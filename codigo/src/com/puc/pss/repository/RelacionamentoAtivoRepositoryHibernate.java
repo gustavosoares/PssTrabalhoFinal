@@ -28,18 +28,17 @@ public class RelacionamentoAtivoRepositoryHibernate implements IRelacionamentoAt
 	}
 
 	public void cadastrarRelacionamento(Integer ativoPaiId, Integer ativoFilhoId) throws SQLException {
-		// TODO Auto-generated method stub
-		RelacionamentoAtivo r = buscarRelacionamento(ativoPaiId, ativoFilhoId);
-		if (r == null ) {
-			r = new RelacionamentoAtivo();
-			r.setAtivoIdPai(ativoPaiId);
-			r.setAtivoIdFilho(ativoFilhoId);
-			genericPersistence.save(r);
-		}
-		
+		// TODO Adicionar regra de negocio no BO
+		RelacionamentoAtivo r = null;
+		r = new RelacionamentoAtivo();
+		r.setAtivoIdPai(ativoPaiId);
+		r.setAtivoIdFilho(ativoFilhoId);
+		genericPersistence.save(r);
 	}
 
-	public RelacionamentoAtivo buscarRelacionamento(Integer ativoPaiId, Integer ativoFilhoId) {
+	// TODO Adicionar throws NoResultException
+	public RelacionamentoAtivo buscarRelacionamento(Integer ativoPaiId, Integer ativoFilhoId) throws NoResultException {
+		/*
 		RelacionamentoAtivo r = null;
 		try{
 			r = genericPersistence.findByNamedQuery("findByRelacionamento", ativoPaiId, ativoFilhoId);
@@ -48,6 +47,8 @@ public class RelacionamentoAtivoRepositoryHibernate implements IRelacionamentoAt
 		}
 		
 		return r;
+		*/
+		return genericPersistence.findByNamedQuery("findByRelacionamento", ativoPaiId, ativoFilhoId);
 	}
 	
 	public void removerRelacionamentoPorAtivoPaiId(Integer ativoPaiId)

@@ -7,6 +7,7 @@ import java.util.ListIterator;
 
 import javax.persistence.NoResultException;
 
+import com.puc.pss.bo.RelacionamentoAtivoBO;
 import com.puc.pss.model.Ativo;
 import com.puc.pss.repository.AtivoRepositoryHibernate;
 import com.puc.pss.repository.RelacionamentoAtivoRepositoryHibernate;
@@ -51,11 +52,11 @@ public class TestAtivoHibernate {
 		List listaAtivos = ativoRepo.listarAtivos();
 		System.out.println(listaAtivos);
 		
-		RelacionamentoAtivoRepositoryHibernate rAtivoRepo = RelacionamentoAtivoRepositoryHibernate.getInstance();
+		RelacionamentoAtivoBO rAtivoBO = RelacionamentoAtivoBO.getInstance();
 		Integer ativoPaiId = new Integer(2);
-		Integer ativoFilhoId = new Integer(3);
+		Integer ativoFilhoId = new Integer(6);
 		try {
-			rAtivoRepo.cadastrarRelacionamento(ativoPaiId, ativoFilhoId);
+			rAtivoBO.cadastrarRelacionamento(ativoPaiId, ativoFilhoId);
 		} catch (SQLException e) {
 			System.err.println("erro no cadastro de relacionamento");
 			e.printStackTrace();
