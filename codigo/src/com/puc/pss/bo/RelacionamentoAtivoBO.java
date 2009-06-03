@@ -40,9 +40,6 @@ public class RelacionamentoAtivoBO implements IRelacionamentoAtivoRepository{
 	public void cadastrarRelacionamento(Integer ativoPaiId, Integer ativoFilhoId) throws SQLException {
 		RelacionamentoAtivo r = buscarRelacionamento(ativoPaiId, ativoFilhoId);
 		if (r == null ) {
-			r = new RelacionamentoAtivo();
-			r.setAtivoIdPai(ativoPaiId);
-			r.setAtivoIdFilho(ativoFilhoId);
 			instanceRepository.cadastrarRelacionamento(ativoPaiId, ativoFilhoId);
 		}
 		

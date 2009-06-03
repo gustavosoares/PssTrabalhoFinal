@@ -28,7 +28,6 @@ public class RelacionamentoAtivoRepositoryHibernate implements IRelacionamentoAt
 	}
 
 	public void cadastrarRelacionamento(Integer ativoPaiId, Integer ativoFilhoId) throws SQLException {
-		// TODO Adicionar regra de negocio no BO
 		RelacionamentoAtivo r = null;
 		r = new RelacionamentoAtivo();
 		r.setAtivoIdPai(ativoPaiId);
@@ -36,7 +35,6 @@ public class RelacionamentoAtivoRepositoryHibernate implements IRelacionamentoAt
 		genericPersistence.save(r);
 	}
 
-	// TODO Adicionar throws NoResultException
 	public RelacionamentoAtivo buscarRelacionamento(Integer ativoPaiId, Integer ativoFilhoId) throws NoResultException {
 		/*
 		RelacionamentoAtivo r = null;
