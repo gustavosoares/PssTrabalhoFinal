@@ -11,7 +11,7 @@ import com.puc.pss.model.RelacionamentoAtivo;
 
 public interface IRelacionamentoAtivoRepository {
 
-	public void cadastrarRelacionamento(RelacionamentoAtivo relacionaAtivo) throws SQLException;
+	public void cadastrarRelacionamento(Integer ativoPaiId, Integer ativoFilhoId) throws SQLException;
 	public void removerRelacionamentoPorAtivoId(Integer ativoPaiId) throws SQLException;
 	public List buscarAtivosFilhosPorId(Integer ativoPaiId) throws NoResultException;
 	
