@@ -50,7 +50,7 @@ public class RelacionamentoAtivoRepositoryHibernate implements IRelacionamentoAt
 		return r;
 	}
 	
-	public void removerRelacionamentoPorAtivoId(Integer ativoPaiId)
+	public void removerRelacionamentoPorAtivoPaiId(Integer ativoPaiId)
 			throws SQLException {
 		// TODO Auto-generated method stub
 		
