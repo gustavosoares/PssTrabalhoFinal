@@ -25,7 +25,8 @@ import javax.persistence.UniqueConstraint;
 @NamedQueries( {
 		@NamedQuery(name = "RelacionamentoAtivo.listAll", query = "from RelacionamentoAtivo a"),
 		@NamedQuery(name = "RelacionamentoAtivo.findByAtivoIdPai", query = "from RelacionamentoAtivo a where a.ativoIdPai = ?1"),
-		@NamedQuery(name = "RelacionamentoAtivo.findByAtivoIdFilho", query = "from RelacionamentoAtivo a where a.ativoIdFilho = ?1") })
+		@NamedQuery(name = "RelacionamentoAtivo.findByAtivoIdFilho", query = "from RelacionamentoAtivo a where a.ativoIdFilho = ?1"),
+		@NamedQuery(name = "RelacionamentoAtivo.findByRelacionamento", query = "from RelacionamentoAtivo a where a.ativoIdPai = ?1 and a.ativoIdFilho = ?2") })
 
 public class RelacionamentoAtivo {
 	

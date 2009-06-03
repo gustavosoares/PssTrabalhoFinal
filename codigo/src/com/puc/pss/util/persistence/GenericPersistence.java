@@ -113,12 +113,12 @@ public class GenericPersistence<T> {
     }
 	
 	@SuppressWarnings("unchecked")
-	public List<T> listByQuery(String query, String... args) throws NoResultException {
+	public List<T> listByQuery(String query, Object... args) throws NoResultException {
 		int i = 1;
 
 		Query localquery = getInternalManager().createNamedQuery(createQueryName(query));
 
-		for (String argument : args) {
+		for (Object argument : args) {
 			localquery.setParameter(i++, argument);
 		}
 		return localquery.getResultList();

@@ -14,5 +14,6 @@ public interface IRelacionamentoAtivoRepository {
 	public void cadastrarRelacionamento(Integer ativoPaiId, Integer ativoFilhoId) throws SQLException;
 	public void removerRelacionamentoPorAtivoId(Integer ativoPaiId) throws SQLException;
 	public List buscarAtivosFilhosPorId(Integer ativoPaiId) throws NoResultException;
+	public RelacionamentoAtivo buscarRelacionamento(Integer ativoPaiId, Integer ativoFilhoId) throws NoResultException;
 	
 }

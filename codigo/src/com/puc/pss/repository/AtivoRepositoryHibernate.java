@@ -41,6 +41,5 @@ public class AtivoRepositoryHibernate implements IAtivoRepository {
 	
 	public List<Ativo> listarAtivos() {
 		return genericPersistence.listAll();
-		//return listaAtivos;
 	}
 }
