@@ -7,6 +7,7 @@ import java.util.ListIterator;
 import javax.persistence.NoResultException;
 
 import com.puc.pss.model.Ativo;
+import com.puc.pss.repository.interfaces.IAtivoRepository;
 import com.puc.pss.util.persistence.GenericPersistence;
 
 public class AtivoRepositoryHibernate implements IAtivoRepository {
@@ -27,16 +28,12 @@ public class AtivoRepositoryHibernate implements IAtivoRepository {
 	}
 	
 	public void cadastrarAtivo(Ativo ativo) throws SQLException {
-
 		genericPersistence.save(ativo);
-
 	}
 	
 	public void removerAtivoPorId(Integer id) throws SQLException {
-
 		Ativo ativo = genericPersistence.findByNamedQuery("findById", id);
 		genericPersistence.remove(ativo, id);
-
 	}
 	
 	public List<Ativo> listarAtivos() {

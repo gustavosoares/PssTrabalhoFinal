@@ -1,4 +1,4 @@
-package com.puc.pss.repository;
+package com.puc.pss.repository.interfaces;
 
 import java.sql.SQLException;
 import java.util.List;

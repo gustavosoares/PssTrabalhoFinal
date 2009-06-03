@@ -8,6 +8,7 @@ import javax.persistence.NoResultException;
 
 import com.puc.pss.model.Ativo;
 import com.puc.pss.model.RelacionamentoAtivo;
+import com.puc.pss.repository.interfaces.IRelacionamentoAtivoRepository;
 import com.puc.pss.util.persistence.GenericPersistence;
 
 public class RelacionamentoAtivoRepositoryHibernate implements IRelacionamentoAtivoRepository {
@@ -22,7 +23,7 @@ public class RelacionamentoAtivoRepositoryHibernate implements IRelacionamentoAt
 		return instance;
 	}
 
-	public List buscarAtivosFilhosPorId(Integer ativoPaiId) throws NoResultException {
+	public List buscarAtivosFilhosPorAtivoPaiId(Integer ativoPaiId) throws NoResultException {
 		return genericPersistence.listByQuery("findByAtivoIdPai", ativoPaiId);
 	}
 
