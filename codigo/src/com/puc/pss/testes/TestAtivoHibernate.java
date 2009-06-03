@@ -1,6 +1,11 @@
 package com.puc.pss.testes;
 
+import java.sql.SQLException;
 import java.util.Date;
+import java.util.List;
+import java.util.ListIterator;
+
+import javax.persistence.NoResultException;
 
 import com.puc.pss.model.Ativo;
 import com.puc.pss.repository.AtivoRepositoryHibernate;
@@ -20,8 +25,30 @@ public class TestAtivoHibernate {
 		
 		AtivoRepositoryHibernate ativoRepo = AtivoRepositoryHibernate.getInstance();
 		
-		ativoRepo.cadastrarAtivo(ativo);
+		try {
+			ativoRepo.cadastrarAtivo(ativo);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		
+		try {
+			ativo = ativoRepo.buscarAtivoPorId(new Integer(1));
+			System.out.println(ativo);
+		} catch (NoResultException e) {
+			System.out.println("objeto nao encontrado");
+		}
+
+		
+		try {
+			ativoRepo.removerAtivoPorId(new Integer(1));
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (NoResultException e) {
+			System.out.println("objeto nao encontrado");
+		}
+		
+		List listaAtivos = ativoRepo.listarAtivos();
+		System.out.println(listaAtivos);
 	}
 
 }

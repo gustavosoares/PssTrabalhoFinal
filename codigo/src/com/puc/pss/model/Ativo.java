@@ -1,14 +1,21 @@
 package com.puc.pss.model;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import java.text.SimpleDateFormat;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
@@ -24,6 +31,7 @@ public class Ativo {
 	
 	@Id
 	@GeneratedValue
+	@OrderBy("id")
 	private Integer id;
 	
 	@Column(nullable = false)
@@ -36,7 +44,7 @@ public class Ativo {
 	private Date dataCriacao;
 	
 	private Date dataAlteracao;
-	
+
 	public static final int TIPO_SERVIDOR = 1;
 	public static final int TIPO_APLICACAO = 2;
 	public static final int TIPO_ROTEADOR = 3;
@@ -98,7 +106,7 @@ public class Ativo {
 	@Override
 	public String toString() {
 		return "Ativo[id=" + this.id + ", Nome="
-				+ this.nome + ", Tipo=" + this.tipo + "]";
+				+ this.nome + ", Tipo=" + this.tipo + ", Data Criacao: " +this.dataCriacao +"]";
 	}
 
 	

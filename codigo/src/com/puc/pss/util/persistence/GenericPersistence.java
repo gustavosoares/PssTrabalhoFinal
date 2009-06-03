@@ -107,6 +107,12 @@ public class GenericPersistence<T> {
     }
 
 	@SuppressWarnings("unchecked")
+	public List<T> listAll() {
+        Query query = getInternalManager().createNamedQuery(createQueryName("listAll"));
+        return query.getResultList();
+    }
+	
+	@SuppressWarnings("unchecked")
 	public List<T> listByQuery(String query, String... args) throws NoResultException {
 		int i = 1;
 
