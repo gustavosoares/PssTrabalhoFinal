@@ -24,9 +24,7 @@ public class AtivoRepositoryHibernate implements IAtivoRepository {
 	
 	public void cadastrarAtivo(Ativo ativo) {
 		try {
-			genericPersistence.getInternalManager().getTransaction().begin();
 			genericPersistence.save(ativo);
-			genericPersistence.getInternalManager().getTransaction().commit();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

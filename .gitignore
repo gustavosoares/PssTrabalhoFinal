@@ -1,3 +1,4 @@
 .gitignore~
 *~
+codigo/build
 codigo/build/*
