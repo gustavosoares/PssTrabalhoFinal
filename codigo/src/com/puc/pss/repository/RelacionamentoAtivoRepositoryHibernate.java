@@ -2,11 +2,9 @@ package com.puc.pss.repository;
 
 import java.sql.SQLException;
 import java.util.List;
-import java.util.ListIterator;
 
 import javax.persistence.NoResultException;
 
-import com.puc.pss.model.Ativo;
 import com.puc.pss.model.RelacionamentoAtivo;
 import com.puc.pss.repository.interfaces.IRelacionamentoAtivoRepository;
 import com.puc.pss.util.persistence.GenericPersistence;
@@ -36,16 +34,6 @@ public class RelacionamentoAtivoRepositoryHibernate implements IRelacionamentoAt
 	}
 
 	public RelacionamentoAtivo buscarRelacionamento(Integer ativoPaiId, Integer ativoFilhoId) throws NoResultException {
-		/*
-		RelacionamentoAtivo r = null;
-		try{
-			r = genericPersistence.findByNamedQuery("findByRelacionamento", ativoPaiId, ativoFilhoId);
-		}catch (NoResultException e) {
-			System.out.println("Relacionamento: "+ativoPaiId+" -> "+ativoFilhoId+" nao encontrado");
-		}
-		
-		return r;
-		*/
 		return genericPersistence.findByNamedQuery("findByRelacionamento", ativoPaiId, ativoFilhoId);
 	}
 	
