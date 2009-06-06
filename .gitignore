@@ -1,6 +1,7 @@
 .gitignore~
 *~
 codigo/build
+codigo/.classpath
 codigo/build/classes/*
 codigo/build/classes
 codigo/build/*
