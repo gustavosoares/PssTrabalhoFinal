@@ -42,6 +42,24 @@ public class RelacionamentoAtivoRepositoryHibernate implements IRelacionamentoAt
 		// TODO Auto-generated method stub
 		
 	}
+
+	public RelacionamentoAtivo buscarRelacionamentoPorAtivoFilhoId(Integer id)
+			throws NoResultException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public RelacionamentoAtivo buscarRelacionamentoPorAtivoPaiId(Integer id)
+			throws NoResultException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public void removerRelacionamento(RelacionamentoAtivo relacionamento)
+			throws SQLException {
+		// TODO Auto-generated method stub
+		
+	}
 	
 	
 }
