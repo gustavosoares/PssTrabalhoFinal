@@ -1,6 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="2.5">
-  <display-name>PssTrabalhoFinal</display-name>
+  <display-name>PssTrabalhoFinal  Gustavo Soares</display-name>
+  	<servlet>
+		<description>Servlet que realiza todas as acoes do sistema</description>
+		<display-name>ServletController</display-name>
+		<servlet-name>ServletController</servlet-name>
+		<servlet-class>com.pss.core.controller.ServletController</servlet-class>
+		<!-- FEATURES -->
+		<init-param>
+			<description>feature seguranca</description>
+			<param-name>seguranca</param-name>
+			<param-value>false</param-value>
+		</init-param>
+		<init-param>
+			<description>feature relacionamento</description>
+			<param-name>relacionamento</param-name>
+			<param-value>false</param-value>
+		</init-param>
+		<init-param>
+			<description>feature monitoracao</description>
+			<param-name>monitoracao</param-name>
+			<param-value>false</param-value>
+		</init-param>
+		<init-param>
+			<description>feature salvar versao</description>
+			<param-name>versionamento</param-name>
+			<param-value>false</param-value>
+		</init-param>
+		<!-- FIM -->
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ServletController</servlet-name>
+		<url-pattern>/ServletController</url-pattern>
+	</servlet-mapping>
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
     <welcome-file>index.htm</welcome-file>

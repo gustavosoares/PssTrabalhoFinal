@@ -1,6 +1,7 @@
 package com.pss.features.logoperacao.aspectos;
 
 import java.util.Date;
+import com.pss.core.util.Logging;
 
 public aspect LogOperacao {
 
@@ -8,7 +9,9 @@ public aspect LogOperacao {
 		execution(void *.say*(..));
 	
 	before(): command() {
+		
 		String msg = "Comando executado: "+thisJoinPoint.getSignature();
-		System.out.println(new Date()+" "+msg);
+		Logging.log(msg);
+
 	}
 }

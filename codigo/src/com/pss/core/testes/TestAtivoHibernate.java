@@ -61,6 +61,7 @@ public class TestAtivoHibernate {
 			System.err.println("erro no cadastro de relacionamento");
 			e.printStackTrace();
 		}
+		
 	}
 
 }
