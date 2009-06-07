@@ -1,7 +1,7 @@
 <%@ page import="com.pss.core.*, java.util.*"%>
 
-<%@ include file="includeTopo.jsp" %>
-<%@ include file="includeMenu.jsp" %>
+<%@ include file="core/includeTopo.jsp" %>
+<%@ include file="core/includeMenu.jsp" %>
 
 <td width="550">
 <table border="0" width="550" align="center" valign="top">
