@@ -2,9 +2,9 @@
 <persistence version="1.0" xmlns="http://java.sun.com/xml/ns/persistence">
     <persistence-unit name="defaultUnit">
     <provider>org.hibernate.ejb.HibernatePersistence</provider>
-    <class>com.puc.pss.model.Ativo</class>
-    <class>com.puc.pss.model.RelacionamentoAtivo</class>
-    <class>com.puc.pss.model.Usuario</class>
+    <class>com.pss.core.model.Ativo</class>
+    <class>com.pss.features.ativos.relacionamento.model.RelacionamentoAtivo</class>
+    <class>com.pss.features.seguranca.model.Usuario</class>
         <properties>
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" />
             <property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/inventario" />
