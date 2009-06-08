@@ -19,6 +19,8 @@ import javax.persistence.OrderBy;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
+import com.pss.core.model.Ativo;
+
 
 @Entity
 @Table(name = "relaciona_ativo", uniqueConstraints = { @UniqueConstraint(columnNames = { "id" }) })
@@ -40,8 +42,7 @@ public class RelacionamentoAtivo {
 	
 	@Column(nullable = false)
 	private Integer ativoIdFilho;
-	
-	
+		
 	public RelacionamentoAtivo() {
 		
 	}

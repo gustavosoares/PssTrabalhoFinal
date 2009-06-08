@@ -13,6 +13,8 @@ import javax.persistence.OrderBy;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
+import com.pss.core.util.Seguranca;
+
 import sun.misc.BASE64Encoder;
 
 @Entity
@@ -80,20 +82,7 @@ public class Usuario {
 	}
 	
 	private String encriptar(String plainText) {
-		byte[] sbe = null;
-		MessageDigest md5;
-
-		try {
-			md5 = MessageDigest.getInstance("MD5");
-		} catch (NoSuchAlgorithmException e) {
-			throw new RuntimeException("Nao foi possivel criptografar o " + plainText, e);
-		}
-
-		md5.update(plainText.getBytes());
-		sbe = md5.digest();
-
-		BASE64Encoder base64 = new BASE64Encoder();
-		return base64.encode(sbe);
+		return Seguranca.encriptar(plainText);
 	}
 	
 }

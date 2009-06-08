@@ -3,14 +3,12 @@ package com.pss.core.testes;
 import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
-import java.util.ListIterator;
 
 import javax.persistence.NoResultException;
 
 import com.pss.core.model.Ativo;
 import com.pss.core.model.repository.AtivoRepositoryHibernate;
 import com.pss.features.ativos.relacionamento.bo.RelacionamentoAtivoBO;
-import com.pss.features.ativos.relacionamento.repository.RelacionamentoAtivoRepositoryHibernate;
 
 public class TestAtivoHibernate {
 
