@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.persistence.NoResultException;
 
+import com.pss.core.bo.AtivoBO;
 import com.pss.core.model.Ativo;
 import com.pss.core.model.repository.AtivoRepositoryHibernate;
 import com.pss.features.ativos.relacionamento.bo.RelacionamentoAtivoBO;
@@ -42,7 +43,7 @@ public class TestAtivoHibernate {
 
 		
 		try {
-			ativoRepo.removerAtivoPorId(2);
+			ativoRepo.removerAtivoPorId(1);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} catch (NoResultException e) {
@@ -53,8 +54,11 @@ public class TestAtivoHibernate {
 		System.out.println(listaAtivos);
 		
 		RelacionamentoAtivoBO rAtivoBO = RelacionamentoAtivoBO.getInstance();
+		AtivoBO ativoBO = AtivoBO.getInstance();
 		try {
-			rAtivoBO.cadastrarRelacionamento(2, 3);
+			Ativo ativoPai = ativoBO.buscarAtivoPorId(2);
+			Ativo ativoFilho = ativoBO.buscarAtivoPorId(3);
+			rAtivoBO.cadastrarRelacionamento(ativoPai, ativoFilho);
 		} catch (SQLException e) {
 			System.err.println("erro no cadastro de relacionamento");
 			e.printStackTrace();

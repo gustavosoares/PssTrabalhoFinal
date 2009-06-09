@@ -7,82 +7,61 @@ import javax.persistence.NoResultException;
 
 import com.pss.core.bo.AtivoBO;
 import com.pss.core.model.Ativo;
+import com.pss.features.ativos.relacionamento.factories.RelacionamentoAtivoRepositoryFactory;
 import com.pss.features.ativos.relacionamento.model.RelacionamentoAtivo;
 import com.pss.features.ativos.relacionamento.repository.RelacionamentoAtivoRepositoryHibernate;
 import com.pss.features.ativos.relacionamento.repository.interfaces.RelacionamentoAtivoRepository;
 
 public class RelacionamentoAtivoBO implements RelacionamentoAtivoRepository{
 
+	private static String PERSISTENCE_TYPE = "hibernate";
 	private static RelacionamentoAtivoBO instance = null;
 	private static AtivoBO instanceAtivo = null;
-	private static RelacionamentoAtivoRepositoryHibernate instanceRepository = null;
+	private static RelacionamentoAtivoRepository instanceRepository = null;
 
 	public static RelacionamentoAtivoBO getInstance() {
 		if (instance == null) {
 			instance = new RelacionamentoAtivoBO();
 			instanceAtivo = AtivoBO.getInstance();
-			instanceRepository = RelacionamentoAtivoRepositoryHibernate.getInstance();
+			instanceRepository = RelacionamentoAtivoRepositoryFactory.getInstance(PERSISTENCE_TYPE);
 		}		
 		return instance;
 	}
 	
-	public List buscarAtivosFilhosPorAtivoPaiId(Integer ativoPaiId) throws NoResultException {
-		return instanceRepository.buscarAtivosFilhosPorAtivoPaiId(ativoPaiId);
+	public List buscarAtivosFilhosPorAtivoPai(Ativo ativoPai) throws NoResultException {
+		return instanceRepository.buscarAtivosFilhosPorAtivoPai(ativoPai);
 	}
 
-	public RelacionamentoAtivo buscarRelacionamento(Integer ativoPaiId, Integer ativoFilhoId) {
+	public RelacionamentoAtivo buscarRelacionamento(Ativo ativoPai, Ativo ativoFilho) {
 		RelacionamentoAtivo r = null;
 		try{
-			r = instanceRepository.buscarRelacionamento(ativoPaiId, ativoFilhoId);
+			r = instanceRepository.buscarRelacionamento(ativoPai, ativoFilho);
 		}catch (NoResultException e) {
-			System.out.println("Relacionamento: "+ativoPaiId+" -> "+ativoFilhoId+" nao encontrado");
+			System.out.println("Relacionamento: "+ativoPai+" -> "+ativoFilho+" nao encontrado");
 		}
 		
 		return r;
 	}
 
-	public void cadastrarRelacionamento(Integer ativoPaiId, Integer ativoFilhoId) throws SQLException {
+	public void removerRelacionamentoPorAtivoPai(Ativo ativoPai) throws SQLException {
+		instanceRepository.removerRelacionamentoPorAtivoPai(ativoPai);
 		
-		Ativo ativoPai = instanceAtivo.buscarAtivoPorId(ativoPaiId);
-		Ativo ativoFilho = instanceAtivo.buscarAtivoPorId(ativoFilhoId);
+	}
+
+	public RelacionamentoAtivo buscarRelacionamentoPorAtivoFilho(Ativo ativoFilho) throws NoResultException {
+		return instanceRepository.buscarRelacionamentoPorAtivoFilho(ativoFilho);
+	}
+
+	public RelacionamentoAtivo buscarRelacionamentoPorAtivoPai(Ativo ativoPai) throws NoResultException {
+		return instanceRepository.buscarRelacionamentoPorAtivoPai(ativoPai);
+	}
+
+	public void removerRelacionamento(RelacionamentoAtivo relacionamento) throws SQLException {
+		instanceRepository.removerRelacionamento(relacionamento);
+	}
+
+	public void cadastrarRelacionamento(Ativo ativoPai, Ativo ativoFilho) throws SQLException, NoResultException {
 		instanceRepository.cadastrarRelacionamento(ativoPai, ativoFilho);
-		/*
-		RelacionamentoAtivo r = buscarRelacionamento(ativoPaiId, ativoFilhoId);
-		if (r == null ) {
-			instanceRepository.cadastrarRelacionamento(ativoPaiId, ativoFilhoId);
-		}
-		*/
-		
-	}
-
-	public void removerRelacionamentoPorAtivoPaiId(Ativo ativoPai)
-			throws SQLException {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public RelacionamentoAtivo buscarRelacionamentoPorAtivoFilhoId(Integer id)
-			throws NoResultException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public RelacionamentoAtivo buscarRelacionamentoPorAtivoPaiId(Integer id)
-			throws NoResultException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public void removerRelacionamento(RelacionamentoAtivo relacionamento)
-			throws SQLException {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public void cadastrarRelacionamento(Ativo ativoPai, Ativo ativoFilho)
-			throws SQLException, NoResultException {
-		// TODO Auto-generated method stub
-		
 	}
 
 

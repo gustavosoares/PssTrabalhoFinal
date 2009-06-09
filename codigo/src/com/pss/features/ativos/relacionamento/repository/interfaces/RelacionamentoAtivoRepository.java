@@ -12,11 +12,11 @@ import com.pss.features.ativos.relacionamento.model.RelacionamentoAtivo;
 public interface RelacionamentoAtivoRepository {
 
 	public void cadastrarRelacionamento(Ativo ativoPai, Ativo ativoFilho) throws SQLException, NoResultException;
-	public void removerRelacionamentoPorAtivoPaiId(Ativo ativoPai) throws SQLException;
+	public void removerRelacionamentoPorAtivoPai(Ativo ativoPai) throws SQLException;
 	public void removerRelacionamento(RelacionamentoAtivo relacionamento) throws SQLException;
-	public List buscarAtivosFilhosPorAtivoPaiId(Integer ativoPaiId) throws NoResultException;
-	public RelacionamentoAtivo buscarRelacionamento(Integer ativoPaiId, Integer ativoFilhoId) throws NoResultException;
-	public RelacionamentoAtivo buscarRelacionamentoPorAtivoPaiId(Integer id) throws NoResultException;
-	public RelacionamentoAtivo buscarRelacionamentoPorAtivoFilhoId(Integer id) throws NoResultException;
+	public List<Ativo> buscarAtivosFilhosPorAtivoPai(Ativo ativoPai) throws NoResultException;
+	public RelacionamentoAtivo buscarRelacionamento(Ativo ativoPai, Ativo ativoFilho) throws NoResultException;
+	public RelacionamentoAtivo buscarRelacionamentoPorAtivoPai(Ativo ativoPai) throws NoResultException;
+	public RelacionamentoAtivo buscarRelacionamentoPorAtivoFilho(Ativo ativoFilho) throws NoResultException;
 	
 }

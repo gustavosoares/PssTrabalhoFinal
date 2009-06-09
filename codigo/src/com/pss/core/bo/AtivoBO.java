@@ -5,21 +5,22 @@ import java.util.List;
 
 import javax.persistence.NoResultException;
 
+import com.pss.core.factories.AtivoRepositoryFactory;
 import com.pss.core.model.Ativo;
-import com.pss.core.model.repository.AtivoRepositoryHibernate;
 import com.pss.core.model.repository.interfaces.AtivoRepository;
 
 
 
 public class AtivoBO implements AtivoRepository {
 
+	private static String PERSISTENCE_TYPE = "hibernate";
 	private static AtivoBO instance = null;
-	private static AtivoRepositoryHibernate instanceRepository = null;
+	private static AtivoRepository instanceRepository = null;
 	
 	public static AtivoBO getInstance() {
 		if (instance == null) {
 			instance = new AtivoBO();
-			instanceRepository = AtivoRepositoryHibernate.getInstance();
+			instanceRepository = AtivoRepositoryFactory.getInstance(PERSISTENCE_TYPE);
 		}		
 		return instance;
 	}
@@ -36,7 +37,7 @@ public class AtivoBO implements AtivoRepository {
 		return instanceRepository.listarAtivos();
 	}
 
-	public void removerAtivoPorId(Integer id) throws SQLException {
+	public void removerAtivoPorId(Integer id) throws SQLException, NoResultException {
 		instanceRepository.removerAtivoPorId(id);
 		
 	}
