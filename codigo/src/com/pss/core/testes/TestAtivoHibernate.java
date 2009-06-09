@@ -32,7 +32,7 @@ public class TestAtivoHibernate {
 		}
 		
 		try {
-			ativo = ativoRepo.buscarAtivoPorId(new Integer(1));
+			ativo = ativoRepo.buscarAtivoPorId(1);
 			System.out.println(ativo);
 		} catch (NoResultException e) {
 			System.out.println("objeto nao encontrado");

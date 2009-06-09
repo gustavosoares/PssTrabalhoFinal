@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.NoResultException;
 
+import com.pss.core.model.Ativo;
 import com.pss.core.util.GenericPersistence;
 import com.pss.features.ativos.relacionamento.model.RelacionamentoAtivo;
 import com.pss.features.ativos.relacionamento.repository.interfaces.IRelacionamentoAtivoRepository;
@@ -25,11 +26,11 @@ public class RelacionamentoAtivoRepositoryHibernate implements IRelacionamentoAt
 		return genericPersistence.listByQuery("findByAtivoIdPai", ativoPaiId);
 	}
 
-	public void cadastrarRelacionamento(Integer ativoPaiId, Integer ativoFilhoId) throws SQLException {
+	public void cadastrarRelacionamento(Ativo ativoPai,Ativo ativoFilho) throws SQLException, NoResultException {
 		RelacionamentoAtivo r = null;
 		r = new RelacionamentoAtivo();
-		r.setAtivoIdPai(ativoPaiId);
-		r.setAtivoIdFilho(ativoFilhoId);
+		r.setAtivoPai(ativoPai);
+		r.setAtivoFilho(ativoFilho);
 		genericPersistence.save(r);
 	}
 
@@ -37,7 +38,7 @@ public class RelacionamentoAtivoRepositoryHibernate implements IRelacionamentoAt
 		return genericPersistence.findByNamedQuery("findByRelacionamento", ativoPaiId, ativoFilhoId);
 	}
 	
-	public void removerRelacionamentoPorAtivoPaiId(Integer ativoPaiId)
+	public void removerRelacionamentoPorAtivoPaiId(Ativo ativoPai)
 			throws SQLException {
 		// TODO Auto-generated method stub
 		
@@ -56,7 +57,7 @@ public class RelacionamentoAtivoRepositoryHibernate implements IRelacionamentoAt
 	}
 
 	public void removerRelacionamento(RelacionamentoAtivo relacionamento)
-			throws SQLException {
+			throws NoResultException {
 		// TODO Auto-generated method stub
 		
 	}

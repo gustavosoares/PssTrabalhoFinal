@@ -12,6 +12,8 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -23,12 +25,12 @@ import com.pss.core.model.Ativo;
 
 
 @Entity
-@Table(name = "relaciona_ativo", uniqueConstraints = { @UniqueConstraint(columnNames = { "id" }) })
+@Table(name = "relaciona_ativo", uniqueConstraints = { @UniqueConstraint(columnNames = { "id", "ativoPai_id", "ativoFilho_id" }) })
 @NamedQueries( {
 		@NamedQuery(name = "RelacionamentoAtivo.listAll", query = "from RelacionamentoAtivo a"),
-		@NamedQuery(name = "RelacionamentoAtivo.findByAtivoIdPai", query = "from RelacionamentoAtivo a where a.ativoIdPai = ?1"),
-		@NamedQuery(name = "RelacionamentoAtivo.findByAtivoIdFilho", query = "from RelacionamentoAtivo a where a.ativoIdFilho = ?1"),
-		@NamedQuery(name = "RelacionamentoAtivo.findByRelacionamento", query = "from RelacionamentoAtivo a where a.ativoIdPai = ?1 and a.ativoIdFilho = ?2") })
+		@NamedQuery(name = "RelacionamentoAtivo.findByAtivoPaiId", query = "from RelacionamentoAtivo a where a.ativoPai_id = ?1"),
+		@NamedQuery(name = "RelacionamentoAtivo.findByAtivoFilhoId", query = "from RelacionamentoAtivo a where a.ativoFilho_id = ?1"),
+		@NamedQuery(name = "RelacionamentoAtivo.findByRelacionamento", query = "from RelacionamentoAtivo a where a.ativoPai_id = ?1 and a.ativoFilho_id = ?2") })
 
 public class RelacionamentoAtivo {
 	
@@ -37,12 +39,22 @@ public class RelacionamentoAtivo {
 	@OrderBy("id")
 	private Integer id;
 	
+	/*
 	@Column(nullable = false)
 	private Integer ativoIdPai;
 	
 	@Column(nullable = false)
 	private Integer ativoIdFilho;
-		
+	*/
+	
+	@ManyToOne
+	@JoinColumn(name = "ativoPai_id", nullable = false)
+	private Ativo ativoPai;
+	
+	@ManyToOne
+	@JoinColumn(name = "ativoFilho_id", nullable = false)
+	private Ativo ativoFilho;
+	
 	public RelacionamentoAtivo() {
 		
 	}
@@ -55,6 +67,8 @@ public class RelacionamentoAtivo {
 		this.id = id;
 	}
 
+	
+	/*
 	public Integer getAtivoIdPai() {
 		return ativoIdPai;
 	}
@@ -70,11 +84,28 @@ public class RelacionamentoAtivo {
 	public void setAtivoIdFilho(Integer ativoIdFilho) {
 		this.ativoIdFilho = ativoIdFilho;
 	}
+	*/
+
+	public Ativo getAtivoPai() {
+		return ativoPai;
+	}
+
+	public void setAtivoPai(Ativo ativoPai) {
+		this.ativoPai = ativoPai;
+	}
+
+	public Ativo getAtivoFilho() {
+		return ativoFilho;
+	}
+
+	public void setAtivoFilho(Ativo ativoFilho) {
+		this.ativoFilho = ativoFilho;
+	}
 
 	@Override
 	public String toString() {
 		return "Ativo[id=" + this.id + ", AtivoIdPai="
-				+ this.ativoIdPai + ", AtivoIdFilho=" + this.ativoIdFilho + "]";
+				+ this.ativoPai + ", AtivoIdFilho=" + this.ativoFilho + "]";
 	}
 
 	

@@ -11,8 +11,8 @@ import com.pss.features.ativos.relacionamento.model.RelacionamentoAtivo;
 
 public interface IRelacionamentoAtivoRepository {
 
-	public void cadastrarRelacionamento(Integer ativoPaiId, Integer ativoFilhoId) throws SQLException;
-	public void removerRelacionamentoPorAtivoPaiId(Integer ativoPaiId) throws SQLException;
+	public void cadastrarRelacionamento(Ativo ativoPai, Ativo ativoFilho) throws SQLException, NoResultException;
+	public void removerRelacionamentoPorAtivoPaiId(Ativo ativoPai) throws SQLException;
 	public void removerRelacionamento(RelacionamentoAtivo relacionamento) throws SQLException;
 	public List buscarAtivosFilhosPorAtivoPaiId(Integer ativoPaiId) throws NoResultException;
 	public RelacionamentoAtivo buscarRelacionamento(Integer ativoPaiId, Integer ativoFilhoId) throws NoResultException;
