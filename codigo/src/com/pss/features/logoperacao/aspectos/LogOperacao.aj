@@ -1,6 +1,5 @@
 package com.pss.features.logoperacao.aspectos;
 
-import java.util.Date;
 import com.pss.core.util.Logging;
 
 public aspect LogOperacao {

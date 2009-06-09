@@ -8,9 +8,9 @@ import javax.persistence.NoResultException;
 import com.pss.core.model.Ativo;
 import com.pss.core.util.GenericPersistence;
 import com.pss.features.ativos.relacionamento.model.RelacionamentoAtivo;
-import com.pss.features.ativos.relacionamento.repository.interfaces.IRelacionamentoAtivoRepository;
+import com.pss.features.ativos.relacionamento.repository.interfaces.RelacionamentoAtivoRepository;
 
-public class RelacionamentoAtivoRepositoryHibernate implements IRelacionamentoAtivoRepository {
+public class RelacionamentoAtivoRepositoryHibernate implements RelacionamentoAtivoRepository {
 	
 	private static RelacionamentoAtivoRepositoryHibernate instance = null;
 	private GenericPersistence<RelacionamentoAtivo> genericPersistence = new GenericPersistence<RelacionamentoAtivo>(RelacionamentoAtivo.class, "defaultUnit");

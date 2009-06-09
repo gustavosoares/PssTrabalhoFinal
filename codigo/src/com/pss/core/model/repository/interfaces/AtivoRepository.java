@@ -8,7 +8,7 @@ import javax.persistence.NoResultException;
 
 import com.pss.core.model.Ativo;
 
-public interface IAtivoRepository {
+public interface AtivoRepository {
 
 	public Ativo buscarAtivoPorId(Integer id) throws NoResultException;
 	public void cadastrarAtivo(Ativo ativo) throws SQLException;

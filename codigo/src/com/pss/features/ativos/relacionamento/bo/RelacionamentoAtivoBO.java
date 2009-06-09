@@ -9,9 +9,9 @@ import com.pss.core.bo.AtivoBO;
 import com.pss.core.model.Ativo;
 import com.pss.features.ativos.relacionamento.model.RelacionamentoAtivo;
 import com.pss.features.ativos.relacionamento.repository.RelacionamentoAtivoRepositoryHibernate;
-import com.pss.features.ativos.relacionamento.repository.interfaces.IRelacionamentoAtivoRepository;
+import com.pss.features.ativos.relacionamento.repository.interfaces.RelacionamentoAtivoRepository;
 
-public class RelacionamentoAtivoBO implements IRelacionamentoAtivoRepository{
+public class RelacionamentoAtivoBO implements RelacionamentoAtivoRepository{
 
 	private static RelacionamentoAtivoBO instance = null;
 	private static AtivoBO instanceAtivo = null;

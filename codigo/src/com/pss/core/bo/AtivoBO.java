@@ -7,11 +7,11 @@ import javax.persistence.NoResultException;
 
 import com.pss.core.model.Ativo;
 import com.pss.core.model.repository.AtivoRepositoryHibernate;
-import com.pss.core.model.repository.interfaces.IAtivoRepository;
+import com.pss.core.model.repository.interfaces.AtivoRepository;
 
 
 
-public class AtivoBO implements IAtivoRepository {
+public class AtivoBO implements AtivoRepository {
 
 	private static AtivoBO instance = null;
 	private static AtivoRepositoryHibernate instanceRepository = null;

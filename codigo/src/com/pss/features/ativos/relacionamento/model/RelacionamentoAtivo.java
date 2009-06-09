@@ -28,9 +28,9 @@ import com.pss.core.model.Ativo;
 @Table(name = "relaciona_ativo", uniqueConstraints = { @UniqueConstraint(columnNames = { "id", "ativoPai_id", "ativoFilho_id" }) })
 @NamedQueries( {
 		@NamedQuery(name = "RelacionamentoAtivo.listAll", query = "from RelacionamentoAtivo a"),
-		@NamedQuery(name = "RelacionamentoAtivo.findByAtivoPaiId", query = "from RelacionamentoAtivo a where a.ativoPai_id = ?1"),
-		@NamedQuery(name = "RelacionamentoAtivo.findByAtivoFilhoId", query = "from RelacionamentoAtivo a where a.ativoFilho_id = ?1"),
-		@NamedQuery(name = "RelacionamentoAtivo.findByRelacionamento", query = "from RelacionamentoAtivo a where a.ativoPai_id = ?1 and a.ativoFilho_id = ?2") })
+		@NamedQuery(name = "RelacionamentoAtivo.findByAtivoPai", query = "from RelacionamentoAtivo a where a.ativoPai = ?1"),
+		@NamedQuery(name = "RelacionamentoAtivo.findByAtivoFilho", query = "from RelacionamentoAtivo a where a.ativoFilho = ?1"),
+		@NamedQuery(name = "RelacionamentoAtivo.findByRelacionamento", query = "from RelacionamentoAtivo a where a.ativoPai = ?1 and a.ativoFilho = ?2") })
 
 public class RelacionamentoAtivo {
 	

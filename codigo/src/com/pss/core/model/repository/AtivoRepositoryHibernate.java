@@ -2,15 +2,14 @@ package com.pss.core.model.repository;
 
 import java.sql.SQLException;
 import java.util.List;
-import java.util.ListIterator;
 
 import javax.persistence.NoResultException;
 
 import com.pss.core.model.Ativo;
-import com.pss.core.model.repository.interfaces.IAtivoRepository;
+import com.pss.core.model.repository.interfaces.AtivoRepository;
 import com.pss.core.util.GenericPersistence;
 
-public class AtivoRepositoryHibernate implements IAtivoRepository {
+public class AtivoRepositoryHibernate implements AtivoRepository {
 	
 	private static AtivoRepositoryHibernate instance = null;
 	private GenericPersistence<Ativo> genericPersistence = new GenericPersistence<Ativo>(Ativo.class, "defaultUnit");

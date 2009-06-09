@@ -1,8 +1,5 @@
 package com.pss.features.seguranca.model;
 
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,8 +11,6 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 import com.pss.core.util.Seguranca;
-
-import sun.misc.BASE64Encoder;
 
 @Entity
 @Table(name = "usuario", uniqueConstraints = { @UniqueConstraint(columnNames = { "id", "email" }) })

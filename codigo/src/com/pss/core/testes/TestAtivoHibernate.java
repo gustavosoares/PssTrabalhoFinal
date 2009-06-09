@@ -17,6 +17,8 @@ public class TestAtivoHibernate {
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+		
+		System.out.println("iniciando...");
 		Ativo ativo = new Ativo();
 		ativo.setDataCriacao(new Date());
 		ativo.setNome("matrix");
@@ -40,7 +42,7 @@ public class TestAtivoHibernate {
 
 		
 		try {
-			ativoRepo.removerAtivoPorId(1);
+			ativoRepo.removerAtivoPorId(2);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} catch (NoResultException e) {
@@ -51,14 +53,15 @@ public class TestAtivoHibernate {
 		System.out.println(listaAtivos);
 		
 		RelacionamentoAtivoBO rAtivoBO = RelacionamentoAtivoBO.getInstance();
-		Integer ativoPaiId = new Integer(2);
-		Integer ativoFilhoId = new Integer(6);
 		try {
-			rAtivoBO.cadastrarRelacionamento(ativoPaiId, ativoFilhoId);
+			rAtivoBO.cadastrarRelacionamento(2, 3);
 		} catch (SQLException e) {
 			System.err.println("erro no cadastro de relacionamento");
 			e.printStackTrace();
+		} catch (NoResultException e) {
+			System.err.println("relacionamento nao cadastrado: ativos nao encontrados");
 		}
+	
 		
 	}
 

@@ -9,7 +9,7 @@ import javax.persistence.NoResultException;
 import com.pss.core.model.Ativo;
 import com.pss.features.ativos.relacionamento.model.RelacionamentoAtivo;
 
-public interface IRelacionamentoAtivoRepository {
+public interface RelacionamentoAtivoRepository {
 
 	public void cadastrarRelacionamento(Ativo ativoPai, Ativo ativoFilho) throws SQLException, NoResultException;
 	public void removerRelacionamentoPorAtivoPaiId(Ativo ativoPai) throws SQLException;
