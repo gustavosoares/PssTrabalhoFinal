@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.persistence.NoResultException;
 
+import org.hibernate.exception.ConstraintViolationException;
+
 import com.pss.core.model.Ativo;
 import com.pss.core.util.GenericPersistence;
 import com.pss.features.ativos.relacionamento.model.RelacionamentoAtivo;
@@ -22,11 +24,11 @@ public class RelacionamentoAtivoRepositoryHibernate implements RelacionamentoAti
 		return instance;
 	}
 
-	public List buscarAtivosFilhosPorAtivoPaiId(Integer ativoPaiId) throws NoResultException {
-		return genericPersistence.listByQuery("findByAtivoIdPai", ativoPaiId);
+	public List buscarAtivosFilhosPorAtivoPai(Ativo ativoPai) throws NoResultException {
+		return genericPersistence.listByQuery("findByAtivoIdPai", ativoPai);
 	}
 
-	public void cadastrarRelacionamento(Ativo ativoPai,Ativo ativoFilho) throws SQLException, NoResultException {
+	public void cadastrarRelacionamento(Ativo ativoPai,Ativo ativoFilho) throws SQLException, NoResultException, ConstraintViolationException {
 		RelacionamentoAtivo r = null;
 		r = new RelacionamentoAtivo();
 		r.setAtivoPai(ativoPai);
@@ -34,33 +36,20 @@ public class RelacionamentoAtivoRepositoryHibernate implements RelacionamentoAti
 		genericPersistence.save(r);
 	}
 
-	public RelacionamentoAtivo buscarRelacionamento(Integer ativoPaiId, Integer ativoFilhoId) throws NoResultException {
-		return genericPersistence.findByNamedQuery("findByRelacionamento", ativoPaiId, ativoFilhoId);
+	public RelacionamentoAtivo buscarRelacionamento(Ativo ativoPai, Ativo ativoFilho) throws NoResultException {
+		return genericPersistence.findByNamedQuery("findByRelacionamento", ativoPai, ativoFilho);
 	}
-	
-	public void removerRelacionamentoPorAtivoPaiId(Ativo ativoPai)
-			throws SQLException {
-		// TODO Auto-generated method stub
+
+	public List<RelacionamentoAtivo> buscarRelacionamentoPorAtivoFilho(Ativo ativoFilho) throws NoResultException {
+		return genericPersistence.listByQuery("findByAtivoFilho", ativoFilho);
+	}
+
+	public List<RelacionamentoAtivo> buscarRelacionamentoPorAtivoPai(Ativo ativoPai) throws NoResultException {
+		return genericPersistence.listByQuery("findByAtivoPai", ativoPai);
+	}
+
+	public void removerRelacionamento(RelacionamentoAtivo relacionamento) throws NoResultException, SQLException {
+		genericPersistence.remove(relacionamento, relacionamento.getId());
+	}
 		
-	}
-
-	public RelacionamentoAtivo buscarRelacionamentoPorAtivoFilhoId(Integer id)
-			throws NoResultException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public RelacionamentoAtivo buscarRelacionamentoPorAtivoPaiId(Integer id)
-			throws NoResultException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public void removerRelacionamento(RelacionamentoAtivo relacionamento)
-			throws NoResultException {
-		// TODO Auto-generated method stub
-		
-	}
-	
-	
 }

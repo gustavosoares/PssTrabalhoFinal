@@ -9,6 +9,8 @@ import javax.persistence.NoResultException;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
+import org.hibernate.exception.ConstraintViolationException;
+
 class InternalEntityManager {
 	private static EntityManagerFactory emf;
 	static EntityManager getInstance(String factoryName) {
@@ -43,7 +45,7 @@ public class GenericPersistence<T> {
 			em.persist(entity);
 			em.getTransaction().commit();
 		} catch (Exception e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 			em.getTransaction().rollback();
 			throw new SQLException(e.getMessage());
 		} finally {

@@ -21,7 +21,6 @@ public class UsuarioRepositoryHibernate implements UsuarioRepository{
 	public Usuario buscarUsuarioPorEmaileSenha(String email, String senha) throws NoResultException {
 		Usuario usuario = genericPersistence.findByNamedQuery("findByEmailAndPassword", email, senha);
 		return usuario;
-		
 	}
 
 }

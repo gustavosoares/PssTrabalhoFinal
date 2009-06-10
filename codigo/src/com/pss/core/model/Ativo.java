@@ -117,8 +117,8 @@ public class Ativo {
 
 	@Override
 	public String toString() {
-		return "Ativo[id=" + this.id + ", Nome="
-				+ this.nome + ", Tipo=" + this.tipo + ", Data Criacao: " +this.dataCriacao +"]";
+		return "\nAtivo[id=" + this.id + ",\n Nome="
+				+ this.nome + ",\n Tipo=" + this.tipo + ",\n Data Criacao: " +this.dataCriacao +"]";
 	}
 
 	

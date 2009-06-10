@@ -25,7 +25,7 @@ import com.pss.core.model.Ativo;
 
 
 @Entity
-@Table(name = "relaciona_ativo", uniqueConstraints = { @UniqueConstraint(columnNames = { "id", "ativoPai_id", "ativoFilho_id" }) })
+@Table(name = "relaciona_ativo", uniqueConstraints = { @UniqueConstraint(columnNames = { "ativoPai_id", "ativoFilho_id" }) })
 @NamedQueries( {
 		@NamedQuery(name = "RelacionamentoAtivo.listAll", query = "from RelacionamentoAtivo a"),
 		@NamedQuery(name = "RelacionamentoAtivo.findByAtivoPai", query = "from RelacionamentoAtivo a where a.ativoPai = ?1"),
@@ -104,8 +104,8 @@ public class RelacionamentoAtivo {
 
 	@Override
 	public String toString() {
-		return "Ativo[id=" + this.id + ", AtivoIdPai="
-				+ this.ativoPai + ", AtivoIdFilho=" + this.ativoFilho + "]";
+		return "\nRelacionamentoAtivo[id=" + this.id + ",\n AtivoIdPai=["
+				+ this.ativoPai + "] <===>  AtivoIdFilho=[" + this.ativoFilho + "]";
 	}
 
 	

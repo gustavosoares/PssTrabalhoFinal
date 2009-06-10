@@ -5,8 +5,11 @@ import java.util.List;
 
 import javax.persistence.NoResultException;
 
+import org.hibernate.exception.ConstraintViolationException;
+
 import com.pss.core.bo.AtivoBO;
 import com.pss.core.model.Ativo;
+import com.pss.core.util.Logging;
 import com.pss.features.ativos.relacionamento.factories.RelacionamentoAtivoRepositoryFactory;
 import com.pss.features.ativos.relacionamento.model.RelacionamentoAtivo;
 import com.pss.features.ativos.relacionamento.repository.RelacionamentoAtivoRepositoryHibernate;
@@ -19,6 +22,10 @@ public class RelacionamentoAtivoBO implements RelacionamentoAtivoRepository{
 	private static AtivoBO instanceAtivo = null;
 	private static RelacionamentoAtivoRepository instanceRepository = null;
 
+	private RelacionamentoAtivoBO() {
+		
+	}
+	
 	public static RelacionamentoAtivoBO getInstance() {
 		if (instance == null) {
 			instance = new RelacionamentoAtivoBO();
@@ -43,23 +50,31 @@ public class RelacionamentoAtivoBO implements RelacionamentoAtivoRepository{
 		return r;
 	}
 
-	public void removerRelacionamentoPorAtivoPai(Ativo ativoPai) throws SQLException {
-		instanceRepository.removerRelacionamentoPorAtivoPai(ativoPai);
-		
-	}
-
-	public RelacionamentoAtivo buscarRelacionamentoPorAtivoFilho(Ativo ativoFilho) throws NoResultException {
+	public List<RelacionamentoAtivo> buscarRelacionamentoPorAtivoFilho(Ativo ativoFilho) throws NoResultException {
 		return instanceRepository.buscarRelacionamentoPorAtivoFilho(ativoFilho);
 	}
 
-	public RelacionamentoAtivo buscarRelacionamentoPorAtivoPai(Ativo ativoPai) throws NoResultException {
+	public List<RelacionamentoAtivo> buscarRelacionamentoPorAtivoPai(Ativo ativoPai) throws NoResultException {
 		return instanceRepository.buscarRelacionamentoPorAtivoPai(ativoPai);
 	}
 
 	public void removerRelacionamento(RelacionamentoAtivo relacionamento) throws SQLException {
 		instanceRepository.removerRelacionamento(relacionamento);
 	}
-
+	
+	/**
+	 * Remove lista de relacionamento
+	 * @param lista_relacionamentos
+	 * @throws SQLException
+	 */
+	public void removerRelacionamento(List<RelacionamentoAtivo> lista_relacionamentos) throws SQLException {
+		for (int i = 0; i < lista_relacionamentos.size(); i++) {
+			RelacionamentoAtivo relacionamento = (RelacionamentoAtivo) lista_relacionamentos.get(i);
+			Logging.log("removendo relacionamento: "+relacionamento);
+			removerRelacionamento(relacionamento);
+		}
+	}
+	
 	public void cadastrarRelacionamento(Ativo ativoPai, Ativo ativoFilho) throws SQLException, NoResultException {
 		instanceRepository.cadastrarRelacionamento(ativoPai, ativoFilho);
 	}
