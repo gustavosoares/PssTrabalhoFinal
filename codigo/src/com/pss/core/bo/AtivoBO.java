@@ -5,11 +5,11 @@ import java.util.List;
 
 import javax.persistence.NoResultException;
 
+import com.pss.core.facade.FacadeUtil;
 import com.pss.core.factories.AtivoRepositoryFactory;
 import com.pss.core.model.Ativo;
 import com.pss.core.model.repository.interfaces.AtivoRepository;
 import com.pss.core.util.FeatureMapper;
-import com.pss.core.util.Logging;
 
 public class AtivoBO implements AtivoRepository {
 	
@@ -41,18 +41,18 @@ public class AtivoBO implements AtivoRepository {
 	public void removerAtivoPorId(Integer id) throws SQLException, NoResultException {
 		//Possui relacionamento?
 		boolean relacionamento = featureMapper.getInstance().featureHabilitada("relacionamento");
-		Logging.log("verificando se existe relacionamento: "+relacionamento);
+		FacadeUtil.log("verificando se existe relacionamento: "+relacionamento);
 		if (relacionamento) {
-			Logging.log("removendo o relacionamento primeiro");
+			FacadeUtil.log("removendo o relacionamento primeiro");
 			com.pss.features.ativos.relacionamento.bo.RelacionamentoAtivoBO rBO = com.pss.features.ativos.relacionamento.bo.RelacionamentoAtivoBO.getInstance();
 			Ativo ativo = buscarAtivoPorId(id);
 			//pai
 			List lista_relacionamentos = rBO.buscarRelacionamentoPorAtivoPai(ativo);
-			Logging.log("Relacionamentos por ativo pai: "+lista_relacionamentos);
+			FacadeUtil.log("Relacionamentos por ativo pai: "+lista_relacionamentos);
 			rBO.removerRelacionamento(lista_relacionamentos);
 			//filho
 			lista_relacionamentos = rBO.buscarRelacionamentoPorAtivoFilho(ativo);
-			Logging.log("Relacionamentos por ativo filho: "+lista_relacionamentos);
+			FacadeUtil.log("Relacionamentos por ativo filho: "+lista_relacionamentos);
 			rBO.removerRelacionamento(lista_relacionamentos);
 			//remove ativo
 			instanceRepository.removerAtivoPorId(id);

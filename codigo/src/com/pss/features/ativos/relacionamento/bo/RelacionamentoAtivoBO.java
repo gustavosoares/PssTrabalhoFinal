@@ -5,14 +5,11 @@ import java.util.List;
 
 import javax.persistence.NoResultException;
 
-import org.hibernate.exception.ConstraintViolationException;
-
 import com.pss.core.bo.AtivoBO;
+import com.pss.core.facade.FacadeUtil;
 import com.pss.core.model.Ativo;
-import com.pss.core.util.Logging;
 import com.pss.features.ativos.relacionamento.factories.RelacionamentoAtivoRepositoryFactory;
 import com.pss.features.ativos.relacionamento.model.RelacionamentoAtivo;
-import com.pss.features.ativos.relacionamento.repository.RelacionamentoAtivoRepositoryHibernate;
 import com.pss.features.ativos.relacionamento.repository.interfaces.RelacionamentoAtivoRepository;
 
 public class RelacionamentoAtivoBO implements RelacionamentoAtivoRepository{
@@ -70,7 +67,7 @@ public class RelacionamentoAtivoBO implements RelacionamentoAtivoRepository{
 	public void removerRelacionamento(List<RelacionamentoAtivo> lista_relacionamentos) throws SQLException {
 		for (int i = 0; i < lista_relacionamentos.size(); i++) {
 			RelacionamentoAtivo relacionamento = (RelacionamentoAtivo) lista_relacionamentos.get(i);
-			Logging.log("removendo relacionamento: "+relacionamento);
+			FacadeUtil.log("removendo relacionamento: "+relacionamento);
 			removerRelacionamento(relacionamento);
 		}
 	}
