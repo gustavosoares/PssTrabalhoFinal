@@ -9,13 +9,11 @@ import com.pss.core.facade.FacadeUtil;
 import com.pss.core.factories.AtivoRepositoryFactory;
 import com.pss.core.model.Ativo;
 import com.pss.core.model.repository.interfaces.AtivoRepository;
-import com.pss.core.util.FeatureMapper;
 
 public class AtivoBO implements AtivoRepository {
 	
 	private static String PERSISTENCE_TYPE = "hibernate";
 	private static AtivoBO instance = null;
-	private FeatureMapper featureMapper = FeatureMapper.getInstance();
 	private static AtivoRepository instanceRepository = null;
 	
 	public static AtivoBO getInstance() {
@@ -40,7 +38,7 @@ public class AtivoBO implements AtivoRepository {
 
 	public void removerAtivoPorId(Integer id) throws SQLException, NoResultException {
 		//Possui relacionamento?
-		boolean relacionamento = featureMapper.getInstance().featureHabilitada("relacionamento");
+		boolean relacionamento = FacadeUtil.featureHabilitada("relacionamento");
 		FacadeUtil.log("verificando se existe relacionamento: "+relacionamento);
 		if (relacionamento) {
 			FacadeUtil.log("removendo o relacionamento primeiro");

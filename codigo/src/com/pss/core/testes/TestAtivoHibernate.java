@@ -6,12 +6,10 @@ import java.util.List;
 
 import javax.persistence.NoResultException;
 
-import org.hibernate.exception.ConstraintViolationException;
 
 import com.pss.core.bo.AtivoBO;
+import com.pss.core.facade.FacadeUtil;
 import com.pss.core.model.Ativo;
-import com.pss.core.model.repository.AtivoRepositoryHibernate;
-import com.pss.core.util.FeatureMapper;
 import com.pss.features.ativos.relacionamento.bo.RelacionamentoAtivoBO;
 
 public class TestAtivoHibernate {
@@ -22,8 +20,8 @@ public class TestAtivoHibernate {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		
-		FeatureMapper featureMapper = FeatureMapper.getInstance();
-		featureMapper.registrarFeature("relacionamento", "true");
+		FacadeUtil.registrarFeature("relacionamento", "true");
+		
 		AtivoBO ativoBO = AtivoBO.getInstance();
 		
 		for (int i=0; i < 3; i++) {

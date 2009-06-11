@@ -14,12 +14,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.pss.core.commands.Command;
 import com.pss.core.commands.CommandMap;
-import com.pss.core.util.FeatureMapper;
+import com.pss.core.facade.FacadeUtil;
 
 
 public class ServletController extends HttpServlet {
-	
-	public FeatureMapper featureMapper = null;
 	
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException { 
 		doPost(request, response); 
@@ -38,16 +36,15 @@ public class ServletController extends HttpServlet {
 	    super.init(config);
 	    
 	    //Load dos parametros de features;
-	    featureMapper = FeatureMapper.getInstance();
 	    String seguranca = config.getInitParameter("seguranca").toLowerCase();
 	    String relacionamento = config.getInitParameter("relacionamento").toLowerCase();
 	    String monitoracao = config.getInitParameter("monitoracao").toLowerCase();
 	    String versionamento = config.getInitParameter("versionamento").toLowerCase();
 	    
-	    featureMapper.registrarFeature("segurance", seguranca);
-	    featureMapper.registrarFeature("relacionamento", relacionamento);
-	    featureMapper.registrarFeature("monitoracao", monitoracao);
-	    featureMapper.registrarFeature("versionamento", versionamento);
+	    FacadeUtil.registrarFeature("segurance", seguranca);
+	    FacadeUtil.registrarFeature("relacionamento", relacionamento);
+	    FacadeUtil.registrarFeature("monitoracao", monitoracao);
+	    FacadeUtil.registrarFeature("versionamento", versionamento);
 	    
 	    // Inicializando as bases de dados
 	    /*
