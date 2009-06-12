@@ -26,4 +26,7 @@ public class FacadeUtil {
 		return FeatureMapper.getInstance().featureHabilitada(featureName);
 	}
 
+	public static String obterEstadoDasFeatures(){
+		return FeatureMapper.getInstance().toString();
+	}
 }

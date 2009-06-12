@@ -46,6 +46,7 @@ public class ServletController extends HttpServlet {
 	    FacadeUtil.registrarFeature("monitoracao", monitoracao);
 	    FacadeUtil.registrarFeature("versionamento", versionamento);
 	    
+	    FacadeUtil.log(FacadeUtil.obterEstadoDasFeatures());
 	    // Inicializando as bases de dados
 	    /*
 	    ColaboradorRepository.getInstance();

@@ -1,6 +1,7 @@
 package com.pss.core.util;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 import com.pss.core.model.repository.AtivoRepositoryHibernate;
@@ -29,6 +30,18 @@ public class FeatureMapper {
 		} else {
 			return estado;
 		}
+	}
+	
+	public String toString() {
+		Iterator iterator = features.keySet().iterator();
+		StringBuffer sb = new StringBuffer();
+		sb.append("\n");
+		while (iterator.hasNext()) {
+		   String key = (String) iterator.next();
+		   Boolean estado = (Boolean) features.get(key);
+		   sb.append(key+" -> "+String.valueOf(estado)+"\n");
+		}
+		return sb.toString();
 	}
  
 }

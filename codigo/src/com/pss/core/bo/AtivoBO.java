@@ -30,6 +30,8 @@ public class AtivoBO implements AtivoRepository {
 	}
 
 	public void cadastrarAtivo(Ativo ativo) throws SQLException {
+		ativo.setDataCriacao(new Date());
+		ativo.setDataAlteracao(new Date());
 		instanceRepository.cadastrarAtivo(ativo);
 	}
 
@@ -65,6 +67,13 @@ public class AtivoBO implements AtivoRepository {
 	public void editarAtivo(Ativo ativo) throws SQLException {
 		ativo.setDataAlteracao(new Date());
 		instanceRepository.editarAtivo(ativo);
+		
+		//possui monitoracao?
+		boolean monitoracao = FacadeUtil.featureHabilitada("monitoracao");
+		if (monitoracao) {
+			//enviar email para a lista pessoas cadastradas
+			
+		}
 	}
 
 }

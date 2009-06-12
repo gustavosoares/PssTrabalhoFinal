@@ -32,8 +32,6 @@ public class TestAtivoHibernate {
 			ativo.setDescricacao("blabla");
 			ativo.setTipo(1);
 			
-
-			
 			try {
 				ativoBO.cadastrarAtivo(ativo);
 			} catch (SQLException e) {
@@ -50,6 +48,23 @@ public class TestAtivoHibernate {
 			System.out.println("objeto nao encontrado");
 		}
 
+		
+		/**
+		 * Editar um ativo
+		 * 
+		 */
+		int ativo_editar_id = 1;
+		try {
+			System.out.println("Editando o ativo_id "+ativo_editar_id);
+			ativo = ativoBO.buscarAtivoPorId(ativo_editar_id);
+			System.out.println(ativo);
+			ativo.setDescricacao("descricacao alteraaada");
+			ativoBO.editarAtivo(ativo);
+		} catch (NoResultException e) {
+			System.out.println("ativo id "+ativo_editar_id+" nao encontrado para edicao");
+		} catch (SQLException e) {
+			System.err.println("Erro editando o ativo id "+ativo_editar_id+": "+e.getMessage());
+		}
 		
 		/**
 		 * REMOVER
