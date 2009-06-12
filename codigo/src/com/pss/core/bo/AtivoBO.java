@@ -1,6 +1,7 @@
 package com.pss.core.bo;
 
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.NoResultException;
@@ -59,6 +60,11 @@ public class AtivoBO implements AtivoRepository {
 		}
 		
 		
+	}
+
+	public void editarAtivo(Ativo ativo) throws SQLException {
+		ativo.setDataAlteracao(new Date());
+		instanceRepository.editarAtivo(ativo);
 	}
 
 }

@@ -11,6 +11,7 @@ public interface AtivoRepository {
 
 	public Ativo buscarAtivoPorId(Integer id) throws NoResultException;
 	public void cadastrarAtivo(Ativo ativo) throws SQLException;
+	public void editarAtivo(Ativo ativo) throws SQLException;
 	public void removerAtivoPorId(Integer id) throws SQLException, NoResultException;
 	public List listarAtivos();
 	

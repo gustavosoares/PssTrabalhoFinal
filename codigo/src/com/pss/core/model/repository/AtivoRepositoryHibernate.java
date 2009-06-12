@@ -38,4 +38,8 @@ public class AtivoRepositoryHibernate implements AtivoRepository {
 	public List<Ativo> listarAtivos() {
 		return genericPersistence.listAll();
 	}
+
+	public void editarAtivo(Ativo ativo) throws SQLException {
+		genericPersistence.update(ativo);
+	}
 }
