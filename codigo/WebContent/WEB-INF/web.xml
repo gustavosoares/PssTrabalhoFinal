@@ -27,6 +27,7 @@
 			<param-name>versionamento</param-name>
 			<param-value>false</param-value>
 		</init-param>
+		<load-on-startup>0</load-on-startup>
 		<!-- FIM -->
 	</servlet>
 	<servlet-mapping>
