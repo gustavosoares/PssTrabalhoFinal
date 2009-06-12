@@ -2,7 +2,7 @@ package com.pss.features.seguranca.bo;
 
 import javax.persistence.NoResultException;
 
-import com.pss.core.util.Seguranca;
+import com.pss.core.facade.FacadeUtil;
 import com.pss.features.seguranca.factories.UsuarioRepositoryFactory;
 import com.pss.features.seguranca.model.Usuario;
 import com.pss.features.seguranca.repository.interfaces.UsuarioRepository;
@@ -22,7 +22,7 @@ public class UsuarioBO implements UsuarioRepository {
 	}
 	
 	public Usuario buscarUsuarioPorEmaileSenha(String email, String senha) throws NoResultException {
-		return instanceRepository.buscarUsuarioPorEmaileSenha(email, Seguranca.encriptar(senha.trim()));
+		return instanceRepository.buscarUsuarioPorEmaileSenha(email, FacadeUtil.encriptar(senha.trim()));
 	}
 
 }
