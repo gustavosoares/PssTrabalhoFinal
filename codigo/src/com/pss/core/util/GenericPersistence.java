@@ -9,8 +9,6 @@ import javax.persistence.NoResultException;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
-import org.hibernate.exception.ConstraintViolationException;
-
 class InternalEntityManager {
 	private static EntityManagerFactory emf;
 	static EntityManager getInstance(String factoryName) {

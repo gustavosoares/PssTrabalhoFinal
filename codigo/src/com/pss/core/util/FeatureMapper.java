@@ -4,8 +4,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-import com.pss.core.model.repository.AtivoRepositoryHibernate;
-
 public class FeatureMapper {
 	
 	private static Map features = null;

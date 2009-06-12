@@ -10,12 +10,13 @@ import javax.persistence.OrderBy;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
-import com.pss.core.util.Seguranca;
+import com.pss.core.facade.FacadeUtil;
 
 @Entity
 @Table(name = "usuario", uniqueConstraints = { @UniqueConstraint(columnNames = { "id", "email" }) })
 @NamedQueries({
 		@NamedQuery(name = "Usuario.listAll", query = "from Usuario a"),
+		@NamedQuery(name = "Usuario.findById", query = "from Usuario a where a.id = ?1"),
 		@NamedQuery(name = "Usuario.findByEmailAndPassword", query = "from Usuario a where a.email = ?1 and a.senha = ?2") })
 		
 public class Usuario {
@@ -72,12 +73,12 @@ public class Usuario {
 
 	@Override
 	public String toString() {
-		return "Usuario[id=" + this.id + ", Nome="
-				+ this.nome + ", Email=" + this.email + "]";
+		return "\nUsuario[id=" + this.id + ",\n Nome="
+				+ this.nome + ",\n Email=" + this.email + "]";
 	}
 	
 	private String encriptar(String plainText) {
-		return Seguranca.encriptar(plainText);
+		return FacadeUtil.encriptar(plainText);
 	}
 	
 }
