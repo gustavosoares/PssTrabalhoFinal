@@ -1,6 +1,5 @@
 package com.pss.features.ativos.relacionamento.factories;
 
-import com.pss.core.model.repository.AtivoRepositoryHibernate;
 import com.pss.features.ativos.relacionamento.repository.RelacionamentoAtivoRepositoryHibernate;
 import com.pss.features.ativos.relacionamento.repository.interfaces.RelacionamentoAtivoRepository;
 

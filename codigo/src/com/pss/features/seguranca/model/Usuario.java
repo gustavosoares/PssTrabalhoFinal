@@ -81,4 +81,10 @@ public class Usuario {
 		return FacadeUtil.encriptar(plainText);
 	}
 	
+	public void notificar(String ativo) {
+		FacadeUtil.log("##################");
+		FacadeUtil.log("Notificacao recebida do ativo: "+ativo);
+		FacadeUtil.log("##################");
+	}
+	
 }

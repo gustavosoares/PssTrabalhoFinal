@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.NoResultException;
 
 import com.pss.core.bo.AtivoBO;
+import com.pss.core.facade.FacadeBO;
 import com.pss.core.facade.FacadeUtil;
 import com.pss.core.model.Ativo;
 import com.pss.features.ativos.relacionamento.factories.RelacionamentoAtivoRepositoryFactory;
@@ -26,7 +27,7 @@ public class RelacionamentoAtivoBO implements RelacionamentoAtivoRepository{
 	public static RelacionamentoAtivoBO getInstance() {
 		if (instance == null) {
 			instance = new RelacionamentoAtivoBO();
-			instanceAtivo = AtivoBO.getInstance();
+			instanceAtivo = FacadeBO.getAtivoBOInstance();
 			instanceRepository = RelacionamentoAtivoRepositoryFactory.getInstance(PERSISTENCE_TYPE);
 		}		
 		return instance;

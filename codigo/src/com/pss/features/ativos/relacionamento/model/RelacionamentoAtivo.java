@@ -1,22 +1,12 @@
 package com.pss.features.ativos.relacionamento.model;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
-import java.text.SimpleDateFormat;
-
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
@@ -39,14 +29,6 @@ public class RelacionamentoAtivo {
 	@OrderBy("id")
 	private Integer id;
 	
-	/*
-	@Column(nullable = false)
-	private Integer ativoIdPai;
-	
-	@Column(nullable = false)
-	private Integer ativoIdFilho;
-	*/
-	
 	@ManyToOne
 	@JoinColumn(name = "ativoPai_id", nullable = false)
 	private Ativo ativoPai;
@@ -66,25 +48,6 @@ public class RelacionamentoAtivo {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-
-	
-	/*
-	public Integer getAtivoIdPai() {
-		return ativoIdPai;
-	}
-
-	public void setAtivoIdPai(Integer ativoIdPai) {
-		this.ativoIdPai = ativoIdPai;
-	}
-
-	public Integer getAtivoIdFilho() {
-		return ativoIdFilho;
-	}
-
-	public void setAtivoIdFilho(Integer ativoIdFilho) {
-		this.ativoIdFilho = ativoIdFilho;
-	}
-	*/
 
 	public Ativo getAtivoPai() {
 		return ativoPai;

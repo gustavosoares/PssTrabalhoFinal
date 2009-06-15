@@ -1,6 +1,7 @@
 package com.pss.core.facade;
 
 import com.pss.core.bo.AtivoBO;
+import com.pss.core.model.Ativo;
 
 public class FacadeBO {
 	
@@ -27,6 +28,23 @@ public class FacadeBO {
 	
 	public static com.pss.features.ativos.relacionamento.bo.RelacionamentoAtivoBO getRelacionamentoAtivoBOInstance() {
 		return com.pss.features.ativos.relacionamento.bo.RelacionamentoAtivoBO.getInstance();
+	}
+	
+	public static boolean ativoExiste(Ativo ativo) {
+		
+		Ativo ativo_aux = null; 
+		try{
+			ativo_aux =	getAtivoBOInstance().buscarAtivoPorId(ativo.getId());
+		}catch(Exception e) {
+			
+		}
+
+		if (ativo_aux == null) {
+			return false;
+		}else{
+			ativo_aux = null;
+			return true;
+		}
 	}
 	
 }
