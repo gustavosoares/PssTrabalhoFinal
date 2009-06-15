@@ -30,6 +30,10 @@ public class FacadeBO {
 		return com.pss.features.ativos.relacionamento.bo.RelacionamentoAtivoBO.getInstance();
 	}
 	
+	public static com.pss.features.monitoracao.agente1.bo.Agente1BO getAgente1BOInstance() {
+		return com.pss.features.monitoracao.agente1.bo.Agente1BO.getInstance();
+	}
+	
 	public static boolean ativoExiste(Ativo ativo) {
 		
 		Ativo ativo_aux = null; 
