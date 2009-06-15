@@ -12,7 +12,7 @@ public interface UsuarioRepository {
 	public Usuario buscarUsuarioPorEmaileSenha(String email, String senha) throws NoResultException;
 	public Usuario buscarUsuarioPorId(Integer id) throws NoResultException;
 	public void cadastrarUsuario(Usuario usuario) throws SQLException;
-	public void removerUsuario(Usuario usario) throws SQLException, NoResultException;
+	public void removerUsuario(Usuario usuario) throws SQLException, NoResultException;
 	public List<Usuario> listarUsuarios();
 	
 }
