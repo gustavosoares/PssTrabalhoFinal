@@ -24,7 +24,10 @@ public class TestAtivoHibernate {
 		
 		AtivoBO ativoBO = AtivoBO.getInstance();
 		
-		for (int i=0; i < 3; i++) {
+		/**
+		 * Cadastrar ativo
+		 */
+		for (int i=0; i < 5; i++) {
 			System.out.println("iniciando...");
 			Ativo ativo = new Ativo();
 			ativo.setDataCriacao(new Date());
@@ -69,6 +72,7 @@ public class TestAtivoHibernate {
 		/**
 		 * REMOVER
 		 */
+		/*
 		int ativo_remover_id = 11;
 		try {
 			ativoBO.removerAtivoPorId(ativo_remover_id);
@@ -77,7 +81,7 @@ public class TestAtivoHibernate {
 		} catch (NoResultException e) {
 			System.out.println("AtivoId "+ativo_remover_id+" nao sera removido pois nao foi encontrado");
 		}
-
+		*/
 		List listaAtivos = ativoBO.listarAtivos();
 		
 		System.out.println("******************");
@@ -87,8 +91,8 @@ public class TestAtivoHibernate {
 		RelacionamentoAtivoBO rAtivoBO = RelacionamentoAtivoBO.getInstance();
 		
 		try {
-			Ativo ativoPai = ativoBO.buscarAtivoPorId(11);
-			Ativo ativoFilho = ativoBO.buscarAtivoPorId(22);
+			Ativo ativoPai = ativoBO.buscarAtivoPorId(1);
+			Ativo ativoFilho = ativoBO.buscarAtivoPorId(2);
 			rAtivoBO.cadastrarRelacionamento(ativoPai, ativoFilho);
 		} catch (SQLException e) {
 			System.err.println("erro no cadastro de relacionamento: "+e.getMessage());
