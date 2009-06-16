@@ -1,6 +1,7 @@
 package com.pss.features.ativos.relacionamento.bo;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -87,6 +88,7 @@ public class RelacionamentoAtivoBO implements RelacionamentoAtivoRepository{
 		//para fazer a DFS
 		LinkedList stack_open = new LinkedList();
 		LinkedList stack_closed = new LinkedList();
+		List lista_relacionamentos = new ArrayList();
 		
 		//Buscar primeiro como sendo ativo filho
 		List lista_ativos_pai = buscarRelacionamentoPorAtivoFilho(ativo);
@@ -95,6 +97,7 @@ public class RelacionamentoAtivoBO implements RelacionamentoAtivoRepository{
 			RelacionamentoAtivo r = (RelacionamentoAtivo) lista_ativos_pai.get(i);
 			Ativo ativo_aux = r.getAtivoPai();
 			stack_closed.addFirst(ativo_aux.getId());
+			lista_relacionamentos.add(r);
 			System.out.println(ativo_aux.getId());
 		}
 		System.out.println("**********************************************************************");
@@ -122,18 +125,21 @@ public class RelacionamentoAtivoBO implements RelacionamentoAtivoRepository{
 					//System.out.println("stack_close contem "+filho_id);
 				}else if (filho_id.intValue() != id_node.intValue() && ! stack_open.contains(filho_id)) {
 					stack_open.addFirst(filho_id);
+					lista_relacionamentos.add(r);
 				}
 				//pai
 				if (stack_closed.contains(pai_id)){
 					//System.out.println("stack_close contem "+pai_id);
 				}else if (pai_id.intValue() != id_node.intValue() && ! stack_open.contains(pai_id)){
 					stack_open.addFirst(pai_id);
+					lista_relacionamentos.add(r);
 				}
 			}
 			stack_closed.addFirst(id_node);
 
 		}
-		
+	
+		stack_closed.addFirst(lista_relacionamentos);
 		return stack_closed;
 		
 	}

@@ -106,6 +106,10 @@ public class TestAtivoHibernate {
 		ativo = ativoBO.buscarAtivoPorId(ativo_relacionamento_id);
 		
 		LinkedList lista_relacionamento = rAtivoBO.mapearRelacionamento(ativo);
+		List lista_relac_ativos = (List) lista_relacionamento.removeFirst();
+		
+		FacadeUtil.log("Relacionamentos: "+lista_relac_ativos);
+		
 		System.out.println("Relacionamentos com o ativo id "+ativo_relacionamento_id+": "+lista_relacionamento);
 		
 	}

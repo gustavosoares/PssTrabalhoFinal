@@ -67,9 +67,16 @@ public class RelacionamentoAtivo {
 	}
 
 	@Override
+/*	
 	public String toString() {
 		return "\nRelacionamentoAtivo[id=" + this.id + ",\n AtivoIdPai=["
 				+ this.ativoPai + "] <===>  AtivoIdFilho=[" + this.ativoFilho + "]";
+	}
+*/
+	public String toString() {
+		
+		return "\nRelacionamentoAtivo[AtivoIdPai="
+				+ this.ativoPai.getId() + " <===>  AtivoIdFilho=" + this.ativoFilho.getId() + "]";
 	}
 
 	
