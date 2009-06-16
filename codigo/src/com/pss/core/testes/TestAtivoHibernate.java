@@ -27,6 +27,7 @@ public class TestAtivoHibernate {
 		/**
 		 * Cadastrar ativo
 		 */
+		/*
 		for (int i=0; i < 5; i++) {
 			System.out.println("iniciando...");
 			Ativo ativo = new Ativo();
@@ -41,7 +42,7 @@ public class TestAtivoHibernate {
 				e.printStackTrace();
 			}
 		}
-
+		*/
 		Ativo ativo = null;
 		
 		try {
@@ -84,15 +85,15 @@ public class TestAtivoHibernate {
 		*/
 		List listaAtivos = ativoBO.listarAtivos();
 		
-		System.out.println("******************");
-		System.out.println(listaAtivos);
-		System.out.println("******************");
+		//System.out.println("******************");
+		//System.out.println(listaAtivos);
+		//System.out.println("******************");
 		
 		RelacionamentoAtivoBO rAtivoBO = RelacionamentoAtivoBO.getInstance();
 		
 		try {
-			Ativo ativoPai = ativoBO.buscarAtivoPorId(1);
-			Ativo ativoFilho = ativoBO.buscarAtivoPorId(2);
+			Ativo ativoPai = ativoBO.buscarAtivoPorId(10);
+			Ativo ativoFilho = ativoBO.buscarAtivoPorId(12);
 			rAtivoBO.cadastrarRelacionamento(ativoPai, ativoFilho);
 		} catch (SQLException e) {
 			System.err.println("erro no cadastro de relacionamento: "+e.getMessage());
@@ -100,6 +101,9 @@ public class TestAtivoHibernate {
 			System.err.println("relacionamento nao cadastrado: ativos nao encontrados");
 		} 
 	
+		ativo = ativoBO.buscarAtivoPorId(2);
+		
+		rAtivoBO.mapearRelacionamento(ativo);
 		
 	}
 

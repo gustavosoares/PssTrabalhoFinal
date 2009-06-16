@@ -1,6 +1,7 @@
 package com.pss.features.ativos.relacionamento.bo;
 
 import java.sql.SQLException;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.persistence.NoResultException;
@@ -77,5 +78,46 @@ public class RelacionamentoAtivoBO implements RelacionamentoAtivoRepository{
 		instanceRepository.cadastrarRelacionamento(ativoPai, ativoFilho);
 	}
 
+	public void mapearRelacionamento(Ativo ativo) {
+		
+		//Buscar primeiro como sendo ativo filho
+		List lista_ativos_pai = buscarRelacionamentoPorAtivoFilho(ativo);
+		FacadeUtil.log("Ativos que sao pai do ativo "+ativo.getId()+" :");
+		for (int i = 0; i < lista_ativos_pai.size(); i++) {
+			RelacionamentoAtivo r = (RelacionamentoAtivo) lista_ativos_pai.get(i);
+			Ativo ativo_aux = r.getAtivoPai();
+			System.out.println(ativo_aux.getId());
+		}
+		System.out.println("**********************************************************************");
+		//Busca de ativos que sao filhos do ativo
+		List lista_ativos_filho = buscarRelacionamentoPorAtivoPai(ativo);
+		FacadeUtil.log("Ativos que sao filho do ativo "+ativo.getId()+" :");
+		for (int i = 0; i < lista_ativos_filho.size(); i++) {
+			RelacionamentoAtivo r = (RelacionamentoAtivo) lista_ativos_filho.get(i);
+			Ativo ativo_aux = r.getAtivoFilho();
+			System.out.println(ativo_aux.getId());
+		}
+		//Obter a arvore de dependencia
+		LinkedList stack_open = new LinkedList();
+		LinkedList stack_closed = new LinkedList();
+		
+		/*
+	    // Push on top of stack
+	    stack.addFirst(new Integer(1));
+	    stack.addFirst(new Integer(2));
+	    stack.addFirst(new Integer(3));
+	    stack.addFirst(new Integer(4));
+	    
+	    System.out.println(stack);
+	    // Pop off top of stack
+	    
+	    System.out.println("first: "+stack.removeFirst());
+	    System.out.println(stack);
+	    System.out.println("first: "+stack.removeFirst());
+	    System.out.println(stack);
+	    System.out.println("first: "+stack.removeFirst());
+	    // If the queue is to be used by multiple threads,
+		*/
+	}
 
 }
