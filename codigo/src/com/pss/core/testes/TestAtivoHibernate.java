@@ -2,6 +2,7 @@ package com.pss.core.testes;
 
 import java.sql.SQLException;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.persistence.NoResultException;
@@ -92,8 +93,8 @@ public class TestAtivoHibernate {
 		RelacionamentoAtivoBO rAtivoBO = RelacionamentoAtivoBO.getInstance();
 		
 		try {
-			Ativo ativoPai = ativoBO.buscarAtivoPorId(10);
-			Ativo ativoFilho = ativoBO.buscarAtivoPorId(12);
+			Ativo ativoPai = ativoBO.buscarAtivoPorId(8);
+			Ativo ativoFilho = ativoBO.buscarAtivoPorId(13);
 			rAtivoBO.cadastrarRelacionamento(ativoPai, ativoFilho);
 		} catch (SQLException e) {
 			System.err.println("erro no cadastro de relacionamento: "+e.getMessage());
@@ -101,9 +102,11 @@ public class TestAtivoHibernate {
 			System.err.println("relacionamento nao cadastrado: ativos nao encontrados");
 		} 
 	
-		ativo = ativoBO.buscarAtivoPorId(2);
+		int ativo_relacionamento_id = 2;
+		ativo = ativoBO.buscarAtivoPorId(ativo_relacionamento_id);
 		
-		rAtivoBO.mapearRelacionamento(ativo);
+		LinkedList lista_relacionamento = rAtivoBO.mapearRelacionamento(ativo);
+		System.out.println("Relacionamentos com o ativo id "+ativo_relacionamento_id+": "+lista_relacionamento);
 		
 	}
 

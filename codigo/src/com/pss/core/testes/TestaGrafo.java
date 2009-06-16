@@ -21,6 +21,10 @@ public class TestaGrafo {
 	    System.out.println(stack);
 	    // Pop off top of stack
 	    
+	    if (stack.contains(4)){
+	    	System.out.println("contem 4");
+	    }
+	    
 	    System.out.println("first: "+stack.removeFirst());
 	    System.out.println(stack);
 	    System.out.println("first: "+stack.removeFirst());

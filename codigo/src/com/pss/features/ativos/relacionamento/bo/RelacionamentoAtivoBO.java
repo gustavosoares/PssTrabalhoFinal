@@ -57,6 +57,10 @@ public class RelacionamentoAtivoBO implements RelacionamentoAtivoRepository{
 		return instanceRepository.buscarRelacionamentoPorAtivoPai(ativoPai);
 	}
 
+	public List<RelacionamentoAtivo> buscarRelacionamentoPorAtivo(Ativo ativo) throws NoResultException {
+		return instanceRepository.buscarRelacionamentoPorAtivo(ativo);
+	}
+	
 	public void removerRelacionamento(RelacionamentoAtivo relacionamento) throws SQLException {
 		instanceRepository.removerRelacionamento(relacionamento);
 	}
@@ -78,7 +82,11 @@ public class RelacionamentoAtivoBO implements RelacionamentoAtivoRepository{
 		instanceRepository.cadastrarRelacionamento(ativoPai, ativoFilho);
 	}
 
-	public void mapearRelacionamento(Ativo ativo) {
+	public LinkedList mapearRelacionamento(Ativo ativo) {
+		
+		//para fazer a DFS
+		LinkedList stack_open = new LinkedList();
+		LinkedList stack_closed = new LinkedList();
 		
 		//Buscar primeiro como sendo ativo filho
 		List lista_ativos_pai = buscarRelacionamentoPorAtivoFilho(ativo);
@@ -86,38 +94,48 @@ public class RelacionamentoAtivoBO implements RelacionamentoAtivoRepository{
 		for (int i = 0; i < lista_ativos_pai.size(); i++) {
 			RelacionamentoAtivo r = (RelacionamentoAtivo) lista_ativos_pai.get(i);
 			Ativo ativo_aux = r.getAtivoPai();
+			stack_closed.addFirst(ativo_aux.getId());
 			System.out.println(ativo_aux.getId());
 		}
 		System.out.println("**********************************************************************");
-		//Busca de ativos que sao filhos do ativo
-		List lista_ativos_filho = buscarRelacionamentoPorAtivoPai(ativo);
-		FacadeUtil.log("Ativos que sao filho do ativo "+ativo.getId()+" :");
-		for (int i = 0; i < lista_ativos_filho.size(); i++) {
-			RelacionamentoAtivo r = (RelacionamentoAtivo) lista_ativos_filho.get(i);
-			Ativo ativo_aux = r.getAtivoFilho();
-			System.out.println(ativo_aux.getId());
-		}
+		stack_open.addFirst(ativo.getId());
 		//Obter a arvore de dependencia
-		LinkedList stack_open = new LinkedList();
-		LinkedList stack_closed = new LinkedList();
+		List lista_relacionamento_ativos = null;
+		while (stack_open.size() != 0) {
+			
+			FacadeUtil.log("stack_open: "+stack_open);
+			FacadeUtil.log("stack_close: "+stack_closed);
+			System.out.println("*************");
+			Integer id_node = (Integer) stack_open.removeFirst();
+			Ativo ativo_node = instanceAtivo.buscarAtivoPorId(id_node);
+			lista_relacionamento_ativos = buscarRelacionamentoPorAtivo(ativo_node);
+			FacadeUtil.log("Ativos que relacionados ao ativo "+ativo_node.getId()+" :");
+			for (int i = 0; i < lista_relacionamento_ativos.size(); i++) {
+				RelacionamentoAtivo r = (RelacionamentoAtivo) lista_relacionamento_ativos.get(i);
+				Ativo ativo_aux_filho = r.getAtivoFilho(); //filho
+				Integer filho_id = ativo_aux_filho.getId();
+				Ativo ativo_aux_pai = r.getAtivoPai(); //pai
+				Integer pai_id = ativo_aux_pai.getId();
+				System.out.println(pai_id+" ->>> "+filho_id);
+				//filho
+				if (stack_closed.contains(filho_id)){
+					//System.out.println("stack_close contem "+filho_id);
+				}else if (filho_id.intValue() != id_node.intValue() && ! stack_open.contains(filho_id)) {
+					stack_open.addFirst(filho_id);
+				}
+				//pai
+				if (stack_closed.contains(pai_id)){
+					//System.out.println("stack_close contem "+pai_id);
+				}else if (pai_id.intValue() != id_node.intValue() && ! stack_open.contains(pai_id)){
+					stack_open.addFirst(pai_id);
+				}
+			}
+			stack_closed.addFirst(id_node);
+
+		}
 		
-		/*
-	    // Push on top of stack
-	    stack.addFirst(new Integer(1));
-	    stack.addFirst(new Integer(2));
-	    stack.addFirst(new Integer(3));
-	    stack.addFirst(new Integer(4));
-	    
-	    System.out.println(stack);
-	    // Pop off top of stack
-	    
-	    System.out.println("first: "+stack.removeFirst());
-	    System.out.println(stack);
-	    System.out.println("first: "+stack.removeFirst());
-	    System.out.println(stack);
-	    System.out.println("first: "+stack.removeFirst());
-	    // If the queue is to be used by multiple threads,
-		*/
+		return stack_closed;
+		
 	}
 
 }

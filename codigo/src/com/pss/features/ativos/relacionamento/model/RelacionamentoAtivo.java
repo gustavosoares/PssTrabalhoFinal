@@ -20,6 +20,7 @@ import com.pss.core.model.Ativo;
 		@NamedQuery(name = "RelacionamentoAtivo.listAll", query = "from RelacionamentoAtivo a"),
 		@NamedQuery(name = "RelacionamentoAtivo.findByAtivoPai", query = "from RelacionamentoAtivo a where a.ativoPai = ?1"),
 		@NamedQuery(name = "RelacionamentoAtivo.findByAtivoFilho", query = "from RelacionamentoAtivo a where a.ativoFilho = ?1"),
+		@NamedQuery(name = "RelacionamentoAtivo.findByAtivo", query = "from RelacionamentoAtivo a where a.ativoPai = ?1 or a.ativoFilho = ?1"),
 		@NamedQuery(name = "RelacionamentoAtivo.findByRelacionamento", query = "from RelacionamentoAtivo a where a.ativoPai = ?1 and a.ativoFilho = ?2") })
 
 public class RelacionamentoAtivo {

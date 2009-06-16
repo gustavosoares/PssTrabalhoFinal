@@ -51,5 +51,9 @@ public class RelacionamentoAtivoRepositoryHibernate implements RelacionamentoAti
 	public void removerRelacionamento(RelacionamentoAtivo relacionamento) throws NoResultException, SQLException {
 		genericPersistence.remove(relacionamento, relacionamento.getId());
 	}
+
+	public List<RelacionamentoAtivo> buscarRelacionamentoPorAtivo(Ativo ativo) throws NoResultException {
+		return genericPersistence.listByQuery("findByAtivo", ativo);
+	}
 		
 }
