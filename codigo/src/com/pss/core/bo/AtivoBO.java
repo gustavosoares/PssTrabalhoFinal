@@ -2,6 +2,7 @@ package com.pss.core.bo;
 
 import java.sql.SQLException;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.persistence.NoResultException;
@@ -76,5 +77,20 @@ public class AtivoBO implements AtivoRepository {
 			agenteBO.notificarObservadores(ativo);
 		}
 	}
+	
+	public int obterTotalDeAtivosServidor() {
+		return obterTotaldeAtivosPorTipo(Ativo.TIPO_SERVIDOR);
+	}
 
+	public int obterTotalDeAtivosAplicacao() {
+		return obterTotaldeAtivosPorTipo(Ativo.TIPO_APLICACAO);
+	}
+	
+	public int obterTotalDeAtivosRoteador() {
+		return obterTotaldeAtivosPorTipo(Ativo.TIPO_ROTEADOR);
+	}
+	
+	public int obterTotaldeAtivosPorTipo(int tipo) {
+		return instanceRepository.obterTotaldeAtivosPorTipo(tipo);
+	}
 }

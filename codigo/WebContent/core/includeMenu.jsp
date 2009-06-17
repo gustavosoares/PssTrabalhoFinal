@@ -14,7 +14,12 @@
 					<td> 
 						<a href="/gsoares/ServletController?acao=editarAtivo">Editar um ativo</a>
 					</td> 
-				</tr>																		
+				</tr>
+				<tr> 
+					<td> 
+						<a href="/gsoares/ServletController?acao=listarAtivo">Listar ativos</a>
+					</td> 
+				</tr>																	
 			</table>
 		</td>
 		

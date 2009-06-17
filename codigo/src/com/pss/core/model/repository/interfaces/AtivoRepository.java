@@ -14,5 +14,6 @@ public interface AtivoRepository {
 	public void editarAtivo(Ativo ativo) throws SQLException;
 	public void removerAtivoPorId(Integer id) throws SQLException, NoResultException;
 	public List listarAtivos();
+	public int obterTotaldeAtivosPorTipo(int tipo);
 	
 }
