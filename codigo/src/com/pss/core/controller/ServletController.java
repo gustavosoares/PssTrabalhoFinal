@@ -40,12 +40,12 @@ public class ServletController extends HttpServlet {
 	    String seguranca = config.getInitParameter("seguranca").toLowerCase();
 	    String relacionamento = config.getInitParameter("relacionamento").toLowerCase();
 	    String monitoracao = config.getInitParameter("monitoracao").toLowerCase();
-	    String versionamento = config.getInitParameter("versionamento").toLowerCase();
+	    //String versionamento = config.getInitParameter("versionamento").toLowerCase();
 	    
-	    FacadeUtil.registrarFeature("segurance", seguranca);
+	    FacadeUtil.registrarFeature("seguranca", seguranca);
 	    FacadeUtil.registrarFeature("relacionamento", relacionamento);
 	    FacadeUtil.registrarFeature("monitoracao", monitoracao);
-	    FacadeUtil.registrarFeature("versionamento", versionamento);
+	    //FacadeUtil.registrarFeature("versionamento", versionamento);
 	    
 	    FacadeUtil.log(FacadeUtil.obterEstadoDasFeatures());
 	    // Inicializando as bases de dados

@@ -1,4 +1,4 @@
-<%@ page import="com.pss.core.*, java.util.*"%>
+<%@ page import="com.pss.core.*, com.pss.core.facade.*, java.util.*"%>
 
 <%@ include file="includeTopo.jsp" %>
 <%@ include file="includeMenu.jsp" %>

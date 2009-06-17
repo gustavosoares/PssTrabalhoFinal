@@ -19,7 +19,22 @@
 					<td> 
 						<a href="/gsoares/ServletController?acao=listarAtivo">Listar ativos</a>
 					</td> 
-				</tr>																	
+				</tr>
+<% 
+if (com.pss.core.facade.FacadeUtil.featureHabilitada("seguranca")) {
+%>
+				<tr> 
+					<td> 
+						<a href="/gsoares/ServletController?acao=cadastrarUsuario">Cadastrar usuário</a>
+					</td> 
+				</tr>	
+				<tr> 
+					<td> 
+						<a href="/gsoares/ServletController?acao=removerUsuario">Remover usuário</a>
+					</td> 
+				</tr>
+
+<% } %>
 			</table>
 		</td>
 		

@@ -10,7 +10,7 @@
 		<init-param>
 			<description>feature seguranca</description>
 			<param-name>seguranca</param-name>
-			<param-value>false</param-value>
+			<param-value>true</param-value>
 		</init-param>
 		<init-param>
 			<description>feature relacionamento</description>
@@ -22,11 +22,11 @@
 			<param-name>monitoracao</param-name>
 			<param-value>true</param-value>
 		</init-param>
-		<init-param>
+		<!--init-param>
 			<description>feature salvar versao</description>
 			<param-name>versionamento</param-name>
 			<param-value>false</param-value>
-		</init-param>
+		</init-param-->
 		<load-on-startup>0</load-on-startup>
 		<!-- FIM -->
 	</servlet>
