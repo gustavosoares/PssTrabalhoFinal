@@ -21,6 +21,8 @@
 					</td> 
 				</tr>
 <% 
+try {
+	
 if (com.pss.core.facade.FacadeUtil.featureHabilitada("seguranca")) {
 %>
 				<tr> 
@@ -34,7 +36,11 @@ if (com.pss.core.facade.FacadeUtil.featureHabilitada("seguranca")) {
 					</td> 
 				</tr>
 
-<% } %>
+<% 
+} 
+
+} catch (Exception e) {}
+%>
 			</table>
 		</td>
 		

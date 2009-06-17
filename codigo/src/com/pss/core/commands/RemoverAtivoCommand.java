@@ -47,6 +47,7 @@ public class RemoverAtivoCommand extends Command {
 			try {
 				Ativo ativo = ativoBO.buscarAtivoPorId(ativoId);
 				ativoBO.removerAtivoPorId(ativoId);
+				lista_ativos = ativoBO.listarAtivos();
 				request.setAttribute("mensagemJsp", "Ativo "+ativo.getNome()+" removido com sucesso");
 			} catch (Exception e) {
 				request.setAttribute("temErroJsp", new Boolean(true));
