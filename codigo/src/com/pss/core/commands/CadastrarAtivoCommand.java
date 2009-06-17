@@ -15,15 +15,13 @@ import com.pss.core.model.Ativo;
 public class CadastrarAtivoCommand extends Command {
 
 	public CadastrarAtivoCommand() {
-		commandName = "CadastrarAtivo";
+		commandName = "cadastrarAtivo";
 		urlForwardOK = "/core/cadastrarAtivo.jsp";
 	}
 	
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
-		FacadeUtil.log("execute do cadastrar ativo chamado");
 		
 		AtivoBO ativoBO = FacadeBO.getAtivoBOInstance();
 		

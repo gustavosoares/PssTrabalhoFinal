@@ -14,7 +14,7 @@ AtivoBO ativoBO = FacadeBO.getAtivoBOInstance();
 <tr valign="top">
 	<td>
 		<form name="cadastraAtivoForm" method="POST" action="/gsoares/ServletController" >
-			<input type="hidden" name="acao" value="CadastrarAtivo">	
+			<input type="hidden" name="acao" value="cadastrarAtivo">	
 			<input type="hidden" name="subacao" value="cadastra">
 			<table>
 				<tr align="left">

@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 public class ListarAtivoCommand extends Command {
 
 	public ListarAtivoCommand() {
-		commandName = "ListarAtivo";
+		commandName = "listarAtivo";
 		urlForwardOK = "/core/listarAtivo.jsp";
 	}
 	
