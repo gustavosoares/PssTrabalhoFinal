@@ -24,7 +24,7 @@ Iterator itAtivos = lista.iterator();
 					<td>Ativo</td>
 					<td>
 			<select name="ativoId" size="1" >
-				<option value="">Selecione um projeto</option>
+				<option value="">Selecione o ativo para remoção</option>
 <% 
 	while (itAtivos.hasNext()) { 
 		Ativo ativo = (Ativo) itAtivos.next();		
