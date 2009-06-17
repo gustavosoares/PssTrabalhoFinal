@@ -3,6 +3,8 @@ package com.pss.core.commands;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.pss.core.facade.FacadeUtil;
+
 public class CommandMap {
 	private static CommandMap instance = null;
 
@@ -42,6 +44,13 @@ public class CommandMap {
 		 * FEATURES
 		 */
 		
+		/**
+		 * SEGURANCA
+		 */
+		if (FacadeUtil.featureHabilitada("seguranca")) {
+			FacadeUtil.log("carregando commands de seguranca");
+			this.commandList.putAll(com.pss.features.seguranca.commands.CommandSegurancaMap.getInstance().getCommandList());
+		}
 	
 	}
 
