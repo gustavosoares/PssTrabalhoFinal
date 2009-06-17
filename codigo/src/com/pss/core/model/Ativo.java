@@ -35,7 +35,7 @@ public class Ativo {
 	private Integer tipo;
 
 	@Column(nullable = false, length=1000)
-	private String descricacao;
+	private String descricao;
 
 	@Column(nullable = false)
 	private String nome;
@@ -104,12 +104,12 @@ public class Ativo {
 	}
 	
 	
-	public String getDescricacao() {
-		return descricacao;
+	public String getDescricao() {
+		return descricao;
 	}
 
-	public void setDescricacao(String descricacao) {
-		this.descricacao = descricacao;
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
 	}
 
 	@Override

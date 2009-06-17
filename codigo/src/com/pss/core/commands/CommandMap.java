@@ -16,6 +16,7 @@ public class CommandMap {
 	}
 	
 	private CommandMap() {
+		
 		this.commandList = new HashMap();
 		
 		Command comando = new InicioCommand();

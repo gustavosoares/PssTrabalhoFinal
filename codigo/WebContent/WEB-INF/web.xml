@@ -15,12 +15,12 @@
 		<init-param>
 			<description>feature relacionamento</description>
 			<param-name>relacionamento</param-name>
-			<param-value>false</param-value>
+			<param-value>true</param-value>
 		</init-param>
 		<init-param>
 			<description>feature monitoracao</description>
 			<param-name>monitoracao</param-name>
-			<param-value>false</param-value>
+			<param-value>true</param-value>
 		</init-param>
 		<init-param>
 			<description>feature salvar versao</description>

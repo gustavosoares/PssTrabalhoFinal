@@ -63,7 +63,7 @@ public class TestAtivoHibernate {
 			System.out.println("Editando o ativo_id "+ativo_editar_id);
 			ativo = ativoBO.buscarAtivoPorId(ativo_editar_id);
 			System.out.println(ativo);
-			ativo.setDescricacao("descricacao alteraaada");
+			ativo.setDescricao("descricacao alteraaada");
 			ativoBO.editarAtivo(ativo);
 		} catch (NoResultException e) {
 			System.out.println("ativo id "+ativo_editar_id+" nao encontrado para edicao");
