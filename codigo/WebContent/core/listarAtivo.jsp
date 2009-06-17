@@ -11,11 +11,11 @@
 <% 
 AtivoBO ativoBO = FacadeBO.getAtivoBOInstance();
 
-int ativo_servidor = ativoBO.obterTotalDeAtivosServidor();
-int ativo_aplicacao = ativoBO.obterTotalDeAtivosAplicacao();
-int ativo_roteador = ativoBO.obterTotalDeAtivosRoteador();
+Integer ativo_servidor = (Integer) request.getAttribute("count_servidor");
+Integer ativo_aplicacao = (Integer) request.getAttribute("count_aplicacao");
+Integer ativo_roteador = (Integer) request.getAttribute("count_roteador");
 
-int total_ativos = ativo_aplicacao + ativo_roteador + ativo_servidor;
+Integer total_ativos = (Integer) request.getAttribute("count_total");
 %>
 	<tr>
 		<td colspan="3"><b><i>Relatório de Ativos</i></b></td>
