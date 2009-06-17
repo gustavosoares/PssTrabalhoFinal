@@ -35,5 +35,6 @@
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/jung-visualization-2.0.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/stax-api-1.0.1.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/wstx-asl-3.2.6.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/aspectjrt.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

@@ -1,8 +1,8 @@
 <%@ page import="com.pss.core.*, com.pss.core.bo.*, com.pss.core.facade.*, com.pss.features.seguranca.bo.*, java.util.*"%>
 
 <!--  include padrao para os jsps -->
-<%@ include file="includeTopo.jsp" %>
-<%@ include file="includeMenu.jsp" %>
+<%@ include file="/core/includeTopo.jsp" %>
+<%@ include file="/core/includeMenu.jsp" %>
 <td width="550">
 <table border="1" width="550" align="left">
 <!-- fim padrao -->
@@ -51,5 +51,5 @@ UsuarioBO usuarioBO = FacadeBO.getUsuarioBOInstance();
 </table>
 
 </td>
-<%@ include file="includeRodape.jsp" %> 
+<%@ include file="/core/includeRodape.jsp" %> 
 <!-- fim padrao -->
