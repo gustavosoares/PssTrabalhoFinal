@@ -7,7 +7,7 @@
     <class>com.pss.features.seguranca.model.Usuario</class>
         <properties>
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" />
-            <property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/inventario" />
+            <property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/inventario?autoReconnect=true&amp;useUnicode=false&amp;characterEncoding=UTF8&amp;maxReconnects=5&amp;profileSQL=false&amp;dumpQueriesOnException=true" />
             <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver" />
             <property name="hibernate.connection.password" value="" />
             <property name="hibernate.connection.username" value="root" />
