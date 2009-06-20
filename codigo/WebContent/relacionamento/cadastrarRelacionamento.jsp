@@ -1,4 +1,5 @@
-<%@ page import="com.pss.core.*, com.pss.core.bo.*, com.pss.core.facade.*, com.pss.features.ativos.relacionamento.bo.*, java.util.*"%>
+<%@ page import="com.pss.core.*, com.pss.core.bo.*, com.pss.core.facade.*, com.pss.core.model.*, 
+com.pss.features.ativos.relacionamento.bo.*, java.util.*"%>
 
 <!--  include padrao para os jsps -->
 <%@ include file="/core/includeTopo.jsp" %>
@@ -9,37 +10,50 @@
 
 
 <% 
-UsuarioBO usuarioBO = FacadeBO.getUsuarioBOInstance();
+List lista = (List)request.getAttribute("liAtivos");
+Iterator itAtivos = lista.iterator();
 %>
 <tr valign="top">
 	<td>
 		<form name="cadastraForm" method="POST" action="/gsoares/ServletController" >
-			<input type="hidden" name="acao" value="cadastrarUsuario">	
+			<input type="hidden" name="acao" value="cadastrarRelacionamento">	
 			<input type="hidden" name="subacao" value="cadastra">
 			<table>
 				<tr align="left">
-					<td>Nome</td>
+					<td>Ativo Pai</td>
 					<td>
-						<input type="text" name="nome">
+			<select name="ativoPai" size="1" >
+				<option value="">Selecione o ativo pai</option>
+<% 
+	while (itAtivos.hasNext()) { 
+		Ativo ativo = (Ativo) itAtivos.next();		
+%>
+				<option value="<%= ativo.getId().intValue() %>"><%= ativo.getNome()%></option>
+<% 
+	} 
+%>
+			</select>						
 					</td>
 				</tr>
 				<tr align="left">
-					<td>Email</td>
+					<td>Ativo Filho</td>
 					<td>
-						<input type="text" name="email">
+			<select name="ativoFilho" size="1" >
+				<option value="">Selecione o ativo filho</option>
+<% 
+	for (int i=0; i < lista.size(); i++) {
+		Ativo ativo = (Ativo) lista.get(i);
+%>
+				<option value="<%= ativo.getId().intValue() %>"><%= ativo.getNome()%></option>
+<% 
+	} 
+%>
+			</select>						
 					</td>
 				</tr>
-				<tr align="left">
-					<td>Senha</td>
-					<td>
-						<input type="password" name="senha">
-					</td>
-				</tr>
-				<!-- lista de orientadores -->
-			
 				<tr align="center">
 					<td colspan="2"> 
-						<input type="submit" name="btnSubmit" value="Cadastrar usuario">
+						<input type="submit" name="btnSubmit" value="Cadastrar">
 					</td>
 				</tr>
 			</table>	

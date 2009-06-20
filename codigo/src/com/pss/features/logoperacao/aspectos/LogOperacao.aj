@@ -14,7 +14,7 @@ public aspect LogOperacao {
 	
 	before(HttpServletRequest request, HttpServletResponse response): commandExecuted(request, response) {
 		
-		String msg = "[LogOperacao] Comando executado: "+thisJoinPoint.getSignature();
+		String msg = "Comando executado: "+thisJoinPoint.getSignature();
 		Logging.log(this, msg);
 
 	}

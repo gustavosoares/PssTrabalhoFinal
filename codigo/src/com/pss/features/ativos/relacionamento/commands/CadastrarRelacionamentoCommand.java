@@ -1,6 +1,7 @@
 package com.pss.features.ativos.relacionamento.commands;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -25,6 +26,9 @@ public class CadastrarRelacionamentoCommand extends Command {
 			throws ServletException, IOException {
 		
 		RelacionamentoAtivoBO relBO =  FacadeBO.getRelacionamentoAtivoBOInstance();
+		AtivoBO ativoBO = FacadeBO.getAtivoBOInstance();
+		
+		List lista_ativos = ativoBO.listarAtivos();
 		
 		String action = "";
 		String ativoPaiIdStr = "";
@@ -34,12 +38,12 @@ public class CadastrarRelacionamentoCommand extends Command {
 			action = request.getParameter("subacao").trim();
 		}
 		
-		if (request.getParameter("ativopai") != null) {
-			ativoPaiIdStr = request.getParameter("ativopai").trim();
+		if (request.getParameter("ativoPai") != null) {
+			ativoPaiIdStr = request.getParameter("ativoPai").trim();
 		}
 		
-		if (request.getParameter("ativofilho") != null) {
-			ativoFilhoIdStr = request.getParameter("ativofilho").trim();
+		if (request.getParameter("ativoFilho") != null) {
+			ativoFilhoIdStr = request.getParameter("ativoFilho").trim();
 		}
 		
 		if (action.equalsIgnoreCase("cadastra") && ativoPaiIdStr.length() > 0 && ativoFilhoIdStr.length() > 0) {
@@ -49,7 +53,6 @@ public class CadastrarRelacionamentoCommand extends Command {
 				request.setAttribute("mensagemJsp", "Por favor, escolha ativos diferentes no cadastro do relacionamento");				
 			} else {
 				RelacionamentoAtivo rel = new RelacionamentoAtivo();
-				AtivoBO ativoBO = FacadeBO.getAtivoBOInstance();
 				
 				Integer ativoPaiId = new Integer(ativoPaiIdStr);
 				Integer ativoFilhoId = new Integer(ativoFilhoIdStr);
@@ -73,6 +76,7 @@ public class CadastrarRelacionamentoCommand extends Command {
 			request.setAttribute("mensagemJsp", "Cadastro de Relacionamento de ativos, informe todos os dados e pressione cadastrar");
 		}
 		
+		request.setAttribute("liAtivos", lista_ativos);
 		request.getRequestDispatcher(urlForwardOK).forward(request, response);
 		
 	}

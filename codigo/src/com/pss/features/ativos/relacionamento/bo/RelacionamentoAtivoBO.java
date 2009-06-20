@@ -63,10 +63,10 @@ public class RelacionamentoAtivoBO implements RelacionamentoAtivoRepository{
 	}
 	
 	public void removerRelacionamento(RelacionamentoAtivo relacionamento) throws SQLException {
-		Ativo ativoPai = relacionamento.getAtivoPai();
+		Ativo ativoFilho = relacionamento.getAtivoFilho();
 		//instanceRepository.removerRelacionamento(relacionamento);
 		//Removo todos os relacionamentos a partir do ativoPai
-		LinkedList pilha_relacionamentos = mapearRelacionamento(ativoPai);
+		LinkedList pilha_relacionamentos = mapearRelacionamento(ativoFilho);
 		List lista_relacionamentos = (List) pilha_relacionamentos.removeFirst();
 		FacadeUtil.log(this, "Relacionamentos para remover: "+lista_relacionamentos);
 		for (int i = 0; i < lista_relacionamentos.size(); i++) {

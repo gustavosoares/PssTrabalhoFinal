@@ -1,5 +1,5 @@
 <%@ page import="com.pss.core.*, com.pss.core.bo.*, com.pss.core.facade.*, 
-com.pss.features.ativos.relacionamento.bo.*, java.util.*"%>
+com.pss.features.ativos.relacionamento.bo.*, com.pss.features.ativos.relacionamento.model.*, java.util.*"%>
 
 <!--  include padrao para os jsps -->
 <%@ include file="/core/includeTopo.jsp" %>
@@ -11,27 +11,26 @@ com.pss.features.ativos.relacionamento.bo.*, java.util.*"%>
 
 <%
 
-UsuarioBO usuarioBO = FacadeBO.getUsuarioBOInstance();
-List lista = (List)request.getAttribute("liUsuarios");
-Iterator itUsuarios = lista.iterator();
+List lista = (List)request.getAttribute("liRelacionamentos");
+Iterator itRelacionamentos = lista.iterator();
 
 %>
 <tr valign="top">
 	<td>
-		<form name="usuarioForm" method="POST" action="/gsoares/ServletController" >
-			<input type="hidden" name="acao" value="removerUsuario">	
+		<form name="removeForm" method="POST" action="/gsoares/ServletController" >
+			<input type="hidden" name="acao" value="removerRelacionamento">	
 			<input type="hidden" name="subacao" value="remove">
 			<table>
 				<tr align="left">
-					<td>Usuário</td>
+					<td>Relacionamentos</td>
 					<td>
-			<select name="usuarioId" size="1" >
-				<option value="">Selecione o usuário para remoção</option>
+			<select name="relacionamentoId" size="1" >
+				<option value="">Selecione o relacionamento para remoção</option>
 <% 
-	while (itUsuarios.hasNext()) { 
-		Usuario usuario = (Usuario) itUsuarios.next();		
+	while (itRelacionamentos.hasNext()) { 
+		RelacionamentoAtivo relacionamento = (RelacionamentoAtivo) itRelacionamentos.next();		
 %>
-				<option value="<%= usuario.getId().intValue()%>"><%= usuario.getNome()%> - <%= usuario.getEmail()%></option>
+				<option value="<%= relacionamento.getId().intValue()%>"><%= relacionamento.getAtivoPai().getNome()%> COM <%= relacionamento.getAtivoFilho().getNome() %></option>
 <% 
 	} 
 %>
