@@ -41,6 +41,27 @@ if (com.pss.core.facade.FacadeUtil.featureHabilitada("seguranca")) {
 
 } catch (Exception e) {}
 %>
+<% 
+try {
+	
+if (com.pss.core.facade.FacadeUtil.featureHabilitada("relacionamento")) {
+%>
+				<tr> 
+					<td> 
+						<a href="/gsoares/ServletController?acao=cadastrarRelacionamento">Cadastrar relacionamento</a>
+					</td> 
+				</tr>	
+				<tr> 
+					<td> 
+						<a href="/gsoares/ServletController?acao=removerRelacionamento">Remover relacionamento</a>
+					</td> 
+				</tr>
+
+<% 
+} 
+
+} catch (Exception e) {}
+%>
 			</table>
 		</td>
 		
