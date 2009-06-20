@@ -55,5 +55,13 @@ public class RelacionamentoAtivoRepositoryHibernate implements RelacionamentoAti
 	public List<RelacionamentoAtivo> buscarRelacionamentoPorAtivo(Ativo ativo) throws NoResultException {
 		return genericPersistence.listByQuery("findByAtivo", ativo);
 	}
+
+	public List<RelacionamentoAtivo> listarRelacionamentos() {
+		return genericPersistence.listAll();
+	}
+
+	public RelacionamentoAtivo buscarRelacionamentoPorId(Integer id) throws NoResultException {
+		return genericPersistence.findByNamedQuery("findByRelacionamentoId", id);
+	}
 		
 }

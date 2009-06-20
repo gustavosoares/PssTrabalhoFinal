@@ -48,8 +48,16 @@ public class CommandMap {
 		 * SEGURANCA
 		 */
 		if (FacadeUtil.featureHabilitada("seguranca")) {
-			FacadeUtil.log("carregando commands de seguranca");
+			FacadeUtil.log(this, "carregando commands de seguranca");
 			this.commandList.putAll(com.pss.features.seguranca.commands.CommandSegurancaMap.getInstance().getCommandList());
+		}
+		
+		/**
+		 * RELACIONAMENTO
+		 */
+		if (FacadeUtil.featureHabilitada("relacionamento")) {
+			FacadeUtil.log(this, "carregando commands de relacionamento");
+			this.commandList.putAll(com.pss.features.ativos.relacionamento.commands.CommandRelacionamentoMap.getInstance().getCommandList());
 		}
 	
 	}

@@ -63,7 +63,16 @@ public class RelacionamentoAtivoBO implements RelacionamentoAtivoRepository{
 	}
 	
 	public void removerRelacionamento(RelacionamentoAtivo relacionamento) throws SQLException {
-		instanceRepository.removerRelacionamento(relacionamento);
+		Ativo ativoPai = relacionamento.getAtivoPai();
+		//instanceRepository.removerRelacionamento(relacionamento);
+		//Removo todos os relacionamentos a partir do ativoPai
+		LinkedList pilha_relacionamentos = mapearRelacionamento(ativoPai);
+		List lista_relacionamentos = (List) pilha_relacionamentos.removeFirst();
+		FacadeUtil.log(this, "Relacionamentos para remover: "+lista_relacionamentos);
+		for (int i = 0; i < lista_relacionamentos.size(); i++) {
+			RelacionamentoAtivo rel_aux = (RelacionamentoAtivo) lista_relacionamentos.get(i);
+			instanceRepository.removerRelacionamento(rel_aux);
+		}
 	}
 	
 	/**
@@ -74,7 +83,7 @@ public class RelacionamentoAtivoBO implements RelacionamentoAtivoRepository{
 	public void removerRelacionamento(List<RelacionamentoAtivo> lista_relacionamentos) throws SQLException {
 		for (int i = 0; i < lista_relacionamentos.size(); i++) {
 			RelacionamentoAtivo relacionamento = (RelacionamentoAtivo) lista_relacionamentos.get(i);
-			FacadeUtil.log("removendo relacionamento: "+relacionamento);
+			FacadeUtil.log(this, "removendo relacionamento: "+relacionamento);
 			removerRelacionamento(relacionamento);
 		}
 	}
@@ -92,7 +101,7 @@ public class RelacionamentoAtivoBO implements RelacionamentoAtivoRepository{
 		
 		//Buscar primeiro como sendo ativo filho
 		List lista_ativos_pai = buscarRelacionamentoPorAtivoFilho(ativo);
-		FacadeUtil.log("Ativos que sao pai do ativo "+ativo.getId()+" :");
+		FacadeUtil.log(this, "Ativos que sao pai do ativo "+ativo.getId()+" :");
 		for (int i = 0; i < lista_ativos_pai.size(); i++) {
 			RelacionamentoAtivo r = (RelacionamentoAtivo) lista_ativos_pai.get(i);
 			Ativo ativo_aux = r.getAtivoPai();
@@ -106,13 +115,13 @@ public class RelacionamentoAtivoBO implements RelacionamentoAtivoRepository{
 		List lista_relacionamento_ativos = null;
 		while (stack_open.size() != 0) {
 			
-			FacadeUtil.log("stack_open: "+stack_open);
-			FacadeUtil.log("stack_close: "+stack_closed);
+			FacadeUtil.log(this, "stack_open: "+stack_open);
+			FacadeUtil.log(this, "stack_close: "+stack_closed);
 			System.out.println("*************");
 			Integer id_node = (Integer) stack_open.removeFirst();
 			Ativo ativo_node = instanceAtivo.buscarAtivoPorId(id_node);
 			lista_relacionamento_ativos = buscarRelacionamentoPorAtivo(ativo_node);
-			FacadeUtil.log("Ativos que relacionados ao ativo "+ativo_node.getId()+" :");
+			FacadeUtil.log(this, "Ativos que relacionados ao ativo "+ativo_node.getId()+" :");
 			for (int i = 0; i < lista_relacionamento_ativos.size(); i++) {
 				RelacionamentoAtivo r = (RelacionamentoAtivo) lista_relacionamento_ativos.get(i);
 				Ativo ativo_aux_filho = r.getAtivoFilho(); //filho
@@ -142,6 +151,14 @@ public class RelacionamentoAtivoBO implements RelacionamentoAtivoRepository{
 		stack_closed.addFirst(lista_relacionamentos);
 		return stack_closed;
 		
+	}
+
+	public List<RelacionamentoAtivo> listarRelacionamentos() {
+		return instanceRepository.listarRelacionamentos();
+	}
+
+	public RelacionamentoAtivo buscarRelacionamentoPorId(Integer id) throws NoResultException {
+		return instanceRepository.buscarRelacionamentoPorId(id);
 	}
 
 }

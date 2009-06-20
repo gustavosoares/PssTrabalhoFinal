@@ -10,8 +10,8 @@ public class FacadeUtil {
 		
 	}
 	
-	public static void log(String msg) {
-		Logging.log(msg);
+	public static void log(Object obj, String msg) {
+		Logging.log(obj, msg);
 	}
 	
 	public static String encriptar(String senha) {

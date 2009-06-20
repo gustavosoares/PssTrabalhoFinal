@@ -50,11 +50,11 @@ public class Agente1BO implements Agente1ObserverSujeito {
 	
 	public void notificarObservadores(Ativo ativo) {
 		List<Agente1> lista_observadores = listarSujeitos(ativo);
-		FacadeUtil.log("Notificando os observadores do ativo "+ativo.getNome());
+		FacadeUtil.log(this, "Notificando os observadores do ativo "+ativo.getNome());
 		for (int i=0; i < lista_observadores.size(); i++) {
 			Agente1 agente = (Agente1) lista_observadores.get(i);
 			Usuario observador = agente.getUsuario();
-			FacadeUtil.log("Notificando observador: "+observador.getEmail());
+			FacadeUtil.log(this, "Notificando observador: "+observador.getEmail());
 			observador.notificar(ativo.getNome());
 		}
 	}

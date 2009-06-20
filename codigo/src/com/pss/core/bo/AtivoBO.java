@@ -43,18 +43,18 @@ public class AtivoBO implements AtivoRepository {
 	public void removerAtivoPorId(Integer id) throws SQLException, NoResultException {
 		//Possui relacionamento?
 		boolean relacionamento = FacadeUtil.featureHabilitada("relacionamento");
-		FacadeUtil.log("verificando se existe relacionamento: "+relacionamento);
+		FacadeUtil.log(this, "verificando se existe relacionamento: "+relacionamento);
 		if (relacionamento) {
-			FacadeUtil.log("removendo o relacionamento primeiro");
+			FacadeUtil.log(this, "removendo o relacionamento primeiro");
 			com.pss.features.ativos.relacionamento.bo.RelacionamentoAtivoBO rBO = com.pss.features.ativos.relacionamento.bo.RelacionamentoAtivoBO.getInstance();
 			Ativo ativo = buscarAtivoPorId(id);
 			//pai
 			List lista_relacionamentos = rBO.buscarRelacionamentoPorAtivoPai(ativo);
-			FacadeUtil.log("Relacionamentos por ativo pai: "+lista_relacionamentos);
+			FacadeUtil.log(this, "Relacionamentos por ativo pai: "+lista_relacionamentos);
 			rBO.removerRelacionamento(lista_relacionamentos);
 			//filho
 			lista_relacionamentos = rBO.buscarRelacionamentoPorAtivoFilho(ativo);
-			FacadeUtil.log("Relacionamentos por ativo filho: "+lista_relacionamentos);
+			FacadeUtil.log(this, "Relacionamentos por ativo filho: "+lista_relacionamentos);
 			rBO.removerRelacionamento(lista_relacionamentos);
 			//remove ativo
 			instanceRepository.removerAtivoPorId(id);

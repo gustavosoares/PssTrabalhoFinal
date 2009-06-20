@@ -25,7 +25,7 @@ public class ServletController extends HttpServlet {
 	
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException { 
 		String acao = request.getParameter("acao");
-		FacadeUtil.log(this.getClass().getName()+" acao: "+acao);
+		FacadeUtil.log(this, " acao: "+acao);
 		Command comando = (Command) CommandMap.getInstance().getCommand(acao);
 		if (comando == null) {
 			comando = (Command) CommandMap.getInstance().getCommand("Inicio");
@@ -47,7 +47,7 @@ public class ServletController extends HttpServlet {
 	    FacadeUtil.registrarFeature("monitoracao", monitoracao);
 	    //FacadeUtil.registrarFeature("versionamento", versionamento);
 	    
-	    FacadeUtil.log(FacadeUtil.obterEstadoDasFeatures());
+	    FacadeUtil.log(this, FacadeUtil.obterEstadoDasFeatures());
 	    // Inicializando as bases de dados
 	    /*
 	    ColaboradorRepository.getInstance();
@@ -58,7 +58,7 @@ public class ServletController extends HttpServlet {
 	    
 	    // Inicializa o Map de Commandos
 	    CommandMap.getInstance();
-	    FacadeUtil.log("Commandos incializados");
+	    FacadeUtil.log(this, "Commandos incializados");
 	}
 	
 	

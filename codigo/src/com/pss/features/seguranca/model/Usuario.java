@@ -82,9 +82,9 @@ public class Usuario {
 	}
 	
 	public void notificar(String ativo) {
-		FacadeUtil.log("##################");
-		FacadeUtil.log("Notificacao recebida do ativo: "+ativo);
-		FacadeUtil.log("##################");
+		FacadeUtil.log(this, "##################");
+		FacadeUtil.log(this, "Notificacao recebida do ativo: "+ativo);
+		FacadeUtil.log(this, "##################");
 	}
 	
 }
