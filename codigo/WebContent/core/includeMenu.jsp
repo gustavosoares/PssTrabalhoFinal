@@ -56,7 +56,11 @@ if (com.pss.core.facade.FacadeUtil.featureHabilitada("relacionamento")) {
 						<a href="/gsoares/ServletController?acao=removerRelacionamento">Remover relacionamento</a>
 					</td> 
 				</tr>
-
+				<tr> 
+					<td> 
+						<a href="/gsoares/ServletController?acao=listarRelacionamento">Mapear dependência</a>
+					</td> 
+				</tr>
 <% 
 } 
 
