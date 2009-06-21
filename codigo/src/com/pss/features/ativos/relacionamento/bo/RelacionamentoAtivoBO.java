@@ -101,15 +101,15 @@ public class RelacionamentoAtivoBO implements RelacionamentoAtivoRepository{
 		
 		//Buscar primeiro como sendo ativo filho
 		List lista_ativos_pai = buscarRelacionamentoPorAtivoFilho(ativo);
-		FacadeUtil.log(this, "Ativos que sao pai do ativo "+ativo.getId()+" :");
+		//FacadeUtil.log(this, "Ativos que sao pai do ativo "+ativo.getId()+" :");
 		for (int i = 0; i < lista_ativos_pai.size(); i++) {
 			RelacionamentoAtivo r = (RelacionamentoAtivo) lista_ativos_pai.get(i);
 			Ativo ativo_aux = r.getAtivoPai();
 			stack_closed.addFirst(ativo_aux.getId());
 			lista_relacionamentos.add(r);
-			System.out.println(ativo_aux.getId());
+			//System.out.println(ativo_aux.getId());
 		}
-		System.out.println("**********************************************************************");
+		//System.out.println("**********************************************************************");
 		stack_open.addFirst(ativo.getId());
 		//Obter a arvore de dependencia
 		List lista_relacionamento_ativos = null;
@@ -117,11 +117,11 @@ public class RelacionamentoAtivoBO implements RelacionamentoAtivoRepository{
 			
 			FacadeUtil.log(this, "stack_open: "+stack_open);
 			FacadeUtil.log(this, "stack_close: "+stack_closed);
-			System.out.println("*************");
+			//System.out.println("*************");
 			Integer id_node = (Integer) stack_open.removeFirst();
 			Ativo ativo_node = instanceAtivo.buscarAtivoPorId(id_node);
 			lista_relacionamento_ativos = buscarRelacionamentoPorAtivo(ativo_node);
-			FacadeUtil.log(this, "Ativos que relacionados ao ativo "+ativo_node.getId()+" :");
+			FacadeUtil.log(this, "Ativos que sao relacionados ao ativo "+ativo_node.getId()+" :");
 			for (int i = 0; i < lista_relacionamento_ativos.size(); i++) {
 				RelacionamentoAtivo r = (RelacionamentoAtivo) lista_relacionamento_ativos.get(i);
 				Ativo ativo_aux_filho = r.getAtivoFilho(); //filho

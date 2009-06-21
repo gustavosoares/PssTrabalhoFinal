@@ -66,6 +66,26 @@ if (com.pss.core.facade.FacadeUtil.featureHabilitada("relacionamento")) {
 
 } catch (Exception e) {}
 %>
+<% 
+try {
+	
+if (com.pss.core.facade.FacadeUtil.featureHabilitada("monitoracao")) {
+%>
+				<tr> 
+					<td> 
+						<a href="/gsoares/ServletController?acao=cadastrarMonitoracao">Adicionar observador de ativo</a>
+					</td> 
+				</tr>	
+				<tr> 
+					<td> 
+						<a href="/gsoares/ServletController?acao=removerMonitoracao">Remover observador</a>
+					</td> 
+				</tr>
+<% 
+} 
+
+} catch (Exception e) {}
+%>
 			</table>
 		</td>
 		
