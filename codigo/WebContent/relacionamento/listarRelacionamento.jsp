@@ -44,8 +44,8 @@ if (lista_relacionamentos != null) {
 		<td colspan="2"><center><b><i>Relacionamentos</i></b></center></td>
 	</tr>
 	<tr>
-		<td><b>Ativo Pai</b></td>
-		<td><b>Ativo Filho</b></td>
+		<td><center><b>de</b></center></td>
+		<td><center><b>para</b></center></td>
 	</tr>
 <% 
 	for (int i = 0; i < lista_relacionamentos.size(); i++) { 
@@ -53,8 +53,8 @@ if (lista_relacionamentos != null) {
 %>
 				
 	<tr>
-		<td><%= rel.getAtivoPai().getNome() %></td>
-		<td><%= rel.getAtivoFilho().getNome() %></td>
+		<td><center><%= rel.getAtivoPai().getNome() %></center></td>
+		<td><center><%= rel.getAtivoFilho().getNome() %></center></td>
 	</tr>
 
 <% 
