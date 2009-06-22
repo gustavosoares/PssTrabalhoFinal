@@ -13,7 +13,14 @@ com.pss.features.monitoracao.agente1.model.*, java.util.*"%>
 <% 
 List lista_agentes = (List)request.getAttribute("liAgentes");
 List lista_ativos = (List)request.getAttribute("liAtivos");
-String usuarioIdStr = request.getParameter("usuarioId").trim();
+String usuarioIdStr = null;
+
+try{
+	usuarioIdStr = request.getParameter("usuarioId").trim();	
+} catch (NullPointerException e) {
+	usuarioIdStr = "";
+}
+
 
 %>
 <tr valign="top">
