@@ -59,8 +59,8 @@ public class Agente1BO implements Agente1ObserverSujeito {
 		}
 	}
 
-	public Agente1 buscarAgente1PorId(Integer id) throws NoResultException {
-		return instanceRepository.buscarAgente1PorId(id);
+	public Agente1 buscarAgente1PorUsuarioEAtivo(Usuario usuario, Ativo ativo) throws NoResultException {
+		return instanceRepository.buscarAgente1PorUsuarioEAtivo(usuario, ativo);
 	}
 
 	public List<Agente1> listarAtivoPorUsuario(Usuario usuario) {

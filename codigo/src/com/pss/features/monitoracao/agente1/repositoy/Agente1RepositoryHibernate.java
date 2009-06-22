@@ -35,8 +35,8 @@ public class Agente1RepositoryHibernate implements Agente1ObserverSujeito {
 		genericPersistence.remove(agente, agente.getId());
 	}
 
-	public Agente1 buscarAgente1PorId(Integer id) throws NoResultException {
-		return genericPersistence.findByNamedQuery("findById", id);
+	public Agente1 buscarAgente1PorUsuarioEAtivo(Usuario usuario, Ativo ativo) throws NoResultException {
+		return genericPersistence.findByNamedQuery("findByUsuarioEAtivo", usuario, ativo);
 	}
 
 	public List<Agente1> listarAtivoPorUsuario(Usuario usuario) {

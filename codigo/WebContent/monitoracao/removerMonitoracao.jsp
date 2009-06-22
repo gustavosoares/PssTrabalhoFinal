@@ -11,7 +11,7 @@ com.pss.features.monitoracao.agente1.model.*, java.util.*"%>
 
 
 <% 
-List lista_agentes = (List)request.getAttribute("liAgentes");
+List lista_usuarios = (List)request.getAttribute("liUsuarios");
 List lista_ativos = (List)request.getAttribute("liAtivos");
 String usuarioIdStr = null;
 
@@ -20,7 +20,6 @@ try{
 } catch (NullPointerException e) {
 	usuarioIdStr = "";
 }
-
 
 %>
 <tr valign="top">
@@ -35,11 +34,10 @@ try{
 			<select name="usuarioId" size="1" >
 				<option value="">Selecione o usuário</option>
 <% 
-	for (int i = 0; i < lista_agentes.size(); i++) {
-		Agente1 agente1 = (Agente1) lista_agentes.get(i);
-		Usuario usuario = agente1.getUsuario();
+	for (int i = 0; i < lista_usuarios.size(); i++) {
+		Usuario usuario = (Usuario) lista_usuarios.get(i);
 %>
-				<option value="<%= usuario.getId().intValue() %> <% if (String.valueOf(usuario.getId().intValue()).equalsIgnoreCase(usuarioIdStr)) { %> selected <% } %>"><%= usuario.getNome()%></option>
+				<option value="<%= usuario.getId().intValue() %>" <% if (String.valueOf(usuario.getId().intValue()).equalsIgnoreCase(usuarioIdStr)) { %> selected <% } %>><%= usuario.getNome()%></option>
 <% 
 	} 
 %>
@@ -52,14 +50,14 @@ if ( lista_ativos != null ) {
 				<tr align="left">
 					<td>Ativo</td>
 					<td>
-			<select name="agenteId" size="1" >
+			<select name="ativoId" size="1" >
 				<option value="">Selecione o ativo</option>
 <% 
 	for (int i = 0; i < lista_ativos.size(); i++) {
 		Agente1 agente1 = (Agente1) lista_ativos.get(i);
 		Ativo ativo = agente1.getAtivo();
 %>
-				<option value="<%= agente1.getId().intValue() %>"><%= ativo.getNome()%></option>
+				<option value="<%= ativo.getId().intValue() %>"><%= ativo.getNome()%></option>
 <% 
 	} 
 %>

@@ -70,7 +70,7 @@ public class Agente1 {
 	@Override
 	public String toString() {
 		return "\nAgente1[id=" + this.id + ",\n Ativo=["
-				+ this.ativo.getNome() + "] esta sendo observado por  Usuaio=[" + this.usuario.getEmail() + "]";
+				+ this.ativo.getNome() + "] esta sendo observado por  Usuario=[" + this.usuario.getEmail() + "]";
 	}
 	
 }
