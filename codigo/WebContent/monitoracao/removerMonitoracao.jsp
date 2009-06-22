@@ -1,5 +1,6 @@
-<%@ page import="com.pss.core.*, com.pss.core.bo.*, com.pss.core.facade.*, 
-com.pss.features.ativos.relacionamento.bo.*, com.pss.features.ativos.relacionamento.model.*, java.util.*"%>
+<%@ page import="com.pss.core.*, com.pss.core.bo.*, com.pss.core.facade.*, com.pss.core.model.*, 
+com.pss.features.monitoracao.agente1.bo.*, com.pss.features.seguranca.model.*, 
+com.pss.features.monitoracao.agente1.model.*, java.util.*"%>
 
 <!--  include padrao para os jsps -->
 <%@ include file="/core/includeTopo.jsp" %>
@@ -9,28 +10,43 @@ com.pss.features.ativos.relacionamento.bo.*, com.pss.features.ativos.relacioname
 <!-- fim padrao -->
 
 
-<%
-
-List lista = (List)request.getAttribute("liRelacionamentos");
-Iterator itRelacionamentos = lista.iterator();
-
+<% 
+List lista_agentes = (List)request.getAttribute("liAgentes");
+List lista_ativos = (List)request.getAttribute("liAtivos");
 %>
 <tr valign="top">
 	<td>
-		<form name="removeForm" method="POST" action="/gsoares/ServletController" >
-			<input type="hidden" name="acao" value="removerRelacionamento">	
+		<form name="cadastraForm" method="POST" action="/gsoares/ServletController" >
+			<input type="hidden" name="acao" value="removerMonitoracao">	
 			<input type="hidden" name="subacao" value="remove">
 			<table>
 				<tr align="left">
-					<td>Relacionamentos</td>
+					<td>Usuário</td>
 					<td>
-			<select name="relacionamentoId" size="1" >
-				<option value="">Selecione o relacionamento para remoção</option>
+			<select name="usuarioId" size="1" >
+				<option value="">Selecione o usuário</option>
 <% 
-	while (itRelacionamentos.hasNext()) { 
-		RelacionamentoAtivo relacionamento = (RelacionamentoAtivo) itRelacionamentos.next();		
+	for (int i = 0; i < lista_agentes.size(); i++) {
+		Agente1 agente1 = (Agente1) lista_agentes.get(i);
+		Usuario usuario = agente1.getUsuario();
 %>
-				<option value="<%= relacionamento.getId().intValue()%>"><%= relacionamento.getAtivoPai().getNome()%> COM <%= relacionamento.getAtivoFilho().getNome() %></option>
+				<option value="<%= usuario.getId().intValue() %>"><%= usuario.getNome()%></option>
+<% 
+	} 
+%>
+			</select>						
+					</td>
+				</tr>
+				<tr align="left">
+					<td>Ativo</td>
+					<td>
+			<select name="ativoId" size="1" >
+				<option value="">Selecione o ativo</option>
+<% 
+	for (int i = 0; i < lista_ativos.size(); i++) {
+		Ativo ativo = (Ativo) lista_ativos.get(i);
+%>
+				<option value="<%= ativo.getId().intValue() %>"><%= ativo.getNome()%></option>
 <% 
 	} 
 %>
@@ -39,7 +55,7 @@ Iterator itRelacionamentos = lista.iterator();
 				</tr>
 				<tr align="center">
 					<td colspan="2"> 
-						<input type="submit" name="btnSubmit" value="Remover">
+						<input type="submit" name="btnSubmit" value="Remover monitoração">
 					</td>
 				</tr>
 			</table>	

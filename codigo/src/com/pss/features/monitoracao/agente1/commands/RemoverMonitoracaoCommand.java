@@ -32,6 +32,7 @@ public class RemoverMonitoracaoCommand extends Command {
 		AtivoBO ativoBO = FacadeBO.getAtivoBOInstance();
 		
 		List lista_agentes = agente1BO.listarUsuariosComMonitoracao();
+		List lista_ativos = null;
 		
 		String action = "";
 		String ativoIdStr = "";
@@ -76,6 +77,7 @@ public class RemoverMonitoracaoCommand extends Command {
 		}
 		
 		request.setAttribute("liAgentes", lista_agentes);
+		request.setAttribute("liAtivos", lista_ativos);
 		request.getRequestDispatcher(urlForwardOK).forward(request, response);
 
 	}
