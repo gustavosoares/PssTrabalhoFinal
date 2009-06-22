@@ -18,6 +18,8 @@ import com.pss.features.seguranca.model.Usuario;
 @Table(name = "agente1", uniqueConstraints = { @UniqueConstraint(columnNames = { "ativo_id", "usuario_id" }) })
 @NamedQueries( {
 		@NamedQuery(name = "Agente1.listAll", query = "from Agente1 a"),
+		@NamedQuery(name = "Agente1.listAllByUser", query = "select distinct Agente1.usuario from Agente1"),
+		@NamedQuery(name = "Agente1.findById", query = "from Agente1 a where a.id = ?1"),
 		@NamedQuery(name = "Agente1.findByAtivo", query = "from Agente1 a where a.ativo = ?1"),
 		@NamedQuery(name = "Agente1.findByUsuario", query = "from Agente1 a where a.usuario = ?1"),
 		@NamedQuery(name = "Agente1.findByUsuarioEAtivo", query = "from Agente1 a where a.usuario = ?1 and a.ativo = ?2") })

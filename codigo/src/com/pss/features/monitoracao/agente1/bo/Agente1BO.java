@@ -40,8 +40,8 @@ public class Agente1BO implements Agente1ObserverSujeito {
 		}
 	}
 
-	public List<Agente1> listarSujeitos(Ativo ativo) {
-		return instanceRepository.listarSujeitos(ativo);
+	public List<Agente1> listarSujeitosPorAtivo(Ativo ativo) {
+		return instanceRepository.listarSujeitosPorAtivo(ativo);
 	}
 
 	public void removerObservador(Agente1 agente) throws SQLException, NoResultException {
@@ -49,7 +49,7 @@ public class Agente1BO implements Agente1ObserverSujeito {
 	}
 	
 	public void notificarObservadores(Ativo ativo) {
-		List<Agente1> lista_observadores = listarSujeitos(ativo);
+		List<Agente1> lista_observadores = listarSujeitosPorAtivo(ativo);
 		FacadeUtil.log(this, "Notificando os observadores do ativo "+ativo.getNome());
 		for (int i=0; i < lista_observadores.size(); i++) {
 			Agente1 agente = (Agente1) lista_observadores.get(i);
@@ -57,6 +57,18 @@ public class Agente1BO implements Agente1ObserverSujeito {
 			FacadeUtil.log(this, "Notificando observador: "+observador.getEmail());
 			observador.notificar(ativo.getNome());
 		}
+	}
+
+	public Agente1 buscarAgente1PorId(Integer id) throws NoResultException {
+		return instanceRepository.buscarAgente1PorId(id);
+	}
+
+	public List<Agente1> listarAtivoPorUsuario(Usuario usuario) {
+		return instanceRepository.listarAtivoPorUsuario(usuario);
+	}
+
+	public List<Agente1> listarUsuariosComMonitoracao() {
+		return instanceRepository.listarUsuariosComMonitoracao();
 	}
 
 }

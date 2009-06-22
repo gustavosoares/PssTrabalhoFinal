@@ -124,6 +124,12 @@ public class GenericPersistence<T> {
 		return localquery.getResultList();
 	}
 
+	@SuppressWarnings("unchecked")
+	public List<T> listByQuery(String query) throws NoResultException {
+		Query localquery = getInternalManager().createNamedQuery(createQueryName(query));
+		return localquery.getResultList();
+	}
+	
 	@SuppressWarnings("unchecked") 
 	public T findByNamedQuery(String query, Object... args) throws NoResultException {
 		int i = 1;

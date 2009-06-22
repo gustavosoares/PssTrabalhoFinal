@@ -59,6 +59,14 @@ public class CommandMap {
 			FacadeUtil.log(this, "carregando commands de relacionamento");
 			this.commandList.putAll(com.pss.features.ativos.relacionamento.commands.CommandRelacionamentoMap.getInstance().getCommandList());
 		}
+		
+		/**
+		 * MONITORACAO
+		 */
+		if (FacadeUtil.featureHabilitada("monitoracao")) {
+			FacadeUtil.log(this, "carregando commands de monitoracao");
+			this.commandList.putAll(com.pss.features.monitoracao.agente1.commands.CommandMonitoracaoMap.getInstance().getCommandList());
+		}
 	
 	}
 
