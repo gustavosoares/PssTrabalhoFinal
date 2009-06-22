@@ -13,6 +13,8 @@ com.pss.features.monitoracao.agente1.model.*, java.util.*"%>
 <% 
 List lista_agentes = (List)request.getAttribute("liAgentes");
 List lista_ativos = (List)request.getAttribute("liAtivos");
+String usuarioIdStr = request.getParameter("usuarioId").trim();
+
 %>
 <tr valign="top">
 	<td>
@@ -30,26 +32,31 @@ List lista_ativos = (List)request.getAttribute("liAtivos");
 		Agente1 agente1 = (Agente1) lista_agentes.get(i);
 		Usuario usuario = agente1.getUsuario();
 %>
-				<option value="<%= usuario.getId().intValue() %>"><%= usuario.getNome()%></option>
+				<option value="<%= usuario.getId().intValue() %> <% if (String.valueOf(usuario.getId().intValue()).equalsIgnoreCase(usuarioIdStr)) { %> selected <% } %>"><%= usuario.getNome()%></option>
 <% 
 	} 
 %>
 			</select>						
 					</td>
 				</tr>
+<% 
+if ( lista_ativos != null ) {
+%>
 				<tr align="left">
 					<td>Ativo</td>
 					<td>
-			<select name="ativoId" size="1" >
+			<select name="agenteId" size="1" >
 				<option value="">Selecione o ativo</option>
 <% 
 	for (int i = 0; i < lista_ativos.size(); i++) {
-		Ativo ativo = (Ativo) lista_ativos.get(i);
+		Agente1 agente1 = (Agente1) lista_ativos.get(i);
+		Ativo ativo = agente1.getAtivo();
 %>
-				<option value="<%= ativo.getId().intValue() %>"><%= ativo.getNome()%></option>
+				<option value="<%= agente1.getId().intValue() %>"><%= ativo.getNome()%></option>
 <% 
 	} 
 %>
+
 			</select>						
 					</td>
 				</tr>
@@ -58,6 +65,18 @@ List lista_ativos = (List)request.getAttribute("liAtivos");
 						<input type="submit" name="btnSubmit" value="Remover monitoração">
 					</td>
 				</tr>
+<%
+} else {
+%>
+				<tr align="center">
+					<td colspan="2"> 
+						<input type="submit" name="btnSubmit" value="Avançar">
+					</td>
+				</tr>
+
+<% 
+}
+%>
 			</table>	
 		</form>
 	</td>
