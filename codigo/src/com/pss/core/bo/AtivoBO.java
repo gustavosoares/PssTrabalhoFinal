@@ -3,10 +3,12 @@ package com.pss.core.bo;
 import java.sql.SQLException;
 import java.util.Date;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.persistence.NoResultException;
 
+import com.pss.core.facade.FacadeBO;
 import com.pss.core.facade.FacadeUtil;
 import com.pss.core.factories.AtivoRepositoryFactory;
 import com.pss.core.model.Ativo;
@@ -43,22 +45,32 @@ public class AtivoBO implements AtivoRepository {
 	public void removerAtivoPorId(Integer id) throws SQLException, NoResultException {
 		//Possui relacionamento?
 		boolean relacionamento = FacadeUtil.featureHabilitada("relacionamento");
+		boolean monitoracao = FacadeUtil.featureHabilitada("monitoracao");
 		FacadeUtil.log(this, "verificando se existe relacionamento: "+relacionamento);
+		FacadeUtil.log(this, "verificando se existe monitoracao: "+monitoracao);
+		Ativo ativo = buscarAtivoPorId(id);
 		if (relacionamento) {
 			FacadeUtil.log(this, "removendo o relacionamento primeiro");
-			com.pss.features.ativos.relacionamento.bo.RelacionamentoAtivoBO rBO = com.pss.features.ativos.relacionamento.bo.RelacionamentoAtivoBO.getInstance();
-			Ativo ativo = buscarAtivoPorId(id);
-			//pai
-			List lista_relacionamentos = rBO.buscarRelacionamentoPorAtivoPai(ativo);
-			FacadeUtil.log(this, "Relacionamentos por ativo pai: "+lista_relacionamentos);
-			rBO.removerRelacionamento(lista_relacionamentos);
-			//filho
-			lista_relacionamentos = rBO.buscarRelacionamentoPorAtivoFilho(ativo);
-			FacadeUtil.log(this, "Relacionamentos por ativo filho: "+lista_relacionamentos);
+			com.pss.features.ativos.relacionamento.bo.RelacionamentoAtivoBO rBO = FacadeBO.getRelacionamentoAtivoBOInstance();
+			LinkedList pilha_relacionamentos = rBO.mapearRelacionamento(ativo);
+			List lista_relacionamentos = (List) pilha_relacionamentos.removeFirst();
 			rBO.removerRelacionamento(lista_relacionamentos);
 			//remove ativo
 			instanceRepository.removerAtivoPorId(id);
-		}else{
+		}
+		
+		if (monitoracao) {
+			FacadeUtil.log(this, "removendo as monitoracoes");
+			com.pss.features.monitoracao.agente1.bo.Agente1BO agente1BO = FacadeBO.getAgente1BOInstance();
+			List lista_agentes = agente1BO.listarSujeitosPorAtivo(ativo);
+			for (int i = 0; i < lista_agentes.size(); i++) {
+				com.pss.features.monitoracao.agente1.model.Agente1 agente1 = (com.pss.features.monitoracao.agente1.model.Agente1) lista_agentes.get(i);
+				agente1BO.removerObservador(agente1);
+			}
+			
+		}
+		
+		if (! monitoracao && ! relacionamento) {
 			instanceRepository.removerAtivoPorId(id);
 		}
 		
