@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.NoResultException;
 
+import com.pss.core.facade.FacadeBO;
 import com.pss.core.facade.FacadeUtil;
 import com.pss.features.seguranca.factories.UsuarioRepositoryFactory;
 import com.pss.features.seguranca.model.Usuario;
@@ -41,6 +42,24 @@ public class UsuarioBO implements UsuarioRepository {
 	}
 
 	public void removerUsuario(Usuario usuario) throws SQLException, NoResultException {
+		
+		boolean relacionamento = FacadeUtil.featureHabilitada("relacionamento");
+		boolean monitoracao = FacadeUtil.featureHabilitada("monitoracao");
+		FacadeUtil.log(this, "verificando se existe relacionamento: "+relacionamento);
+		FacadeUtil.log(this, "verificando se existe monitoracao: "+monitoracao);
+		if (monitoracao) {
+			FacadeUtil.log(this, "removendo as monitoracoes");
+			com.pss.features.monitoracao.agente1.bo.Agente1BO agente1BO = FacadeBO.getAgente1BOInstance();
+			List lista_agentes = agente1BO.listarAtivoPorUsuario(usuario);
+			FacadeUtil.log(this, "agentes: "+lista_agentes);
+			for (int i = 0; i < lista_agentes.size(); i++) {
+				com.pss.features.monitoracao.agente1.model.Agente1 agente1 = (com.pss.features.monitoracao.agente1.model.Agente1) lista_agentes.get(i);
+				FacadeUtil.log(this, "removendo agente: "+agente1);
+				agente1BO.removerObservador(agente1);
+			}
+
+		}
+		
 		instanceRepository.removerUsuario(usuario);
 	}
 
