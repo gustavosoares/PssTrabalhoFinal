@@ -49,6 +49,20 @@ public class AtivoBO implements AtivoRepository {
 		FacadeUtil.log(this, "verificando se existe relacionamento: "+relacionamento);
 		FacadeUtil.log(this, "verificando se existe monitoracao: "+monitoracao);
 		Ativo ativo = buscarAtivoPorId(id);
+		
+		if (monitoracao) {
+			FacadeUtil.log(this, "removendo as monitoracoes");
+			com.pss.features.monitoracao.agente1.bo.Agente1BO agente1BO = FacadeBO.getAgente1BOInstance();
+			List lista_agentes = agente1BO.listarSujeitosPorAtivo(ativo);
+			FacadeUtil.log(this, "agentes: "+lista_agentes);
+			for (int i = 0; i < lista_agentes.size(); i++) {
+				com.pss.features.monitoracao.agente1.model.Agente1 agente1 = (com.pss.features.monitoracao.agente1.model.Agente1) lista_agentes.get(i);
+				FacadeUtil.log(this, "removendo agente: "+agente1);
+				agente1BO.removerObservador(agente1);
+			}
+			
+		}
+		
 		if (relacionamento) {
 			FacadeUtil.log(this, "removendo o relacionamento primeiro");
 			com.pss.features.ativos.relacionamento.bo.RelacionamentoAtivoBO rBO = FacadeBO.getRelacionamentoAtivoBOInstance();
@@ -57,17 +71,6 @@ public class AtivoBO implements AtivoRepository {
 			rBO.removerRelacionamento(lista_relacionamentos);
 			//remove ativo
 			instanceRepository.removerAtivoPorId(id);
-		}
-		
-		if (monitoracao) {
-			FacadeUtil.log(this, "removendo as monitoracoes");
-			com.pss.features.monitoracao.agente1.bo.Agente1BO agente1BO = FacadeBO.getAgente1BOInstance();
-			List lista_agentes = agente1BO.listarSujeitosPorAtivo(ativo);
-			for (int i = 0; i < lista_agentes.size(); i++) {
-				com.pss.features.monitoracao.agente1.model.Agente1 agente1 = (com.pss.features.monitoracao.agente1.model.Agente1) lista_agentes.get(i);
-				agente1BO.removerObservador(agente1);
-			}
-			
 		}
 		
 		if (! monitoracao && ! relacionamento) {

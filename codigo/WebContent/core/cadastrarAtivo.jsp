@@ -29,7 +29,7 @@ AtivoBO ativoBO = FacadeBO.getAtivoBOInstance();
 					<!-- 
 						<input type="text" name="nome">
 					-->	
-					<textarea name="descricao" rows="30" cols="70"></textarea>
+					<textarea name="descricao" rows="20" cols="70"></textarea>
 					</td>
 				</tr>
 				
