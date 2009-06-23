@@ -22,6 +22,7 @@ import javax.persistence.UniqueConstraint;
 @NamedQueries( {
 		@NamedQuery(name = "Ativo.listAll", query = "from Ativo a"),
 		@NamedQuery(name = "Ativo.findById", query = "from Ativo a where a.id = ?1"),
+		@NamedQuery(name = "Ativo.findAtivoByLocalization", query = "from Ativo a where a.localizacao = ?1"),
 		@NamedQuery(name = "Ativo.findAtivoByType", query = "from Ativo a where a.tipo = ?1") })
 
 public class Ativo {
@@ -33,6 +34,9 @@ public class Ativo {
 	
 	@Column(nullable = false)
 	private Integer tipo;
+	
+	@Column(nullable = false)
+	private Integer localizacao;
 
 	@Column(nullable = false, length=1000)
 	private String descricao;
@@ -48,6 +52,10 @@ public class Ativo {
 	public static final int TIPO_SERVIDOR = 1;
 	public static final int TIPO_APLICACAO = 2;
 	public static final int TIPO_ROTEADOR = 3;
+	
+	public static final int LOCALIZACAO_ESTOQUE = 1;
+	public static final int LOCALIZACAO_MANUTENCAO = 2;
+	public static final int LOCALIZACAO_PRODUCAO = 3;
 	
 	public Ativo() {
 		
@@ -69,6 +77,26 @@ public class Ativo {
 		this.tipo = tipo;
 	}
 
+	public Integer getLocalizacaoId() {
+		return localizacao;
+	}
+
+	public String getLocalizacao(Integer localizacao_id) {
+		if (localizacao_id == Ativo.LOCALIZACAO_ESTOQUE) {
+			return "estoque";
+		} else if (localizacao_id == Ativo.LOCALIZACAO_MANUTENCAO) {
+			return "manutencao";
+		} else if (localizacao_id == Ativo.LOCALIZACAO_PRODUCAO) {
+			return "producao";
+		} else {
+			return "desconhecida";
+		}
+	}
+	
+	public void setLocalizacao(Integer localizacao) {
+		this.localizacao = localizacao;
+	}
+	
 	public String getNome() {
 		return nome;
 	}

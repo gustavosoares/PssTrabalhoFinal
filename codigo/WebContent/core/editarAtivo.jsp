@@ -53,6 +53,18 @@ Iterator itAtivos = lista.iterator();
 					</td>
 				</tr>
 				<tr align="left">
+					<td>Data de criação</td>
+					<td>
+						<input type="text" size="15" readonly="true" name="dataCriacao" value="<%= ativo.getDataCriacaoFormatada() %>">
+					</td>
+				</tr>
+				<tr align="left">
+					<td>Data de alteração</td>
+					<td>
+						<input type="text" size="15" readonly="true" name="dataAlteracao" value="<%= ativo.getDataAlteracaoFormatada() %>">
+					</td>
+				</tr>				
+				<tr align="left">
 					<td>Nome</td>
 					<td>
 						<input type="text" name="nome" value="<%= ativo.getNome() %>">
@@ -67,16 +79,25 @@ Iterator itAtivos = lista.iterator();
 					<textarea name="descricao" rows="30" cols="70"><%= ativo.getDescricao() %></textarea>
 					</td>
 				</tr>
-				
-				<!-- lista de orientadores -->
+				<tr>
+					<td>Localização</td>
+					<td> 
+						<select name="localizacaoId" size="1" >
+							<option value="">Selecione a localização do ativo</option>
+							<option value="1" <% if (String.valueOf(ativo.getTipo().intValue()).equals("1")) { %> selected <% } %> >estoque</option>
+							<option value="2" <% if (String.valueOf(ativo.getTipo().intValue()).equals("2")) { %> selected <% } %> >manutencao</option>
+							<option value="3" <% if (String.valueOf(ativo.getTipo().intValue()).equals("3")) { %> selected <% } %> >producao</option>
+						</select>
+					</td>
+				</tr>	
 				<tr>
 					<td>Tipo</td>
 					<td> 
 						<select name="tipoId" size="1" >
 							<option value="">Selecione o tipo do ativo</option>
-							<option value="1" <% if (String.valueOf(ativo.getTipo().intValue()).equals("1")) { %> selected <% } %> >Servidor</option>
-							<option value="2" <% if (String.valueOf(ativo.getTipo().intValue()).equals("2")) { %> selected <% } %> >Aplicação</option>
-							<option value="3" <% if (String.valueOf(ativo.getTipo().intValue()).equals("3")) { %> selected <% } %> >Roteador</option>
+							<option value="1" <% if (String.valueOf(ativo.getLocalizacaoId().intValue()).equals("1")) { %> selected <% } %> >Servidor</option>
+							<option value="2" <% if (String.valueOf(ativo.getLocalizacaoId().intValue()).equals("2")) { %> selected <% } %> >Aplicação</option>
+							<option value="3" <% if (String.valueOf(ativo.getLocalizacaoId().intValue()).equals("3")) { %> selected <% } %> >Roteador</option>
 						</select>
 					</td>
 				</tr>				

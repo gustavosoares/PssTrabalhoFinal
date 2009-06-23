@@ -108,4 +108,8 @@ public class AtivoBO implements AtivoRepository {
 	public int obterTotaldeAtivosPorTipo(int tipo) {
 		return instanceRepository.obterTotaldeAtivosPorTipo(tipo);
 	}
+
+	public List buscarAtivosPorLocalizacao(Integer id) throws NoResultException {
+		return instanceRepository.buscarAtivosPorLocalizacao(id);
+	}
 }

@@ -28,6 +28,7 @@ public class CadastrarAtivoCommand extends Command {
 		String action = "";
 		String nomeStr = "";
 		String tipoIdStr = "";
+		String localizacaoIdStr = "";
 		String descricao = "";
 		
 		if (request.getParameter("subacao") !=  null) {
@@ -42,11 +43,15 @@ public class CadastrarAtivoCommand extends Command {
 			tipoIdStr = request.getParameter("tipo").trim();
 		}
 		
+		if (request.getParameter("localizacao") != null) {
+			localizacaoIdStr = request.getParameter("localizacao").trim();
+		}
+		
 		if (request.getParameter("descricao") != null) {
 			descricao = request.getParameter("descricao").trim();
 		}
 		
-		if (action.equalsIgnoreCase("cadastra") && nomeStr.length() > 0 && tipoIdStr.length() > 0 && descricao.length() > 0) {
+		if (action.equalsIgnoreCase("cadastra") && nomeStr.length() > 0 && tipoIdStr.length() > 0 && descricao.length() > 0 && localizacaoIdStr.length() > 0) {
 			
 			Ativo ativo = new Ativo();
 			
@@ -54,6 +59,9 @@ public class CadastrarAtivoCommand extends Command {
 			
 			Integer tipoId = new Integer(tipoIdStr.trim());
 			ativo.setTipo(tipoId);
+			
+			Integer localizacaoId = new Integer(localizacaoIdStr.trim());
+			ativo.setLocalizacao(localizacaoId);
 			
 			ativo.setDescricao(descricao);
 			
@@ -66,7 +74,7 @@ public class CadastrarAtivoCommand extends Command {
 				e.printStackTrace();
 			}
 		} else {
-			request.setAttribute("mensagemJsp", "Cadastro de ativo, informe todos os dados e pressione cadastrar");
+			request.setAttribute("mensagemJsp", "<b>Cadastro de ativo, informe todos os dados e pressione cadastrar</br>");
 		}
 		
 		request.getRequestDispatcher(urlForwardOK).forward(request, response);

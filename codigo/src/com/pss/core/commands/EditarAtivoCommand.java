@@ -32,6 +32,7 @@ public class EditarAtivoCommand extends Command {
 		String ativoNome = "";
 		String ativoDescricao = "";
 		String ativoTipoIdStr = "";
+		String localizacaoIdStr = "";
 		
 		if (request.getParameter("subacao") !=  null) {
 			action = request.getParameter("subacao").trim();
@@ -51,6 +52,10 @@ public class EditarAtivoCommand extends Command {
 		
 		if (request.getParameter("tipoId") != null) {
 			ativoTipoIdStr = request.getParameter("tipoId").trim();
+		}
+		
+		if (request.getParameter("localizacaoId") != null) {
+			localizacaoIdStr = request.getParameter("localizacaoId").trim();
 		}
 		
 		/*
@@ -75,11 +80,13 @@ public class EditarAtivoCommand extends Command {
 			
 			Integer ativoId = new Integer(AtivoIdStr.trim());
 			Integer ativoTipoId = new Integer(ativoTipoIdStr.trim());
+			Integer localizacaoId = new Integer(localizacaoIdStr.trim());
 			
 			try {
 				ativo = ativoBO.buscarAtivoPorId(ativoId);
 				ativo.setNome(ativoNome);
 				ativo.setDescricao(ativoDescricao);
+				ativo.setLocalizacao(localizacaoId);
 				ativo.setTipo(ativoTipoId);
 				
 				ativoBO.editarAtivo(ativo);

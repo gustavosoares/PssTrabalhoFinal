@@ -33,7 +33,6 @@ AtivoBO ativoBO = FacadeBO.getAtivoBOInstance();
 					</td>
 				</tr>
 				
-				<!-- lista de orientadores -->
 				<tr>
 					<td>Tipo</td>
 					<td> 
@@ -44,7 +43,18 @@ AtivoBO ativoBO = FacadeBO.getAtivoBOInstance();
 							<option value="3">Roteador</option>
 						</select>
 					</td>
-				</tr>				
+				</tr>
+				<tr>
+					<td>Localização</td>
+					<td> 
+						<select name="localizacao" size="1" >
+							<option value="">Selecione a localização do ativo</option>
+							<option value="1">estoque</option>
+							<option value="2">manutencao</option>
+							<option value="3">producao</option>
+						</select>
+					</td>
+				</tr>			
 				<tr align="center">
 					<td colspan="2"> 
 						<input type="submit" name="btnSubmit" value="Cadastrar ativo">
