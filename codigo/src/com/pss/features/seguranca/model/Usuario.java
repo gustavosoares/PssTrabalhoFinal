@@ -13,7 +13,7 @@ import javax.persistence.UniqueConstraint;
 import com.pss.core.facade.FacadeUtil;
 
 @Entity
-@Table(name = "usuario", uniqueConstraints = { @UniqueConstraint(columnNames = { "id", "email" }) })
+@Table(name = "usuario", uniqueConstraints = { @UniqueConstraint(columnNames = { "email" }) })
 @NamedQueries({
 		@NamedQuery(name = "Usuario.listAll", query = "from Usuario a"),
 		@NamedQuery(name = "Usuario.findById", query = "from Usuario a where a.id = ?1"),
