@@ -53,7 +53,6 @@ public class FazerLoginCommand extends Command {
 				if (email.equalsIgnoreCase("admin") && senha.equals("admin")) {
 					usuario = new Usuario();
 				} else {
-					senha = FacadeUtil.encriptar(senha);
 					usuario = usuarioBO.buscarUsuarioPorEmaileSenha(email, senha);
 					FacadeUtil.log(this, "usuario "+email+" autenticado com sucesso!");
 				}
@@ -65,7 +64,7 @@ public class FazerLoginCommand extends Command {
 			}
 		} else {
 			request.setAttribute("temErroJsp", new Boolean(true));
-			request.setAttribute("mensagemJsp", "Cadastro de Usuario, informe todos os dados e pressione cadastrar");
+			request.setAttribute("mensagemJsp", "Autenticacao de usuario");
 		}
 		
 		HttpSession session = request.getSession(true);

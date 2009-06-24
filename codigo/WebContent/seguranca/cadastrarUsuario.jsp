@@ -22,7 +22,7 @@
 				<tr align="left">
 					<td>Email</td>
 					<td>
-						<input type="text" name="email">
+						<input type="text" size="50" name="email">
 					</td>
 				</tr>
 				<tr align="left">

@@ -1,5 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
+<% 
+	
+	String mensagemJsp = "Autenticacao de usuario";
+	Boolean temErroJsp = new Boolean(false);
+
+	if (request.getAttribute("mensagemJsp") != null ) {
+		mensagemJsp = (String) request.getAttribute("mensagemJsp");
+	}
+	if (request.getAttribute("temErroJsp") != null ) {
+		temErroJsp = (Boolean) request.getAttribute("temErroJsp");
+	}
+
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head> 
@@ -20,12 +34,15 @@
 			<table>
 				<tr>
 					<td></td>
-					<td colspan="2"><b>Login<b></td>
+					<td width="550" >
+						<br/><br/><font color="<%= temErroJsp.booleanValue() == false ? "black" : "red" %>">
+							<%= mensagemJsp %> </font>
+					</td>
 				</tr>
 				<tr align="left">
 					<td><b>Email</b></td>
 					<td>
-						<input type="text" size="40" name="email">
+						<input type="text" size="50" name="email">
 					</td>
 				</tr>
 				<tr align="left">
