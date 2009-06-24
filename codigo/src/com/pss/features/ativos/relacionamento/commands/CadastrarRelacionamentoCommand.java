@@ -73,6 +73,7 @@ public class CadastrarRelacionamentoCommand extends Command {
 				}
 			}
 		} else {
+			request.setAttribute("temErroJsp", new Boolean(true));
 			request.setAttribute("mensagemJsp", "Cadastro de Relacionamento de ativos, informe todos os dados e pressione cadastrar");
 		}
 		

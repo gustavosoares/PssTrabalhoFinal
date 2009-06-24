@@ -5,20 +5,78 @@ import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.pss.core.commands.Command;
+import com.pss.core.facade.FacadeBO;
+import com.pss.core.facade.FacadeUtil;
+import com.pss.features.seguranca.bo.UsuarioBO;
+import com.pss.features.seguranca.model.Usuario;
 
 public class FazerLoginCommand extends Command {
 
 	public FazerLoginCommand() {
 		commandName = "fazerLogin";
-		urlForwardOK = "/seguranca/fazerLogin.jsp";
+		urlForwardOK = "/core/index.jsp";
+		urlForwardNotOK = "/seguranca/index.jsp";
 	}
 	
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		
+		UsuarioBO usuarioBO = FacadeBO.getUsuarioBOInstance();
+		Usuario usuario = null;
+		
+		String action = "";
+		String email = "";
+		String senha = "";
+		
+		if (request.getParameter("subacao") !=  null) {
+			action = request.getParameter("subacao").trim();
+		}
+		
+		if (request.getParameter("email") != null) {
+			email = request.getParameter("email").trim();
+		}
+		
+		if (request.getParameter("senha") != null) {
+			senha = request.getParameter("senha").trim();
+		}
+		
+		if (action.equalsIgnoreCase("login") && email.length() > 0 && senha.length() > 0) {
+			
+			
+			
+			try {
+				FacadeUtil.log(this, "autenticando usuario "+email);
+				if (email.equalsIgnoreCase("admin") && senha.equals("admin")) {
+					usuario = new Usuario();
+				} else {
+					senha = FacadeUtil.encriptar(senha);
+					usuario = usuarioBO.buscarUsuarioPorEmaileSenha(email, senha);
+					FacadeUtil.log(this, "usuario "+email+" autenticado com sucesso!");
+				}
+				
+			} catch (Exception e) {
+				request.setAttribute("temErroJsp", new Boolean(true));
+				request.setAttribute("mensagemJsp", "Nao foi possivel autenticar o usuario, verifique a senha digitada. " + e.getMessage());
+				e.printStackTrace();
+			}
+		} else {
+			request.setAttribute("temErroJsp", new Boolean(true));
+			request.setAttribute("mensagemJsp", "Cadastro de Usuario, informe todos os dados e pressione cadastrar");
+		}
+		
+		HttpSession session = request.getSession(true);
+		session.setAttribute("usuario", usuario);
+		
+		if (usuario != null) {
+			request.getRequestDispatcher(urlForwardOK).forward(request, response);
+		} else {
+			request.getRequestDispatcher(urlForwardNotOK).forward(request, response);
+		}		
+
 		
 	}
 

@@ -60,6 +60,7 @@ public class ListarRelacionamentoCommand extends Command {
 				e.printStackTrace();
 			}
 		} else {
+			request.setAttribute("temErroJsp", new Boolean(true));
 			request.setAttribute("mensagemJsp", "Mapeamento de dependências. Selecione um ativo e clique em Mapear");
 		}
 		

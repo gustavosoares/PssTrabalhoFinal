@@ -56,7 +56,8 @@ public class RemoverUsuarioCommand extends Command {
 				e.printStackTrace();
 			}
 		} else {
-			request.setAttribute("mensagemJsp", "Remoção de ativo, escolha um ativo e pressione remover");
+			request.setAttribute("temErroJsp", new Boolean(true));
+			request.setAttribute("mensagemJsp", "Remoção de usuário, escolha um usuário e pressione remover");
 		}
 		
 		request.setAttribute("liUsuarios", lista_usuarios);

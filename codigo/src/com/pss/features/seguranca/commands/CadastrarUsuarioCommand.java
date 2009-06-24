@@ -62,6 +62,7 @@ public class CadastrarUsuarioCommand extends Command {
 				e.printStackTrace();
 			}
 		} else {
+			request.setAttribute("temErroJsp", new Boolean(true));
 			request.setAttribute("mensagemJsp", "Cadastro de Usuario, informe todos os dados e pressione cadastrar");
 		}
 		

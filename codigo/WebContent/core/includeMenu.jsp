@@ -81,6 +81,11 @@ if (com.pss.core.facade.FacadeUtil.featureHabilitada("monitoracao")) {
 						<a href="/gsoares/ServletController?acao=removerMonitoracao">Remover observador</a>
 					</td> 
 				</tr>
+				<tr> 
+					<td> 
+						<a href="/gsoares/seguranca/sair.jsp">Sair do sistema</a>
+					</td> 
+				</tr>
 <% 
 } 
 

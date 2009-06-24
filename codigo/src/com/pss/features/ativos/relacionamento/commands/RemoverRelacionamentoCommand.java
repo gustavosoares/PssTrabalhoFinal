@@ -55,6 +55,7 @@ public class RemoverRelacionamentoCommand extends Command {
 				e.printStackTrace();
 			}
 		} else {
+			request.setAttribute("temErroJsp", new Boolean(true));
 			request.setAttribute("mensagemJsp", "Remoção de relacionamento de ativo, escolha um relacionamento e pressione remover");
 		}
 		

@@ -1,7 +1,19 @@
+<%@ page import="com.pss.core.facade.*, javax.servlet.http.HttpSession, java.util.*"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" 
 	 pageEncoding="UTF-8"%>
 <% 
-	/* ADICIONAR TESTE PARA VERIFICAR SE ESTA LOGADO OU NAO CHECANDO O FEATURE MAPPER */
+
+	try {
+		String urlForwardNotOK = urlForwardNotOK = "/seguranca/index.jsp";
+		if (com.pss.core.facade.FacadeUtil.featureHabilitada("seguranca")) {
+			if (session.getAttribute("usuario") == null) {
+				System.out.println("["+new Date()+"] nao esta autenticado!!!");	
+				request.getRequestDispatcher(urlForwardNotOK).forward(request, response);
+			} 
+		} 
+	
+	} catch (Exception e) {}
+
 	
 	String mensagemJsp = "";
 	Boolean temErroJsp = new Boolean(false);

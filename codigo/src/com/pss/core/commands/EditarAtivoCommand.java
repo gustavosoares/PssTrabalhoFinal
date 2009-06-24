@@ -99,6 +99,7 @@ public class EditarAtivoCommand extends Command {
 			}
 			
 		} else {
+			request.setAttribute("temErroJsp", new Boolean(true));
 			request.setAttribute("mensagemJsp", "Edição de ativo, escolha um ativo e pressione editar");
 		}
 		

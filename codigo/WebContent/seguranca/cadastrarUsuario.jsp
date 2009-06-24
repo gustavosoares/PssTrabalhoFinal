@@ -7,10 +7,6 @@
 <table border="1" width="550" align="left">
 <!-- fim padrao -->
 
-
-<% 
-UsuarioBO usuarioBO = FacadeBO.getUsuarioBOInstance();
-%>
 <tr valign="top">
 	<td>
 		<form name="cadastraForm" method="POST" action="/gsoares/ServletController" >

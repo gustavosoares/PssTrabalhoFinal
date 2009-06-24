@@ -55,6 +55,7 @@ public class RemoverAtivoCommand extends Command {
 				e.printStackTrace();
 			}
 		} else {
+			request.setAttribute("temErroJsp", new Boolean(true));
 			request.setAttribute("mensagemJsp", "Remoção de ativo, escolha um ativo e pressione remover");
 		}
 		

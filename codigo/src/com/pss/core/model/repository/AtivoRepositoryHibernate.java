@@ -56,7 +56,7 @@ public class AtivoRepositoryHibernate implements AtivoRepository {
 		return count;
 	}
 
-	public List buscarAtivoPorLocalizacao(Integer id) throws NoResultException {
+	public List buscarAtivosPorLocalizacao(Integer id) throws NoResultException {
 		return genericPersistence.listByQuery("findAtivoByLocalization", id);
 	}
 	
