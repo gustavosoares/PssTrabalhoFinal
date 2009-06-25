@@ -48,13 +48,12 @@ public class ServletController extends HttpServlet {
 	    //FacadeUtil.registrarFeature("versionamento", versionamento);
 	    
 	    FacadeUtil.log(this, FacadeUtil.obterEstadoDasFeatures());
-	    // Inicializando as bases de dados
-	    /*
-	    ColaboradorRepository.getInstance();
-	    ProjetoRepository.getInstance();
-	    PublicacaoRepository.getInstance();
-	    OrientacaoRepository.getInstance();
-		*/
+	    // Inicializando a thread do Agente2
+	    if (FacadeUtil.featureHabilitada("monitoracao")){
+	    	com.pss.features.monitoracao.agente2.Agente2 agente2 = com.pss.features.monitoracao.agente2.Agente2.getInstance();
+	    	agente2.start();
+	    }
+
 	    
 	    // Inicializa o Map de Commandos
 	    CommandMap.getInstance();
