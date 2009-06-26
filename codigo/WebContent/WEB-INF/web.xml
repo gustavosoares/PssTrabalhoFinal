@@ -22,6 +22,18 @@
 			<param-name>monitoracao</param-name>
 			<param-value>true</param-value>
 		</init-param>
+		
+		<!-- configuracao do agente 2 -->
+		<init-param>
+			<description>percentual minimo de servidores e roteadores em estoque</description>
+			<param-name>percentualMinimoEstoque</param-name>
+			<param-value>20.0</param-value>
+		</init-param>
+		<init-param>
+			<description>frequencia dos testes do agente 2 em milisegundos</description>
+			<param-name>agente2CheckInterval</param-name>
+			<param-value>60000</param-value>
+		</init-param>
 		<!--init-param>
 			<description>feature salvar versao</description>
 			<param-name>versionamento</param-name>

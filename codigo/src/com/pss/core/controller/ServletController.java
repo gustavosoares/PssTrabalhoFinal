@@ -50,7 +50,16 @@ public class ServletController extends HttpServlet {
 	    FacadeUtil.log(this, FacadeUtil.obterEstadoDasFeatures());
 	    // Inicializando a thread do Agente2
 	    if (FacadeUtil.featureHabilitada("monitoracao")){
+	    	String percentualMinimoEstoque = config.getInitParameter("percentualMinimoEstoque").toLowerCase();
+	    	String agente2CheckInterval = config.getInitParameter("agente2CheckInterval").toLowerCase();
 	    	com.pss.features.monitoracao.agente2.Agente2 agente2 = com.pss.features.monitoracao.agente2.Agente2.getInstance();
+	    	try {
+		    	agente2.setCheckInterval(Integer.valueOf(agente2CheckInterval));
+		    	agente2.setPercentualMinimo(Double.valueOf(percentualMinimoEstoque));
+	    	} catch (Exception e) {
+	    		FacadeUtil.log(this, "erro na leitura dos parametros do agente2. Utilizando os parametros default");
+	    	}
+
 	    	agente2.start();
 	    }
 

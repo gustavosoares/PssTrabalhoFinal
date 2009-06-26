@@ -1,5 +1,6 @@
 package com.pss.features.monitoracao.agente2;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import com.pss.core.bo.AtivoBO;
@@ -12,7 +13,7 @@ public class Agente2 extends Thread {
 	private static Agente2 instance = null;
 	private int checkInterval = 60000; // em milisegundos  ms
 	private boolean loop = true;
-	private double percentualMinimo = 5.0;
+	private double percentualMinimo = 30.0;
 	
 	private Agente2() {
 		
@@ -56,6 +57,7 @@ public class Agente2 extends Thread {
 	public void run() {
 		
 		FacadeUtil.log(this, "Iniciando o agente2");
+		FacadeUtil.log(this, "Minimo no estoque: "+getPercentualMinimo());
 		AtivoBO ativoBO = FacadeBO.getAtivoBOInstance();
 		Ativo ativo;
 		double percentual = 0.0;
@@ -76,10 +78,10 @@ public class Agente2 extends Thread {
 				}
 			}
 
-			percentual = (count_estoque / count_total) * 100;
-			FacadeUtil.log(this, "Estoque: "+count_estoque+" Total: "+count_total+" Percentual: "+percentual);
+			percentual = ( (double) count_estoque / count_total) * 100;
+			FacadeUtil.log(this, "Estoque: "+count_estoque+" Total: "+count_total+" Percentual: "+percentual+" Minimo: "+getPercentualMinimo());
 			if (percentual < getPercentualMinimo()) {
-				FacadeUtil.log(this, "!!!!! ATENCAO!!!! Estoque esta em "+getPercentualMinimo());
+				FacadeUtil.log(this, "!!!!! ATENCAO!!!! Estoque esta em "+percentual);
 			}
 			try {
 				Thread.sleep(getCheckInterval());
