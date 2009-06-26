@@ -28,6 +28,10 @@ public class ListarAtivoCommand extends Command {
 		int count_aplicacao = 0;
 		int count_roteador = 0;
 		int count_total = 0;
+		//Localizacao
+		int count_estoque = 0;
+		int count_producao = 0;
+		int count_manutencao = 0;
 		
 		Iterator itAtivos = ativoBO.listarAtivos().iterator();
 		while (itAtivos.hasNext()) {
@@ -39,6 +43,15 @@ public class ListarAtivoCommand extends Command {
 			}else if (ativo.getTipo().intValue() == ativo.TIPO_ROTEADOR) {
 				count_roteador++;
 			}
+			
+			//Localizacao
+			if (ativo.getLocalizacaoId().intValue() == ativo.LOCALIZACAO_ESTOQUE) {
+				count_estoque++;
+			}else if (ativo.getLocalizacaoId().intValue() == ativo.LOCALIZACAO_MANUTENCAO) {
+				count_manutencao++;
+			}else if (ativo.getLocalizacaoId().intValue() == ativo.LOCALIZACAO_PRODUCAO) {
+				count_producao++;
+			}
 		}
 		
 		count_total = count_roteador + count_servidor + count_aplicacao;
@@ -46,8 +59,11 @@ public class ListarAtivoCommand extends Command {
 		request.setAttribute("count_servidor", count_servidor);
 		request.setAttribute("count_roteador", count_roteador);
 		request.setAttribute("count_aplicacao", count_aplicacao);
+		request.setAttribute("count_estoque", count_estoque);
+		request.setAttribute("count_manutencao", count_manutencao);
+		request.setAttribute("count_producao", count_producao);
 		request.setAttribute("count_total", count_total);
-		request.setAttribute("mensagemJsp", "Listagem de ativo por tipo");
+		request.setAttribute("mensagemJsp", "Listagem de ativos");
 		request.getRequestDispatcher(urlForwardOK).forward(request, response);
 
 	}

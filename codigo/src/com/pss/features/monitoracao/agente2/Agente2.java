@@ -12,6 +12,7 @@ public class Agente2 extends Thread {
 	private static Agente2 instance = null;
 	private int checkInterval = 60000; // em milisegundos  ms
 	private boolean loop = true;
+	private double percentualMinimo = 5.0;
 	
 	private Agente2() {
 		
@@ -43,6 +44,15 @@ public class Agente2 extends Thread {
 		this.loop = loop;
 	}
 
+	
+	public double getPercentualMinimo() {
+		return percentualMinimo;
+	}
+
+	public void setPercentualMinimo(double threshold) {
+		this.percentualMinimo = threshold;
+	}
+
 	public void run() {
 		
 		FacadeUtil.log(this, "Iniciando o agente2");
@@ -51,11 +61,10 @@ public class Agente2 extends Thread {
 		double percentual = 0.0;
 		int count_estoque = 0;
 		int count_total = 0;
-		//List lista_ativos_estoque = null;
 		List lista_ativos = null;
 		while (isLoop()) {
-			
-			//lista_ativos_estoque = ativoBO.buscarAtivosPorLocalizacao(Ativo.LOCALIZACAO_ESTOQUE);
+			count_estoque = 0;
+			count_total = 0;
 			lista_ativos = ativoBO.listarAtivos();
 			for (int i = 0; i < lista_ativos.size(); i++) {
 				ativo = (Ativo) lista_ativos.get(i);
@@ -66,10 +75,12 @@ public class Agente2 extends Thread {
 					count_total++;
 				}
 			}
-			//count_estoque = lista_ativos_estoque.size();
-			//count_total = lista_ativos.size();
+
 			percentual = (count_estoque / count_total) * 100;
 			FacadeUtil.log(this, "Estoque: "+count_estoque+" Total: "+count_total+" Percentual: "+percentual);
+			if (percentual < getPercentualMinimo()) {
+				FacadeUtil.log(this, "!!!!! ATENCAO!!!! Estoque esta em "+getPercentualMinimo());
+			}
 			try {
 				Thread.sleep(getCheckInterval());
 			} catch (InterruptedException e) {

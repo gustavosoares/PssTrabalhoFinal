@@ -60,5 +60,17 @@ public class ServletController extends HttpServlet {
 	    FacadeUtil.log(this, "Commandos incializados");
 	}
 	
+	public void destroy() {
+		
+		FacadeUtil.log(this, "destroy");
+	    if (FacadeUtil.featureHabilitada("monitoracao")){
+	    	FacadeUtil.log(this, "parando agente2");
+	    	com.pss.features.monitoracao.agente2.Agente2 agente2 = com.pss.features.monitoracao.agente2.Agente2.getInstance();
+	    	agente2.setLoop(false);
+	    	agente2.stop();
+	    }
+		
+	}
+	
 	
 }

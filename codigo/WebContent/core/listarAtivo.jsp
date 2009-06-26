@@ -15,6 +15,10 @@ Integer ativo_servidor = (Integer) request.getAttribute("count_servidor");
 Integer ativo_aplicacao = (Integer) request.getAttribute("count_aplicacao");
 Integer ativo_roteador = (Integer) request.getAttribute("count_roteador");
 
+Integer ativo_estoque = (Integer) request.getAttribute("count_estoque");
+Integer ativo_manutencao = (Integer) request.getAttribute("count_manutencao");
+Integer ativo_producao = (Integer) request.getAttribute("count_producao");
+
 Integer total_ativos = (Integer) request.getAttribute("count_total");
 %>
 	<tr>
@@ -29,21 +33,41 @@ Integer total_ativos = (Integer) request.getAttribute("count_total");
 		<td><%= total_ativos %></td>
 	</tr>
 	<tr>
+		<td colspan="3"><b><i>Por tipo de ativo</i></b></td>
+	</tr>
+	<tr>
 		<td widht="100" bordercolor="white">&nbsp;</td>
-		<td>Ativos do tipo Servidor</td>
+		<td>Servidor</td>
 		<td><%= ativo_servidor %></td>
 	</tr>
 	<tr>
 		<td widht="100" bordercolor="white">&nbsp;</td>
-		<td>Ativo do tipo Aplicação</td>
+		<td>Aplicação</td>
 		<td><%= ativo_aplicacao %></td>
 	</tr>
 	<tr>
 		<td widht="100" bordercolor="white">&nbsp;</td>
-		<td>Ativo do tipo Roteador</td>
+		<td>Roteador</td>
 		<td><%= ativo_roteador %></td>
 	</tr>
-
+	<tr>
+		<td colspan="3"><b><i>Localização</i></b></td>
+	</tr>
+	<tr>
+		<td widht="100" bordercolor="white">&nbsp;</td>
+		<td>em Estoque</td>
+		<td><%= ativo_estoque %></td>
+	</tr>
+	<tr>
+		<td widht="100" bordercolor="white">&nbsp;</td>
+		<td>em Manutenção</td>
+		<td><%= ativo_manutencao %></td>
+	</tr>
+	<tr>
+		<td widht="100" bordercolor="white">&nbsp;</td>
+		<td>em Produção</td>
+		<td><%= ativo_producao %></td>
+	</tr>	
 <!--  abaixo padrao para todos os jsp -->
 </table>
 
