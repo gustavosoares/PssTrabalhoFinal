@@ -32,7 +32,7 @@
 		<init-param>
 			<description>frequencia dos testes do agente 2 em milisegundos</description>
 			<param-name>agente2CheckInterval</param-name>
-			<param-value>60000</param-value>
+			<param-value>300000</param-value>
 		</init-param>
 		<!--init-param>
 			<description>feature salvar versao</description>
