@@ -81,6 +81,7 @@ public class Agente2 extends Thread {
 			percentual = ( (double) count_estoque / count_total) * 100;
 			FacadeUtil.log(this, "Estoque: "+count_estoque+" Total: "+count_total+" Percentual: "+percentual+" Minimo: "+getPercentualMinimo());
 			if (percentual < getPercentualMinimo()) {
+				//FacadeUtil.log(this, "Estoque: "+count_estoque+" Total: "+count_total+" Percentual: "+percentual+" Minimo: "+getPercentualMinimo());
 				FacadeUtil.log(this, "!!!!! ATENCAO!!!! Estoque esta em "+percentual);
 			}
 			try {
