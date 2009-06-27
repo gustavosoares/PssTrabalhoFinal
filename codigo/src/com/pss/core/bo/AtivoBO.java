@@ -86,7 +86,8 @@ public class AtivoBO implements AtivoRepository {
 		
 		//possui monitoracao?
 		boolean monitoracao = FacadeUtil.featureHabilitada("monitoracao");
-		if (monitoracao) {
+		boolean seguranca = FacadeUtil.featureHabilitada("seguranca");
+		if (monitoracao && seguranca) {
 			//notificar observadores
 			com.pss.features.monitoracao.agente1.bo.Agente1BO agenteBO = com.pss.features.monitoracao.agente1.bo.Agente1BO.getInstance();
 			agenteBO.notificarObservadores(ativo);
