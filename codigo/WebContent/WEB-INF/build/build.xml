@@ -1,15 +1,19 @@
-<!-- Copyright (c) 2002 by ObjectLearn. All Rights Reserved. JEE_VIGINFRA -->
+<!-- Copyright (c) 2002 by ObjectLearn. All Rights Reserved. -->
 <project name="PssTrabalhoFinal"  default="deploy"  basedir=".">
 
 
   <!-- set global properties for this build -->
   <property file="build.properties"/>
+  <property name="filterFile" value="filter.properties"/>
+  <property file="${filterFile}"/>
   <property name="dist" value="../../../dist" />
   <property name="web" value="../" />
   <property name="WebContent" value="../.." />
   
-   
+  <!-- target INIT --> 
   <target name="init">
+    <!-- Deletes the distribution directory -->
+    <delete dir="${dist}"/>
     <!-- Create the dist directory structure used by compile
          and copy the deployment descriptors into it-->
     <mkdir dir="${dist}"/>
@@ -46,9 +50,9 @@
     </copy>	
     
   </target>
-
+  <!-- DEPLOY -->
   <target name="deploy" depends="undeploy,init" >
-    <!-- Create the distribution directory -->
+
     <delete file="${war}.war"/>
   	<delete verbose="true" dir="${dist}/classes"/>
   	<!--
@@ -61,15 +65,18 @@
 	<jar jarfile="${war}.war" basedir="${dist}"/>    
   	<!--copy file="${war}.war" todir="${domain}"/-->
   	<delete file="${war}.war"/>
-    <copy todir="${domain}/${war}">
+  	<filter filtersfile="${filterFile}"/>
+  	<echo message="Monitoracao: ${monitoracao}"/>
+  	<echo message="Seguranca: ${seguranca}"/>
+  	<echo message="Relacionamento: ${relacionamento}"/>
+    <copy todir="${domain}/${war}" filtering="true">
       <fileset dir="${dist}">
         <include name="**/*.*"/>
       	<exclude name="classes/*"/>
+      	<exclude name="lib/*"/>
+      	<exclude name="build/*"/>
       </fileset>
     </copy>
-    <!-- Deletes the distribution directory -->
-   <delete dir="${dist}"/>
-
   </target>
   
 

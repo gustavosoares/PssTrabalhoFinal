@@ -10,29 +10,29 @@
 		<init-param>
 			<description>feature seguranca</description>
 			<param-name>seguranca</param-name>
-			<param-value>true</param-value>
+			<param-value>@seguranca@</param-value>
 		</init-param>
 		<init-param>
 			<description>feature relacionamento</description>
 			<param-name>relacionamento</param-name>
-			<param-value>true</param-value>
+			<param-value>@relacionamento@</param-value>
 		</init-param>
 		<init-param>
 			<description>feature monitoracao</description>
 			<param-name>monitoracao</param-name>
-			<param-value>true</param-value>
+			<param-value>@monitoracao@</param-value>
 		</init-param>
 		
 		<!-- configuracao do agente 2 -->
 		<init-param>
 			<description>percentual minimo de servidores e roteadores em estoque</description>
 			<param-name>percentualMinimoEstoque</param-name>
-			<param-value>20.0</param-value>
+			<param-value>@percentualMinimoEstoque@</param-value>
 		</init-param>
 		<init-param>
 			<description>frequencia dos testes do agente 2 em milisegundos</description>
 			<param-name>agente2CheckInterval</param-name>
-			<param-value>300000</param-value>
+			<param-value>@agente2CheckInterval@</param-value>
 		</init-param>
 		<!--init-param>
 			<description>feature salvar versao</description>
