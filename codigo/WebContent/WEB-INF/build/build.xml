@@ -1,7 +1,9 @@
 <!-- Copyright (c) 2002 by ObjectLearn. All Rights Reserved. -->
-<project name="PssTrabalhoFinal"  default="deploy"  basedir=".">
+<project name="PssTrabalhoFinal"  default="core"  basedir=".">
 
 
+
+	
   <!-- set global properties for this build -->
   <property file="build.properties"/>
   <property name="filterFile" value="filter.properties"/>
@@ -9,6 +11,14 @@
   <property name="dist" value="../../../dist" />
   <property name="web" value="../" />
   <property name="WebContent" value="../.." />
+
+	<!--
+	<taskdef resource="net/sf/antcontrib/antcontrib.properties">
+	  <classpath>
+	    <pathelement location="${WebContent}/WEB-INF/lib/ant-contrib-0.6.jar" />
+	  </classpath>
+	</taskdef>
+	-->
   
   <!-- target INIT --> 
   <target name="init">
@@ -50,8 +60,9 @@
     </copy>	
     
   </target>
+
   <!-- DEPLOY -->
-  <target name="deploy" depends="undeploy,init" >
+  <target name="core" depends="undeploy,init" >
 
     <delete file="${war}.war"/>
   	<delete verbose="true" dir="${dist}/classes"/>
@@ -66,6 +77,7 @@
   	<!--copy file="${war}.war" todir="${domain}"/-->
   	<delete file="${war}.war"/>
   	<filter filtersfile="${filterFile}"/>
+
   	<echo message="Monitoracao: ${monitoracao}"/>
   	<echo message="Seguranca: ${seguranca}"/>
   	<echo message="Relacionamento: ${relacionamento}"/>
@@ -75,6 +87,14 @@
       	<exclude name="classes/*"/>
       	<exclude name="lib/*"/>
       	<exclude name="build/*"/>
+      	<exclude name="seguranca/*"/>
+      	<exclude name="monitoracao/*"/>
+      	<exclude name="relacionamento/*"/>
+      	<!--
+      	<exclude name="WEB-INF/classes/com/pss/features/ativos/**/*.*"/>
+      	<exclude name="WEB-INF/classes/com/pss/features/seguranca/**/*.*"/>
+      	<exclude name="WEB-INF/classes/com/pss/features/monitoracao/**/*.*"/>
+      	-->
       </fileset>
     </copy>
   </target>

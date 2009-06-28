@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
+import com.pss.core.facade.FacadeUtil;
+
 public class FeatureMapper {
 	
 	private static Map features = null;
@@ -18,7 +20,14 @@ public class FeatureMapper {
 	}
 	
 	public void registrarFeature(String featureName, String estado) {
-		features.put(featureName, new Boolean(estado));
+		boolean bool = false;
+		try {
+			bool = new Boolean(estado);
+		} catch (Exception e) {
+			FacadeUtil.log(this, "Erro no parse da feature "+featureName+". Setando para false");
+		}
+		
+		features.put(featureName, bool);
 	}
 	
 	public boolean featureHabilitada(String featureName){
