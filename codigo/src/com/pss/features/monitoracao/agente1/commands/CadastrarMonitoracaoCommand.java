@@ -64,7 +64,7 @@ public class CadastrarMonitoracaoCommand extends Command {
 			
 			try {
 				agente1BO.adicionarObservador(agente1);
-				request.setAttribute("mensagemJsp", "Usuario "+usuario.getNome()+" observando ativo "+ativo.getNome());
+				request.setAttribute("mensagemJsp", "Usuario "+usuario.getNome()+" ("+usuario.getEmail()+") observando ativo "+ativo.getNome());
 			} catch (Exception e) {
 				request.setAttribute("temErroJsp", new Boolean(true));
 				request.setAttribute("mensagemJsp", "Nao foi possivel adicionar observador para o ativo selecionado: " + e.getMessage());

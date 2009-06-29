@@ -28,7 +28,7 @@ List lista_usuarios = (List)request.getAttribute("liUsuarios");
 	for (int i = 0; i < lista_usuarios.size(); i++) {
 		Usuario usuario = (Usuario) lista_usuarios.get(i);
 %>
-				<option value="<%= usuario.getId().intValue() %>"><%= usuario.getNome()%></option>
+				<option value="<%= usuario.getId().intValue() %>"><%= usuario.getNome() %> - <%= usuario.getEmail() %></option>
 <% 
 	} 
 %>

@@ -1,3 +1,8 @@
+<%
+boolean seguranca = com.pss.core.facade.FacadeUtil.featureHabilitada("seguranca");
+boolean monitoracao = com.pss.core.facade.FacadeUtil.featureHabilitada("monitoracao");
+boolean relacionamento = com.pss.core.facade.FacadeUtil.featureHabilitada("relacionamento");
+%>
 		<td width="250" valign="top">
 			<table border="0" width="200"  align="left" valign="top" cellpadding="3">
 				<tr> 
@@ -23,7 +28,7 @@
 <% 
 try {
 	
-if (com.pss.core.facade.FacadeUtil.featureHabilitada("seguranca")) {
+if (seguranca) {
 %>
 				<tr> 
 					<td> 
@@ -44,7 +49,7 @@ if (com.pss.core.facade.FacadeUtil.featureHabilitada("seguranca")) {
 <% 
 try {
 	
-if (com.pss.core.facade.FacadeUtil.featureHabilitada("relacionamento")) {
+if (relacionamento) {
 %>
 				<tr> 
 					<td> 
@@ -69,7 +74,7 @@ if (com.pss.core.facade.FacadeUtil.featureHabilitada("relacionamento")) {
 <% 
 try {
 	
-if (com.pss.core.facade.FacadeUtil.featureHabilitada("monitoracao")) {
+if (monitoracao && seguranca) {
 %>
 				<tr> 
 					<td> 
@@ -81,6 +86,12 @@ if (com.pss.core.facade.FacadeUtil.featureHabilitada("monitoracao")) {
 						<a href="/gsoares/ServletController?acao=removerMonitoracao">Remover observador</a>
 					</td> 
 				</tr>
+<% 
+}
+
+if (seguranca) {
+	
+%>
 				<tr> 
 					<td> 
 						<a href="/gsoares/seguranca/sair.jsp">Sair do sistema</a>

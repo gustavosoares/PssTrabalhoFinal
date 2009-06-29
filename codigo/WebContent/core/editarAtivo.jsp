@@ -84,9 +84,9 @@ Iterator itAtivos = lista.iterator();
 					<td> 
 						<select name="localizacaoId" size="1" >
 							<option value="">Selecione a localização do ativo</option>
-							<option value="1" <% if (String.valueOf(ativo.getTipo().intValue()).equals("1")) { %> selected <% } %> >estoque</option>
-							<option value="2" <% if (String.valueOf(ativo.getTipo().intValue()).equals("2")) { %> selected <% } %> >manutencao</option>
-							<option value="3" <% if (String.valueOf(ativo.getTipo().intValue()).equals("3")) { %> selected <% } %> >producao</option>
+							<option value="1" <% if (String.valueOf(ativo.getLocalizacaoId().intValue()).equals("1")) { %> selected <% } %> >Estoque</option>
+							<option value="2" <% if (String.valueOf(ativo.getLocalizacaoId().intValue()).equals("2")) { %> selected <% } %> >Manutenção</option>
+							<option value="3" <% if (String.valueOf(ativo.getLocalizacaoId().intValue()).equals("3")) { %> selected <% } %> >Produção</option>
 						</select>
 					</td>
 				</tr>	
@@ -95,9 +95,9 @@ Iterator itAtivos = lista.iterator();
 					<td> 
 						<select name="tipoId" size="1" >
 							<option value="">Selecione o tipo do ativo</option>
-							<option value="1" <% if (String.valueOf(ativo.getLocalizacaoId().intValue()).equals("1")) { %> selected <% } %> >Servidor</option>
-							<option value="2" <% if (String.valueOf(ativo.getLocalizacaoId().intValue()).equals("2")) { %> selected <% } %> >Aplicação</option>
-							<option value="3" <% if (String.valueOf(ativo.getLocalizacaoId().intValue()).equals("3")) { %> selected <% } %> >Roteador</option>
+							<option value="1" <% if (String.valueOf(ativo.getTipo().intValue()).equals("1")) { %> selected <% } %> >Servidor</option>
+							<option value="2" <% if (String.valueOf(ativo.getTipo().intValue()).equals("2")) { %> selected <% } %> >Aplicação</option>
+							<option value="3" <% if (String.valueOf(ativo.getTipo().intValue()).equals("3")) { %> selected <% } %> >Roteador</option>
 						</select>
 					</td>
 				</tr>				

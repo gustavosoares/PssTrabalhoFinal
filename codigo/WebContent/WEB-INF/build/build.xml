@@ -2,8 +2,6 @@
 <project name="PssTrabalhoFinal"  default="core"  basedir=".">
 
 
-
-	
   <!-- set global properties for this build -->
   <property file="build.properties"/>
   <property name="filterFile" value="filter.properties"/>
@@ -62,25 +60,43 @@
   </target>
 
   <!-- DEPLOY -->
-  <target name="core" depends="undeploy,init" >
+  <target name="lps" depends="undeploy,init" >
 
     <delete file="${war}.war"/>
   	<delete verbose="true" dir="${dist}/classes"/>
   	<!--
-  	<delete verbose="true" >
-  		<fileset defaultexcludes="no" dir="${dist}/classes">
-  			<include name="**/*"/>
-  		</fileset>
-  	</delete>
-  	-->	
 	<jar jarfile="${war}.war" basedir="${dist}"/>    
-  	<!--copy file="${war}.war" todir="${domain}"/-->
+  	<copy file="${war}.war" todir="${domain}"/>
   	<delete file="${war}.war"/>
-  	<filter filtersfile="${filterFile}"/>
+  	-->
+  	
+  	<!-- Conditions dos models do hibernate -->
+	<condition property="relacionamento.persistence.class" else="">
+		<isset property="relacionamento.persistence.class"/>
+	</condition>
+  	
+	<condition property="seguranca.persistence.class" else="">
+		<isset property="seguranca.persistence.class"/>
+	</condition>
+  	
+	<condition property="monitoracao.persistence.class" else="">
+		<isset property="monitoracao.persistence.class"/>
+	</condition>
 
+  	<filter filtersfile="${filterFile}"/>
+  	<filter token="relacionamento.persistence.class" value="${relacionamento.persistence.class}"/>
+  	<filter token="seguranca.persistence.class" value="${seguranca.persistence.class}"/>
+  	<filter token="monitoracao.persistence.class" value="${monitoracao.persistence.class}"/>
+
+  	<!--
+  	<echo message="relacionamento.persistence.class: ${relacionamento.persistence.class}"/>
+  	<echo message="seguranca.persistence.class: ${seguranca.persistence.class}"/>
+  	<echo message="monitoracao.persistence.class: ${monitoracao.persistence.class}"/>
   	<echo message="Monitoracao: ${monitoracao}"/>
   	<echo message="Seguranca: ${seguranca}"/>
   	<echo message="Relacionamento: ${relacionamento}"/>
+  	-->
+  	
     <copy todir="${domain}/${war}" filtering="true">
       <fileset dir="${dist}">
         <include name="**/*.*"/>
@@ -90,17 +106,60 @@
       	<exclude name="seguranca/*"/>
       	<exclude name="monitoracao/*"/>
       	<exclude name="relacionamento/*"/>
-      	<!--
-      	<exclude name="WEB-INF/classes/com/pss/features/ativos/**/*.*"/>
+      	<exclude name="WEB-INF/classes/com/pss/features/ativos/relacionamento/**/*.*"/>
       	<exclude name="WEB-INF/classes/com/pss/features/seguranca/**/*.*"/>
       	<exclude name="WEB-INF/classes/com/pss/features/monitoracao/**/*.*"/>
-      	-->
       </fileset>
     </copy>
   </target>
-  
 
+
+  <target name="seguranca" depends="lps" if="seguranca">
+
+    <delete file="${war}.war"/>
+  	<delete verbose="true" dir="${dist}/classes"/>
+
+    <copy todir="${domain}/${war}" filtering="true">
+      <fileset dir="${dist}">
+        <include name="seguranca/**/*.*"/>
+      	<include name="WEB-INF/classes/com/pss/features/seguranca/**/*.*"/>
+      </fileset>
+    </copy>
+  	
+  </target>
+
+  <target name="relacionamento" depends="lps" if="relacionamento">
+
+    <delete file="${war}.war"/>
+  	<delete verbose="true" dir="${dist}/classes"/>
+
+    <copy todir="${domain}/${war}" filtering="true">
+      <fileset dir="${dist}">
+        <include name="relacionamento/**/*.*"/>
+      	<include name="WEB-INF/classes/com/pss/features/relacionamento/**/*.*"/>
+      </fileset>
+    </copy>
+  	
+  </target>
+
+  <target name="monitoracao" depends="lps" if="monitoracao">
+
+    <delete file="${war}.war"/>
+  	<delete verbose="true" dir="${dist}/classes"/>
+
+    <copy todir="${domain}/${war}" filtering="true">
+      <fileset dir="${dist}">
+        <include name="monitoracao/**/*.*"/>
+      	<include name="WEB-INF/classes/com/pss/features/monitoracao/**/*.*"/>
+      </fileset>
+    </copy>
+  	
+  </target>	
+
+  <target name="core" depends="seguranca, monitoracao, relacionamento">
   
+  </target>
+
   <target name="undeploy">
     <!-- Create the distribution directory -->
    <!--delete file="${domain}/${war}.war"/-->
