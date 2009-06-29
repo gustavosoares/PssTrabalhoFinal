@@ -136,7 +136,7 @@
     <copy todir="${domain}/${war}" filtering="true">
       <fileset dir="${dist}">
         <include name="relacionamento/**/*.*"/>
-      	<include name="WEB-INF/classes/com/pss/features/relacionamento/**/*.*"/>
+      	<include name="WEB-INF/classes/com/pss/features/ativos/relacionamento/**/*.*"/>
       </fileset>
     </copy>
   	
