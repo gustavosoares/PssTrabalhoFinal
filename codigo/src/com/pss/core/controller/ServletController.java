@@ -25,7 +25,7 @@ public class ServletController extends HttpServlet {
 	
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException { 
 		String acao = request.getParameter("acao");
-		FacadeUtil.log(this, " acao: "+acao);
+		//FacadeUtil.log(this, " acao: "+acao);
 		Command comando = (Command) CommandMap.getInstance().getCommand(acao);
 		if (comando == null) {
 			comando = (Command) CommandMap.getInstance().getCommand("Inicio");
