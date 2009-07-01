@@ -28,9 +28,9 @@ Iterator itRelacionamentos = lista.iterator();
 				<option value="">Selecione o relacionamento para remoção</option>
 <% 
 	while (itRelacionamentos.hasNext()) { 
-		RelacionamentoAtivo relacionamento = (RelacionamentoAtivo) itRelacionamentos.next();		
+		RelacionamentoAtivo rel = (RelacionamentoAtivo) itRelacionamentos.next();		
 %>
-				<option value="<%= relacionamento.getId().intValue()%>"><%= relacionamento.getAtivoPai().getNome()%> COM <%= relacionamento.getAtivoFilho().getNome() %></option>
+				<option value="<%= rel.getId().intValue()%>"><%= rel.getAtivoPai().getNome()%> COM <%= rel.getAtivoFilho().getNome() %></option>
 <% 
 	} 
 %>

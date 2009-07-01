@@ -1,6 +1,5 @@
-<!-- Copyright (c) 2002 by ObjectLearn. All Rights Reserved. -->
-<project name="PssTrabalhoFinal"  default="core"  basedir=".">
-
+<?xml version="1.0"?>
+<project default="core"  basedir=".">
 
   <!-- set global properties for this build -->
   <property file="build.properties"/>
@@ -99,7 +98,16 @@
   	
     <copy todir="${domain}/${war}" filtering="true">
       <fileset dir="${dist}">
+        <include name="**/*.xml"/>
+      	<include name="**/*.properties"/>
+      </fileset>
+    </copy>
+  	
+    <copy todir="${domain}/${war}">
+      <fileset dir="${dist}">
         <include name="**/*.*"/>
+        <exclude name="**/*.xml"/>
+      	<exclude name="**/*.properties"/>
       	<exclude name="classes/*"/>
       	<exclude name="lib/*"/>
       	<exclude name="build/*"/>
@@ -121,6 +129,15 @@
 
     <copy todir="${domain}/${war}" filtering="true">
       <fileset dir="${dist}">
+        <include name="**/*.xml"/>
+      	<include name="**/*.properties"/>
+      </fileset>
+    </copy>
+      		
+    <copy todir="${domain}/${war}">
+      <fileset dir="${dist}">
+        <exclude name="**/*.xml"/>
+      	<exclude name="**/*.properties"/>      	
         <include name="seguranca/**/*.*"/>
       	<include name="WEB-INF/classes/com/pss/features/seguranca/**/*.*"/>
       </fileset>
@@ -135,6 +152,15 @@
 
     <copy todir="${domain}/${war}" filtering="true">
       <fileset dir="${dist}">
+        <include name="**/*.xml"/>
+      	<include name="**/*.properties"/>
+      </fileset>
+    </copy>
+    	
+    <copy todir="${domain}/${war}">
+      <fileset dir="${dist}">
+        <exclude name="**/*.xml"/>
+      	<exclude name="**/*.properties"/>
         <include name="relacionamento/**/*.*"/>
       	<include name="WEB-INF/classes/com/pss/features/ativos/relacionamento/**/*.*"/>
       </fileset>
@@ -149,6 +175,15 @@
 
     <copy todir="${domain}/${war}" filtering="true">
       <fileset dir="${dist}">
+        <include name="**/*.xml"/>
+      	<include name="**/*.properties"/>
+      </fileset>
+    </copy>
+  	
+    <copy todir="${domain}/${war}">
+      <fileset dir="${dist}">
+        <exclude name="**/*.xml"/>
+      	<exclude name="**/*.properties"/>
         <include name="monitoracao/**/*.*"/>
       	<include name="WEB-INF/classes/com/pss/features/monitoracao/**/*.*"/>
       </fileset>
@@ -173,5 +208,4 @@
 
   </target>
   
-
 </project>
