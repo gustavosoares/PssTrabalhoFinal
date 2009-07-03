@@ -22,7 +22,11 @@
 			<param-name>monitoracao</param-name>
 			<param-value>@monitoracao@</param-value>
 		</init-param>
-		
+		<init-param>
+			<description>feature monitoracao</description>
+			<param-name>agente2</param-name>
+			<param-value>@agente2@</param-value>
+		</init-param>		
 		<!-- configuracao do agente 2 -->
 		<init-param>
 			<description>percentual minimo de servidores e roteadores em estoque</description>

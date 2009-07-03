@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<persistence version="1.0" xmlns="http://java.sun.com/xml/ns/persistence">
+<persistence version="1.0">
     <persistence-unit name="defaultUnit">
     <provider>org.hibernate.ejb.HibernatePersistence</provider>
     <class>com.pss.core.model.Ativo</class>

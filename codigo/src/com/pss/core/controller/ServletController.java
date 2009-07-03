@@ -40,16 +40,17 @@ public class ServletController extends HttpServlet {
 	    String seguranca = config.getInitParameter("seguranca").toLowerCase();
 	    String relacionamento = config.getInitParameter("relacionamento").toLowerCase();
 	    String monitoracao = config.getInitParameter("monitoracao").toLowerCase();
-	    //String versionamento = config.getInitParameter("versionamento").toLowerCase();
+	    String agente2_str = config.getInitParameter("agente2").toLowerCase();
+	    
 	    
 	    FacadeUtil.registrarFeature("seguranca", seguranca);
 	    FacadeUtil.registrarFeature("relacionamento", relacionamento);
 	    FacadeUtil.registrarFeature("monitoracao", monitoracao);
-	    //FacadeUtil.registrarFeature("versionamento", versionamento);
+	    FacadeUtil.registrarFeature("agente2", agente2_str);
 	    
 	    FacadeUtil.log(this, FacadeUtil.obterEstadoDasFeatures());
 	    // Inicializando a thread do Agente2
-	    if (FacadeUtil.featureHabilitada("monitoracao")){
+	    if (FacadeUtil.featureHabilitada("agente2")){
 	    	String percentualMinimoEstoque = config.getInitParameter("percentualMinimoEstoque").toLowerCase();
 	    	String agente2CheckInterval = config.getInitParameter("agente2CheckInterval").toLowerCase();
 	    	com.pss.features.monitoracao.agente2.Agente2 agente2 = com.pss.features.monitoracao.agente2.Agente2.getInstance();

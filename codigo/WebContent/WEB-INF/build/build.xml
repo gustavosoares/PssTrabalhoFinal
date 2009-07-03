@@ -69,7 +69,7 @@
   	<delete file="${war}.war"/>
   	-->
   	
-  	<!-- Conditions dos models do hibernate -->
+  	<!--
 	<condition property="relacionamento.persistence.class" else="">
 		<isset property="relacionamento.persistence.class"/>
 	</condition>
@@ -81,12 +81,13 @@
 	<condition property="monitoracao.persistence.class" else="">
 		<isset property="monitoracao.persistence.class"/>
 	</condition>
-
+  	
   	<filter filtersfile="${filterFile}"/>
-  	<filter token="relacionamento.persistence.class" value="${relacionamento.persistence.class}"/>
   	<filter token="seguranca.persistence.class" value="${seguranca.persistence.class}"/>
   	<filter token="monitoracao.persistence.class" value="${monitoracao.persistence.class}"/>
-
+  	<filter token="relacionamento.persistence.class" value="${relacionamento.persistence.class}"/>
+  	-->
+  	
   	<!--
   	<echo message="relacionamento.persistence.class: ${relacionamento.persistence.class}"/>
   	<echo message="seguranca.persistence.class: ${seguranca.persistence.class}"/>
@@ -94,7 +95,7 @@
   	<echo message="Monitoracao: ${monitoracao}"/>
   	<echo message="Seguranca: ${seguranca}"/>
   	<echo message="Relacionamento: ${relacionamento}"/>
-  	-->
+
   	
     <copy todir="${domain}/${war}" filtering="true">
       <fileset dir="${dist}">
@@ -119,6 +120,7 @@
       	<exclude name="WEB-INF/classes/com/pss/features/monitoracao/**/*.*"/>
       </fileset>
     </copy>
+    -->
   </target>
 
 
@@ -146,7 +148,7 @@
   </target>
 
   <target name="relacionamento" depends="lps" if="relacionamento">
-
+  		
     <delete file="${war}.war"/>
   	<delete verbose="true" dir="${dist}/classes"/>
 
@@ -168,7 +170,7 @@
   	
   </target>
 
-  <target name="monitoracao" depends="lps" if="monitoracao">
+  <target name="monitoracao" depends="lps" if="checkMonitoracaoAndNotSeguranca-false, monitoracao" >
 
     <delete file="${war}.war"/>
   	<delete verbose="true" dir="${dist}/classes"/>
@@ -191,9 +193,172 @@
   	
   </target>	
 
-  <target name="core" depends="seguranca, monitoracao, relacionamento">
-  
+  <target name="agente2" depends="lps" if="agente2">
+	<echo>"agente2"</echo>
+  	<!--
+  	<filter filtersfile="${filterFile}"/>
+  	<filter token="monitoracao.persistence.class" value="${monitoracao.persistence.class}"/>
+  	-->
+  	
+    <delete file="${war}.war"/>
+  	<delete verbose="true" dir="${dist}/classes"/>
+
+    <copy todir="${domain}/${war}" filtering="true">
+      <fileset dir="${dist}">
+        <include name="**/*.xml"/>
+      	<include name="**/*.properties"/>
+      </fileset>
+    </copy>
+  	
+    <copy todir="${domain}/${war}">
+      <fileset dir="${dist}">
+        <exclude name="**/*.xml"/>
+      	<exclude name="**/*.properties"/>
+      	<include name="WEB-INF/classes/com/pss/features/monitoracao/agente2/**/*.*"/>
+      </fileset>
+    </copy>
+  	
+  </target>		
+
+  <target depends="init" name="check-monitoracao-and-not-seguranca">
+  	<echo message="seguranca: ${seguranca}"/>
+  	<echo message="monitoracao: ${monitoracao}"/> 	
+  	<echo message="seguranca_persistence: ${seguranca.persistence.class}"/>
+  	<echo message="monitoracao_persistence: ${monitoracao.persistence.class}"/>
+  	<condition property="cond-monitoracao-and-not-seguranca">
+  		<and>
+  			<!--isset property="monitoracao"/-->
+  			<not><equals arg1="${monitoracao.persistence.class}" arg2="" /></not>
+  			<equals arg1="${seguranca.persistence.class}" arg2="$${seguranca.persistence.class}" />
+  		</and>
+  	</condition>
   </target>
+
+	<target name="checkMonitoracaoAndNotSeguranca-true" depends="undeploy, check-monitoracao-and-not-seguranca" if="cond-monitoracao-and-not-seguranca">
+	  	<echo message="seguranca nao esta habilitada e monitoracao esta. Removendo a monitoracao do persistence.xml do hibernate"/>
+
+		<!-- -->
+		
+		<property name="monitoracao.persistence.class" value=""/>
+		<property name="monitoracao" value="false"/>
+			
+		<condition property="relacionamento.persistence.class" else="">
+			<isset property="relacionamento.persistence.class"/>
+		</condition>
+	  	
+		<condition property="seguranca.persistence.class" else="">
+			<isset property="seguranca.persistence.class"/>
+		</condition>
+	  	
+		<condition property="monitoracao.persistence.class" else="">
+			<isset property="monitoracao.persistence.class"/>
+		</condition>
+	  	
+	  	<filter filtersfile="${filterFile}"/>
+	  	<filter token="seguranca.persistence.class" value="${seguranca.persistence.class}"/>
+	  	<filter token="monitoracao.persistence.class" value=""/>
+		<filter token="monitoracao" value="false"/>
+	  	<filter token="relacionamento.persistence.class" value="${relacionamento.persistence.class}"/>
+		
+		<!-- -->
+			
+	  	<echo message="seguranca: ${seguranca.persistence.class}"/>
+	  	<echo message="monitoracao: ${monitoracao.persistence.class}"/>
+
+	    <copy todir="${domain}/${war}" filtering="true">
+	      <fileset dir="${dist}">
+	        <include name="**/*.xml"/>
+	      	<include name="**/*.properties"/>
+	      </fileset>
+	    </copy>
+	  	
+	    <copy todir="${domain}/${war}">
+	      <fileset dir="${dist}">
+	        <include name="**/*.*"/>
+	        <exclude name="**/*.xml"/>
+	      	<exclude name="**/*.properties"/>
+	      	<exclude name="classes/*"/>
+	      	<exclude name="lib/*"/>
+	      	<exclude name="build/*"/>
+	      	<exclude name="seguranca/*"/>
+	      	<exclude name="monitoracao/*"/>
+	      	<exclude name="relacionamento/*"/>
+	      	<exclude name="WEB-INF/classes/com/pss/features/ativos/relacionamento/**/*.*"/>
+	      	<exclude name="WEB-INF/classes/com/pss/features/seguranca/**/*.*"/>
+	      	<exclude name="WEB-INF/classes/com/pss/features/monitoracao/**/*.*"/>
+	      </fileset>
+	    </copy>
+		
+	    <copy todir="${domain}/${war}">
+	      <fileset dir="${dist}">
+	        <exclude name="**/*.xml"/>
+	      	<exclude name="**/*.properties"/>
+	      	<include name="WEB-INF/classes/com/pss/features/monitoracao/agente2/**/*.*"/>
+	      </fileset>
+	    </copy>
+		
+	</target>
+	
+	<target name="checkMonitoracaoAndNotSeguranca-false" depends="undeploy, check-monitoracao-and-not-seguranca" unless="cond-monitoracao-and-not-seguranca">
+		<echo message="executando a task normal"/>
+	  	
+		<condition property="relacionamento.persistence.class" else="">
+			<isset property="relacionamento.persistence.class"/>
+		</condition>
+	  	
+		<condition property="seguranca.persistence.class" else="">
+			<isset property="seguranca.persistence.class"/>
+		</condition>
+	  	
+		<condition property="monitoracao.persistence.class" else="">
+			<isset property="monitoracao.persistence.class"/>
+		</condition>
+	  	
+	  	<filter filtersfile="${filterFile}"/>
+	  	<filter token="seguranca.persistence.class" value="${seguranca.persistence.class}"/>
+	  	<filter token="monitoracao.persistence.class" value="${monitoracao.persistence.class}"/>
+	  	<filter token="relacionamento.persistence.class" value="${relacionamento.persistence.class}"/>
+		
+	    <copy todir="${domain}/${war}" filtering="true">
+	      <fileset dir="${dist}">
+	        <include name="**/*.xml"/>
+	      	<include name="**/*.properties"/>
+	      </fileset>
+	    </copy>
+	  	
+	    <copy todir="${domain}/${war}">
+	      <fileset dir="${dist}">
+	        <include name="**/*.*"/>
+	        <exclude name="**/*.xml"/>
+	      	<exclude name="**/*.properties"/>
+	      	<exclude name="classes/*"/>
+	      	<exclude name="lib/*"/>
+	      	<exclude name="build/*"/>
+	      	<exclude name="seguranca/*"/>
+	      	<exclude name="monitoracao/*"/>
+	      	<exclude name="relacionamento/*"/>
+	      	<exclude name="WEB-INF/classes/com/pss/features/ativos/relacionamento/**/*.*"/>
+	      	<exclude name="WEB-INF/classes/com/pss/features/seguranca/**/*.*"/>
+	      	<exclude name="WEB-INF/classes/com/pss/features/monitoracao/**/*.*"/>
+	      </fileset>
+	    </copy>
+		
+		<echo>"Copiando monitoracao - Agente 1 e Agente 2"</echo>
+	    <copy todir="${domain}/${war}">
+	      <fileset dir="${dist}">
+	        <exclude name="**/*.xml"/>
+	      	<exclude name="**/*.properties"/>
+	        <include name="monitoracao/**/*.*"/>
+	      	<include name="WEB-INF/classes/com/pss/features/monitoracao/**/*.*"/>
+	      </fileset>
+	    </copy>
+		
+	</target>
+
+	<target name="checkMonitoracaoSeguranca" depends="checkMonitoracaoAndNotSeguranca-true, checkMonitoracaoAndNotSeguranca-false"/>
+  
+	<target name="core" depends="checkMonitoracaoAndNotSeguranca-true, checkMonitoracaoAndNotSeguranca-false, agente2, seguranca, relacionamento"/>
+  
 
   <target name="undeploy">
     <!-- Create the distribution directory -->
